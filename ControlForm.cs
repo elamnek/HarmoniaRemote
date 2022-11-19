@@ -62,22 +62,22 @@ namespace HarmoniaRemote
 
         private void btnDeflate_Click(object sender, EventArgs e)
         {
-            sp.WriteLine("DEFLATE");
+            sp.WriteLine("DEFLATE,255");
         }
 
         private void btnInflate_Click(object sender, EventArgs e)
         {
-            sp.WriteLine("INFLATE");
+            sp.WriteLine("INFLATE,255");
         }
 
         private void btnForward_Click(object sender, EventArgs e)
         {
-            sp.WriteLine("FORWARD");
+            sp.WriteLine("FORWARD,100");
         }
 
         private void btnReverse_Click(object sender, EventArgs e)
         {
-            sp.WriteLine("REVERSE");
+            sp.WriteLine("REVERSE,100");
         }
     }
 }
