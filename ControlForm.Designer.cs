@@ -36,6 +36,10 @@ namespace HarmoniaRemote
             this.btnInflate = new System.Windows.Forms.Button();
             this.btnForward = new System.Windows.Forms.Button();
             this.btnReverse = new System.Windows.Forms.Button();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblThrottle = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // rtb
@@ -43,13 +47,13 @@ namespace HarmoniaRemote
             this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb.Location = new System.Drawing.Point(0, 200);
             this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(800, 250);
+            this.rtb.Size = new System.Drawing.Size(985, 465);
             this.rtb.TabIndex = 0;
             this.rtb.Text = "";
             // 
             // btnSend
             // 
-            this.btnSend.Location = new System.Drawing.Point(480, 66);
+            this.btnSend.Location = new System.Drawing.Point(340, 22);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(90, 39);
             this.btnSend.TabIndex = 1;
@@ -59,14 +63,14 @@ namespace HarmoniaRemote
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(149, 66);
+            this.textBox1.Location = new System.Drawing.Point(26, 28);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(296, 26);
             this.textBox1.TabIndex = 2;
             // 
             // btnDeflate
             // 
-            this.btnDeflate.Location = new System.Drawing.Point(211, 142);
+            this.btnDeflate.Location = new System.Drawing.Point(34, 148);
             this.btnDeflate.Name = "btnDeflate";
             this.btnDeflate.Size = new System.Drawing.Size(97, 33);
             this.btnDeflate.TabIndex = 3;
@@ -76,7 +80,7 @@ namespace HarmoniaRemote
             // 
             // btnInflate
             // 
-            this.btnInflate.Location = new System.Drawing.Point(108, 142);
+            this.btnInflate.Location = new System.Drawing.Point(34, 108);
             this.btnInflate.Name = "btnInflate";
             this.btnInflate.Size = new System.Drawing.Size(97, 33);
             this.btnInflate.TabIndex = 4;
@@ -86,7 +90,7 @@ namespace HarmoniaRemote
             // 
             // btnForward
             // 
-            this.btnForward.Location = new System.Drawing.Point(348, 142);
+            this.btnForward.Location = new System.Drawing.Point(164, 108);
             this.btnForward.Name = "btnForward";
             this.btnForward.Size = new System.Drawing.Size(97, 33);
             this.btnForward.TabIndex = 5;
@@ -96,7 +100,7 @@ namespace HarmoniaRemote
             // 
             // btnReverse
             // 
-            this.btnReverse.Location = new System.Drawing.Point(451, 142);
+            this.btnReverse.Location = new System.Drawing.Point(164, 148);
             this.btnReverse.Name = "btnReverse";
             this.btnReverse.Size = new System.Drawing.Size(97, 33);
             this.btnReverse.TabIndex = 6;
@@ -104,12 +108,48 @@ namespace HarmoniaRemote
             this.btnReverse.UseVisualStyleBackColor = true;
             this.btnReverse.Click += new System.EventHandler(this.btnReverse_Click);
             // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(594, 28);
+            this.trackBar1.Maximum = 180;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBar1.Size = new System.Drawing.Size(69, 144);
+            this.trackBar1.TabIndex = 7;
+            this.trackBar1.TickFrequency = 10;
+            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trackBar1.Value = 90;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            this.trackBar1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseUp);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(525, 51);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 20);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Throttle";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // lblThrottle
+            // 
+            this.lblThrottle.AutoSize = true;
+            this.lblThrottle.Location = new System.Drawing.Point(540, 86);
+            this.lblThrottle.Name = "lblThrottle";
+            this.lblThrottle.Size = new System.Drawing.Size(32, 20);
+            this.lblThrottle.TabIndex = 9;
+            this.lblThrottle.Text = "0%";
+            // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(985, 665);
+            this.Controls.Add(this.lblThrottle);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.btnReverse);
             this.Controls.Add(this.btnForward);
             this.Controls.Add(this.btnInflate);
@@ -121,6 +161,7 @@ namespace HarmoniaRemote
             this.Padding = new System.Windows.Forms.Padding(0, 200, 0, 0);
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.ControlForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,6 +176,9 @@ namespace HarmoniaRemote
         private System.Windows.Forms.Button btnInflate;
         private System.Windows.Forms.Button btnForward;
         private System.Windows.Forms.Button btnReverse;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblThrottle;
     }
 }
 

@@ -79,5 +79,23 @@ namespace HarmoniaRemote
         {
             sp.WriteLine("REVERSE,100");
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void trackBar1_MouseUp(object sender, MouseEventArgs e)
+        {
+           
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            sp.WriteLine("PROPELL," + this.trackBar1.Value.ToString());
+            int intVal = this.trackBar1.Value;
+            intVal = -90 * (90 - intVal)/100;
+            this.lblThrottle.Text = intVal.ToString() + "%";
+        }
     }
 }
