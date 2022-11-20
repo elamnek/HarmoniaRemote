@@ -92,6 +92,7 @@ namespace HarmoniaRemote
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
+            //write
             sp.WriteLine("PROPELL," + this.trackBar1.Value.ToString());
             int intVal = this.trackBar1.Value;
             intVal = -90 * (90 - intVal)/100;
