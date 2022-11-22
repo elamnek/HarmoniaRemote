@@ -164,7 +164,7 @@ namespace HarmoniaRemote
             this.Controls.Add(this.rtb);
             this.Name = "ControlForm";
             this.Padding = new System.Windows.Forms.Padding(0, 200, 0, 0);
-            this.Text = "Form1";
+            this.Text = "Harmonia Controller";
             this.Load += new System.EventHandler(this.ControlForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
