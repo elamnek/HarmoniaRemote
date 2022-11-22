@@ -18,6 +18,7 @@ namespace HarmoniaRemote
             InitializeComponent();
         }
 
+        //create the serial connection
         private SerialPort sp = new SerialPort("COM4", 9600);
         
         private void ControlForm_Load(object sender, EventArgs e)
