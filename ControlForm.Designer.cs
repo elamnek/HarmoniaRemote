@@ -39,7 +39,11 @@ namespace HarmoniaRemote
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.lblThrottle = new System.Windows.Forms.Label();
+            this.tbFwdDive = new System.Windows.Forms.TrackBar();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblFwdDive = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.SuspendLayout();
             // 
             // rtb
@@ -130,7 +134,7 @@ namespace HarmoniaRemote
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(533, 162);
+            this.label1.Location = new System.Drawing.Point(533, 165);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 20);
             this.label1.TabIndex = 8;
@@ -146,12 +150,46 @@ namespace HarmoniaRemote
             this.lblThrottle.TabIndex = 9;
             this.lblThrottle.Text = "0%";
             // 
+            // tbFwdDive
+            // 
+            this.tbFwdDive.Location = new System.Drawing.Point(647, 28);
+            this.tbFwdDive.Maximum = 180;
+            this.tbFwdDive.Name = "tbFwdDive";
+            this.tbFwdDive.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.tbFwdDive.Size = new System.Drawing.Size(69, 144);
+            this.tbFwdDive.TabIndex = 10;
+            this.tbFwdDive.TickFrequency = 10;
+            this.tbFwdDive.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.tbFwdDive.Value = 90;
+            this.tbFwdDive.Scroll += new System.EventHandler(this.tbFwdDive_Scroll);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(643, 165);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(74, 20);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Fwd Dive";
+            // 
+            // lblFwdDive
+            // 
+            this.lblFwdDive.AutoSize = true;
+            this.lblFwdDive.Location = new System.Drawing.Point(706, 89);
+            this.lblFwdDive.Name = "lblFwdDive";
+            this.lblFwdDive.Size = new System.Drawing.Size(27, 20);
+            this.lblFwdDive.TabIndex = 12;
+            this.lblFwdDive.Text = "90";
+            // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(985, 665);
+            this.Controls.Add(this.lblFwdDive);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.tbFwdDive);
             this.Controls.Add(this.lblThrottle);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.label1);
@@ -167,6 +205,7 @@ namespace HarmoniaRemote
             this.Text = "Harmonia Controller";
             this.Load += new System.EventHandler(this.ControlForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -184,6 +223,9 @@ namespace HarmoniaRemote
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblThrottle;
+        private System.Windows.Forms.TrackBar tbFwdDive;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblFwdDive;
     }
 }
 

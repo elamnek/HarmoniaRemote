@@ -99,5 +99,12 @@ namespace HarmoniaRemote
             intVal = -90 * (90 - intVal)/100;
             this.lblThrottle.Text = intVal.ToString() + "%";
         }
+
+        private void tbFwdDive_Scroll(object sender, EventArgs e)
+        {
+            sp.WriteLine("SERVOFWDDIVE," + this.tbFwdDive.Value.ToString());
+            this.lblFwdDive.Text = this.tbFwdDive.Value.ToString();
+
+        }
     }
 }
