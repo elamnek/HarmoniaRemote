@@ -41,8 +41,21 @@ namespace HarmoniaRemote
                 string txt = sp.ReadLine();
                 if (!txt.StartsWith("VMDPE"))
                 {
-                    Console.WriteLine(txt);
-                    SetControlText(rtb, txt);
+                    if (txt.StartsWith("STATE="))
+                    {
+                        string strState = "IDLE";
+                        if (txt == "STATE=1\r"){strState = "STATIC_TRIM"; }
+                        else if (txt == "STATE=2\r"){strState = "DYNAMIC_TRIM"; }
+                        else if (txt == "STATE=3\r") { strState = "RUN"; }
+                        else if (txt == "STATE=4\r") { strState = "ALARM"; }
+                        SetLBLText(lblState, strState);
+                    }
+                    else
+                    {
+                        Console.WriteLine(txt);
+                        SetRTBText(rtb, txt);
+                    }
+                   
                 }
                 
             }
@@ -51,9 +64,13 @@ namespace HarmoniaRemote
                 MessageBox.Show(ex.ToString());
             }
         }
-        public static void SetControlText(Control control, string text)
+        public static void SetRTBText(Control rtb, string text)
         {
-            control.Invoke((MethodInvoker)delegate { control.Text = control.Text +  text; });
+            rtb.Invoke((MethodInvoker)delegate { rtb.Text = rtb.Text +  text; });
+        }
+        public static void SetLBLText(Control lbl, string text)
+        {
+            lbl.Invoke((MethodInvoker)delegate { lbl.Text = text; });
         }
 
         private void button1_Click(object sender, EventArgs e)

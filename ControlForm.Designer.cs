@@ -42,6 +42,8 @@ namespace HarmoniaRemote
             this.tbFwdDive = new System.Windows.Forms.TrackBar();
             this.label2 = new System.Windows.Forms.Label();
             this.lblFwdDive = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblState = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.SuspendLayout();
@@ -51,7 +53,7 @@ namespace HarmoniaRemote
             this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb.Location = new System.Drawing.Point(0, 200);
             this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(985, 465);
+            this.rtb.Size = new System.Drawing.Size(1003, 465);
             this.rtb.TabIndex = 0;
             this.rtb.Text = "";
             // 
@@ -181,12 +183,36 @@ namespace HarmoniaRemote
             this.lblFwdDive.TabIndex = 12;
             this.lblFwdDive.Text = "90";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(862, 34);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(48, 20);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "State";
+            // 
+            // lblState
+            // 
+            this.lblState.AutoSize = true;
+            this.lblState.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lblState.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblState.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblState.Location = new System.Drawing.Point(828, 66);
+            this.lblState.Name = "lblState";
+            this.lblState.Size = new System.Drawing.Size(122, 31);
+            this.lblState.TabIndex = 15;
+            this.lblState.Text = "Unknown";
+            this.lblState.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(985, 665);
+            this.ClientSize = new System.Drawing.Size(1003, 665);
+            this.Controls.Add(this.lblState);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.lblFwdDive);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tbFwdDive);
@@ -200,6 +226,7 @@ namespace HarmoniaRemote
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.rtb);
+            this.MinimumSize = new System.Drawing.Size(1025, 721);
             this.Name = "ControlForm";
             this.Padding = new System.Windows.Forms.Padding(0, 200, 0, 0);
             this.Text = "Harmonia Controller";
@@ -226,6 +253,8 @@ namespace HarmoniaRemote
         private System.Windows.Forms.TrackBar tbFwdDive;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblFwdDive;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblState;
     }
 }
 
