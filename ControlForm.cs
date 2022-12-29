@@ -37,25 +37,21 @@ namespace HarmoniaRemote
         {
             try
             {
-                
-                string txt = sp.ReadLine();
-                if (!txt.StartsWith("VMDPE"))
+                string strReceived = sp.ReadLine();
+                if (!strReceived.StartsWith("VMDPE"))
                 {
-                    if (txt.StartsWith("STATE="))
+                    if (strReceived.StartsWith("{") && strReceived.EndsWith("}"))
                     {
-                        string strState = "IDLE";
-                        if (txt == "STATE=1\r"){strState = "STATIC_TRIM"; }
-                        else if (txt == "STATE=2\r"){strState = "DYNAMIC_TRIM"; }
-                        else if (txt == "STATE=3\r") { strState = "RUN"; }
-                        else if (txt == "STATE=4\r") { strState = "ALARM"; }
-                        SetLBLText(lblState, strState);
+                        //this is a data packet - display each part in the textboxes
+
+
+
+
                     }
-                    else
-                    {
-                        Console.WriteLine(txt);
-                        SetRTBText(rtb, txt);
-                    }
-                   
+                    
+                    //Console.WriteLine(txt);
+                    SetRTBText(rtb, strReceived);
+
                 }
                 
             }

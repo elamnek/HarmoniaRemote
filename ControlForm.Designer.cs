@@ -44,6 +44,8 @@ namespace HarmoniaRemote
             this.lblFwdDive = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lblState = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.SuspendLayout();
@@ -51,9 +53,9 @@ namespace HarmoniaRemote
             // rtb
             // 
             this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb.Location = new System.Drawing.Point(0, 200);
+            this.rtb.Location = new System.Drawing.Point(0, 400);
             this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(1003, 465);
+            this.rtb.Size = new System.Drawing.Size(1530, 265);
             this.rtb.TabIndex = 0;
             this.rtb.Text = "";
             // 
@@ -78,7 +80,7 @@ namespace HarmoniaRemote
             // btnDeflate
             // 
             this.btnDeflate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeflate.Location = new System.Drawing.Point(34, 148);
+            this.btnDeflate.Location = new System.Drawing.Point(26, 108);
             this.btnDeflate.Name = "btnDeflate";
             this.btnDeflate.Size = new System.Drawing.Size(97, 33);
             this.btnDeflate.TabIndex = 3;
@@ -89,7 +91,7 @@ namespace HarmoniaRemote
             // btnInflate
             // 
             this.btnInflate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInflate.Location = new System.Drawing.Point(34, 108);
+            this.btnInflate.Location = new System.Drawing.Point(26, 68);
             this.btnInflate.Name = "btnInflate";
             this.btnInflate.Size = new System.Drawing.Size(97, 33);
             this.btnInflate.TabIndex = 4;
@@ -100,7 +102,7 @@ namespace HarmoniaRemote
             // btnForward
             // 
             this.btnForward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnForward.Location = new System.Drawing.Point(164, 108);
+            this.btnForward.Location = new System.Drawing.Point(156, 68);
             this.btnForward.Name = "btnForward";
             this.btnForward.Size = new System.Drawing.Size(97, 33);
             this.btnForward.TabIndex = 5;
@@ -111,7 +113,7 @@ namespace HarmoniaRemote
             // btnReverse
             // 
             this.btnReverse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReverse.Location = new System.Drawing.Point(164, 148);
+            this.btnReverse.Location = new System.Drawing.Point(156, 108);
             this.btnReverse.Name = "btnReverse";
             this.btnReverse.Size = new System.Drawing.Size(97, 33);
             this.btnReverse.TabIndex = 6;
@@ -121,7 +123,7 @@ namespace HarmoniaRemote
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(537, 22);
+            this.trackBar1.Location = new System.Drawing.Point(472, 7);
             this.trackBar1.Maximum = 180;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
@@ -136,7 +138,7 @@ namespace HarmoniaRemote
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(533, 165);
+            this.label1.Location = new System.Drawing.Point(468, 154);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 20);
             this.label1.TabIndex = 8;
@@ -146,7 +148,7 @@ namespace HarmoniaRemote
             // lblThrottle
             // 
             this.lblThrottle.AutoSize = true;
-            this.lblThrottle.Location = new System.Drawing.Point(587, 86);
+            this.lblThrottle.Location = new System.Drawing.Point(523, 68);
             this.lblThrottle.Name = "lblThrottle";
             this.lblThrottle.Size = new System.Drawing.Size(32, 20);
             this.lblThrottle.TabIndex = 9;
@@ -154,7 +156,7 @@ namespace HarmoniaRemote
             // 
             // tbFwdDive
             // 
-            this.tbFwdDive.Location = new System.Drawing.Point(647, 28);
+            this.tbFwdDive.Location = new System.Drawing.Point(582, 13);
             this.tbFwdDive.Maximum = 180;
             this.tbFwdDive.Name = "tbFwdDive";
             this.tbFwdDive.Orientation = System.Windows.Forms.Orientation.Vertical;
@@ -168,7 +170,7 @@ namespace HarmoniaRemote
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(643, 165);
+            this.label2.Location = new System.Drawing.Point(578, 146);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 20);
             this.label2.TabIndex = 11;
@@ -177,7 +179,7 @@ namespace HarmoniaRemote
             // lblFwdDive
             // 
             this.lblFwdDive.AutoSize = true;
-            this.lblFwdDive.Location = new System.Drawing.Point(706, 89);
+            this.lblFwdDive.Location = new System.Drawing.Point(635, 78);
             this.lblFwdDive.Name = "lblFwdDive";
             this.lblFwdDive.Size = new System.Drawing.Size(27, 20);
             this.lblFwdDive.TabIndex = 12;
@@ -186,7 +188,7 @@ namespace HarmoniaRemote
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(862, 34);
+            this.label3.Location = new System.Drawing.Point(770, 60);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 20);
             this.label3.TabIndex = 14;
@@ -198,19 +200,37 @@ namespace HarmoniaRemote
             this.lblState.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.lblState.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblState.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblState.Location = new System.Drawing.Point(828, 66);
+            this.lblState.Location = new System.Drawing.Point(736, 92);
             this.lblState.Name = "lblState";
             this.lblState.Size = new System.Drawing.Size(122, 31);
             this.lblState.TabIndex = 15;
             this.lblState.Text = "Unknown";
             this.lblState.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(130, 218);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(174, 26);
+            this.textBox2.TabIndex = 16;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(50, 221);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(74, 20);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "Datetime";
+            // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1003, 665);
+            this.ClientSize = new System.Drawing.Size(1530, 665);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.lblState);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lblFwdDive);
@@ -228,7 +248,7 @@ namespace HarmoniaRemote
             this.Controls.Add(this.rtb);
             this.MinimumSize = new System.Drawing.Size(1025, 721);
             this.Name = "ControlForm";
-            this.Padding = new System.Windows.Forms.Padding(0, 200, 0, 0);
+            this.Padding = new System.Windows.Forms.Padding(0, 400, 0, 0);
             this.Text = "Harmonia Controller";
             this.Load += new System.EventHandler(this.ControlForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
@@ -255,6 +275,8 @@ namespace HarmoniaRemote
         private System.Windows.Forms.Label lblFwdDive;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblState;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label4;
     }
 }
 
