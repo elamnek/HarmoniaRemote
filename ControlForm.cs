@@ -40,15 +40,29 @@ namespace HarmoniaRemote
                 string strReceived = sp.ReadLine();
                 if (!strReceived.StartsWith("VMDPE"))
                 {
-                    if (strReceived.StartsWith("{") && strReceived.EndsWith("}"))
+                    if (strReceived.StartsWith("{"))
                     {
                         //this is a data packet - display each part in the textboxes
+                        String strRaw = strReceived.TrimStart('{').TrimEnd('}');
+                        String[] arrayRaw = strRaw.Split(',');
+                        foreach (String strPart in arrayRaw)
+                        {
+                            String[] arrayValue = strPart.Trim().Split(':');
+                            int intMetadataID = int.Parse(arrayValue[0].ToString());
+                            String strValue = arrayValue[1].ToString();
 
+                            if (intMetadataID == 13) { SetControlText(this.meta_id_13,strValue); }
+                            if (intMetadataID == 3) { SetControlText(this.meta_id_3,strValue); }
+                            if (intMetadataID == 1) { SetControlText(this.meta_id_1,strValue); }
+                            if (intMetadataID == 7) { SetControlText(this.meta_id_7,strValue); }
+                            if (intMetadataID == 10) { SetControlText(this.meta_id_10,strValue); }
+                            if (intMetadataID == 11) { SetControlText(this.meta_id_11,strValue); }
 
-
+                        }
 
                     }
                     
+                    //log everything to the rich textbox
                     //Console.WriteLine(txt);
                     SetRTBText(rtb, strReceived);
 
@@ -64,9 +78,9 @@ namespace HarmoniaRemote
         {
             rtb.Invoke((MethodInvoker)delegate { rtb.Text = rtb.Text +  text; });
         }
-        public static void SetLBLText(Control lbl, string text)
+        public static void SetControlText(Control ctl, string text)
         {
-            lbl.Invoke((MethodInvoker)delegate { lbl.Text = text; });
+            ctl.Invoke((MethodInvoker)delegate { ctl.Text = text; });
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -119,5 +133,32 @@ namespace HarmoniaRemote
             this.lblFwdDive.Text = this.tbFwdDive.Value.ToString();
 
         }
+
+        private void btnIdle_Click(object sender, EventArgs e)
+        {
+            sp.WriteLine("IDLE,0");
+        }
+
+        private void btnManual_Click(object sender, EventArgs e)
+        {
+            sp.WriteLine("MANUAL,0");
+        }
+
+        private void btnStaticTrim_Click(object sender, EventArgs e)
+        {
+            sp.WriteLine("STATIC_TRIM,0");
+        }
+
+        private void btnDynamicTrim_Click(object sender, EventArgs e)
+        {
+            sp.WriteLine("DYNAMIC_TRIM,0");
+        }
+
+        private void btnAlarm_Click(object sender, EventArgs e)
+        {
+            sp.WriteLine("ALARM,0");
+        }
+
+        
     }
 }
