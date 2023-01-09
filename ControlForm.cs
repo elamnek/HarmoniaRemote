@@ -131,7 +131,6 @@ namespace HarmoniaRemote
         {
             sp.WriteLine("SERVOFWDDIVE," + this.tbFwdDive.Value.ToString());
             this.lblFwdDive.Text = this.tbFwdDive.Value.ToString();
-
         }
 
         private void btnIdle_Click(object sender, EventArgs e)
@@ -162,6 +161,18 @@ namespace HarmoniaRemote
         private void btnStopPump_Click(object sender, EventArgs e)
         {
             sp.WriteLine("INFLATE,0");
+        }
+
+        private void tbAftDive_Scroll(object sender, EventArgs e)
+        {
+            sp.WriteLine("SERVOAFTDIVE," + this.tbAftDive.Value.ToString());
+            this.lblAftDive.Text = this.tbAftDive.Value.ToString();
+        }
+
+        private void tbRudder_Scroll(object sender, EventArgs e)
+        {
+            sp.WriteLine("SERVOAFTRUDDER," + this.tbRudder.Value.ToString());
+            this.lblRudder.Text = this.tbRudder.Value.ToString();
         }
     }
 }
