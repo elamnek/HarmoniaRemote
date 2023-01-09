@@ -159,6 +159,9 @@ namespace HarmoniaRemote
             sp.WriteLine("ALARM,0");
         }
 
-        
+        private void btnStopPump_Click(object sender, EventArgs e)
+        {
+            sp.WriteLine("INFLATE,0");
+        }
     }
 }

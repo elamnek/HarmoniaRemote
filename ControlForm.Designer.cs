@@ -66,25 +66,35 @@ namespace HarmoniaRemote
             this.label13 = new System.Windows.Forms.Label();
             this.meta_id_10 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnStopPump = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // rtb
             // 
             this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb.Location = new System.Drawing.Point(0, 400);
+            this.rtb.Location = new System.Drawing.Point(0, 500);
             this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(1530, 265);
+            this.rtb.Size = new System.Drawing.Size(1103, 372);
             this.rtb.TabIndex = 0;
             this.rtb.Text = "";
             // 
             // btnSend
             // 
             this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSend.Location = new System.Drawing.Point(645, 51);
+            this.btnSend.Location = new System.Drawing.Point(880, 99);
             this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(90, 39);
+            this.btnSend.Size = new System.Drawing.Size(71, 39);
             this.btnSend.TabIndex = 1;
             this.btnSend.Text = "Send";
             this.btnSend.UseVisualStyleBackColor = true;
@@ -92,7 +102,7 @@ namespace HarmoniaRemote
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(331, 57);
+            this.textBox1.Location = new System.Drawing.Point(655, 67);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(296, 26);
             this.textBox1.TabIndex = 2;
@@ -100,50 +110,50 @@ namespace HarmoniaRemote
             // btnDeflate
             // 
             this.btnDeflate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeflate.Location = new System.Drawing.Point(331, 137);
+            this.btnDeflate.Location = new System.Drawing.Point(130, 116);
             this.btnDeflate.Name = "btnDeflate";
-            this.btnDeflate.Size = new System.Drawing.Size(97, 33);
+            this.btnDeflate.Size = new System.Drawing.Size(33, 33);
             this.btnDeflate.TabIndex = 3;
-            this.btnDeflate.Text = "Deflate";
+            this.btnDeflate.Text = "-";
             this.btnDeflate.UseVisualStyleBackColor = true;
             this.btnDeflate.Click += new System.EventHandler(this.btnDeflate_Click);
             // 
             // btnInflate
             // 
             this.btnInflate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInflate.Location = new System.Drawing.Point(331, 97);
+            this.btnInflate.Location = new System.Drawing.Point(130, 38);
             this.btnInflate.Name = "btnInflate";
-            this.btnInflate.Size = new System.Drawing.Size(97, 33);
+            this.btnInflate.Size = new System.Drawing.Size(33, 33);
             this.btnInflate.TabIndex = 4;
-            this.btnInflate.Text = "Inflate";
+            this.btnInflate.Text = "+";
             this.btnInflate.UseVisualStyleBackColor = true;
             this.btnInflate.Click += new System.EventHandler(this.btnInflate_Click);
             // 
             // btnForward
             // 
             this.btnForward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnForward.Location = new System.Drawing.Point(461, 97);
+            this.btnForward.Location = new System.Drawing.Point(23, 200);
             this.btnForward.Name = "btnForward";
-            this.btnForward.Size = new System.Drawing.Size(97, 33);
+            this.btnForward.Size = new System.Drawing.Size(48, 33);
             this.btnForward.TabIndex = 5;
-            this.btnForward.Text = "Forward";
+            this.btnForward.Text = "<<";
             this.btnForward.UseVisualStyleBackColor = true;
             this.btnForward.Click += new System.EventHandler(this.btnForward_Click);
             // 
             // btnReverse
             // 
             this.btnReverse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReverse.Location = new System.Drawing.Point(461, 137);
+            this.btnReverse.Location = new System.Drawing.Point(78, 200);
             this.btnReverse.Name = "btnReverse";
-            this.btnReverse.Size = new System.Drawing.Size(97, 33);
+            this.btnReverse.Size = new System.Drawing.Size(48, 33);
             this.btnReverse.TabIndex = 6;
-            this.btnReverse.Text = "Reverse";
+            this.btnReverse.Text = ">>";
             this.btnReverse.UseVisualStyleBackColor = true;
             this.btnReverse.Click += new System.EventHandler(this.btnReverse_Click);
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(777, 36);
+            this.trackBar1.Location = new System.Drawing.Point(205, 25);
             this.trackBar1.Maximum = 180;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
@@ -158,7 +168,7 @@ namespace HarmoniaRemote
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(773, 183);
+            this.label1.Location = new System.Drawing.Point(201, 172);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 20);
             this.label1.TabIndex = 8;
@@ -168,7 +178,7 @@ namespace HarmoniaRemote
             // lblThrottle
             // 
             this.lblThrottle.AutoSize = true;
-            this.lblThrottle.Location = new System.Drawing.Point(828, 97);
+            this.lblThrottle.Location = new System.Drawing.Point(263, 88);
             this.lblThrottle.Name = "lblThrottle";
             this.lblThrottle.Size = new System.Drawing.Size(32, 20);
             this.lblThrottle.TabIndex = 9;
@@ -176,7 +186,7 @@ namespace HarmoniaRemote
             // 
             // tbFwdDive
             // 
-            this.tbFwdDive.Location = new System.Drawing.Point(887, 42);
+            this.tbFwdDive.Location = new System.Drawing.Point(312, 25);
             this.tbFwdDive.Maximum = 180;
             this.tbFwdDive.Name = "tbFwdDive";
             this.tbFwdDive.Orientation = System.Windows.Forms.Orientation.Vertical;
@@ -190,7 +200,7 @@ namespace HarmoniaRemote
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(883, 175);
+            this.label2.Location = new System.Drawing.Point(308, 172);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 20);
             this.label2.TabIndex = 11;
@@ -199,7 +209,7 @@ namespace HarmoniaRemote
             // lblFwdDive
             // 
             this.lblFwdDive.AutoSize = true;
-            this.lblFwdDive.Location = new System.Drawing.Point(940, 107);
+            this.lblFwdDive.Location = new System.Drawing.Point(372, 88);
             this.lblFwdDive.Name = "lblFwdDive";
             this.lblFwdDive.Size = new System.Drawing.Size(27, 20);
             this.lblFwdDive.TabIndex = 12;
@@ -208,7 +218,7 @@ namespace HarmoniaRemote
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(55, 338);
+            this.label3.Location = new System.Drawing.Point(38, 74);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 20);
             this.label3.TabIndex = 14;
@@ -216,7 +226,7 @@ namespace HarmoniaRemote
             // 
             // meta_id_13
             // 
-            this.meta_id_13.Location = new System.Drawing.Point(109, 293);
+            this.meta_id_13.Location = new System.Drawing.Point(92, 29);
             this.meta_id_13.Name = "meta_id_13";
             this.meta_id_13.Size = new System.Drawing.Size(174, 26);
             this.meta_id_13.TabIndex = 16;
@@ -224,7 +234,7 @@ namespace HarmoniaRemote
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(29, 296);
+            this.label4.Location = new System.Drawing.Point(12, 32);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 20);
             this.label4.TabIndex = 17;
@@ -233,9 +243,9 @@ namespace HarmoniaRemote
             // btnIdle
             // 
             this.btnIdle.BackColor = System.Drawing.Color.Silver;
-            this.btnIdle.Location = new System.Drawing.Point(130, 32);
+            this.btnIdle.Location = new System.Drawing.Point(22, 27);
             this.btnIdle.Name = "btnIdle";
-            this.btnIdle.Size = new System.Drawing.Size(32, 33);
+            this.btnIdle.Size = new System.Drawing.Size(33, 33);
             this.btnIdle.TabIndex = 18;
             this.btnIdle.UseVisualStyleBackColor = false;
             this.btnIdle.Click += new System.EventHandler(this.btnIdle_Click);
@@ -243,7 +253,7 @@ namespace HarmoniaRemote
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(89, 41);
+            this.label5.Location = new System.Drawing.Point(72, 36);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 20);
             this.label5.TabIndex = 19;
@@ -252,7 +262,7 @@ namespace HarmoniaRemote
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(63, 74);
+            this.label6.Location = new System.Drawing.Point(72, 69);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(61, 20);
             this.label6.TabIndex = 21;
@@ -261,9 +271,9 @@ namespace HarmoniaRemote
             // btnManual
             // 
             this.btnManual.BackColor = System.Drawing.Color.Fuchsia;
-            this.btnManual.Location = new System.Drawing.Point(130, 68);
+            this.btnManual.Location = new System.Drawing.Point(22, 63);
             this.btnManual.Name = "btnManual";
-            this.btnManual.Size = new System.Drawing.Size(32, 33);
+            this.btnManual.Size = new System.Drawing.Size(33, 33);
             this.btnManual.TabIndex = 20;
             this.btnManual.UseVisualStyleBackColor = false;
             this.btnManual.Click += new System.EventHandler(this.btnManual_Click);
@@ -271,7 +281,7 @@ namespace HarmoniaRemote
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(24, 149);
+            this.label7.Location = new System.Drawing.Point(72, 144);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(100, 20);
             this.label7.TabIndex = 25;
@@ -280,9 +290,9 @@ namespace HarmoniaRemote
             // btnDynamicTrim
             // 
             this.btnDynamicTrim.BackColor = System.Drawing.Color.Blue;
-            this.btnDynamicTrim.Location = new System.Drawing.Point(130, 143);
+            this.btnDynamicTrim.Location = new System.Drawing.Point(22, 138);
             this.btnDynamicTrim.Name = "btnDynamicTrim";
-            this.btnDynamicTrim.Size = new System.Drawing.Size(32, 33);
+            this.btnDynamicTrim.Size = new System.Drawing.Size(33, 33);
             this.btnDynamicTrim.TabIndex = 24;
             this.btnDynamicTrim.UseVisualStyleBackColor = false;
             this.btnDynamicTrim.Click += new System.EventHandler(this.btnDynamicTrim_Click);
@@ -290,7 +300,7 @@ namespace HarmoniaRemote
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(44, 113);
+            this.label8.Location = new System.Drawing.Point(72, 108);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(80, 20);
             this.label8.TabIndex = 23;
@@ -299,9 +309,9 @@ namespace HarmoniaRemote
             // btnStaticTrim
             // 
             this.btnStaticTrim.BackColor = System.Drawing.Color.Yellow;
-            this.btnStaticTrim.Location = new System.Drawing.Point(130, 107);
+            this.btnStaticTrim.Location = new System.Drawing.Point(22, 102);
             this.btnStaticTrim.Name = "btnStaticTrim";
-            this.btnStaticTrim.Size = new System.Drawing.Size(32, 33);
+            this.btnStaticTrim.Size = new System.Drawing.Size(33, 33);
             this.btnStaticTrim.TabIndex = 22;
             this.btnStaticTrim.UseVisualStyleBackColor = false;
             this.btnStaticTrim.Click += new System.EventHandler(this.btnStaticTrim_Click);
@@ -309,7 +319,7 @@ namespace HarmoniaRemote
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(55, 228);
+            this.label9.Location = new System.Drawing.Point(72, 223);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(69, 20);
             this.label9.TabIndex = 27;
@@ -318,9 +328,9 @@ namespace HarmoniaRemote
             // btnAlarm
             // 
             this.btnAlarm.BackColor = System.Drawing.Color.Red;
-            this.btnAlarm.Location = new System.Drawing.Point(130, 222);
+            this.btnAlarm.Location = new System.Drawing.Point(22, 217);
             this.btnAlarm.Name = "btnAlarm";
-            this.btnAlarm.Size = new System.Drawing.Size(32, 33);
+            this.btnAlarm.Size = new System.Drawing.Size(33, 33);
             this.btnAlarm.TabIndex = 26;
             this.btnAlarm.UseVisualStyleBackColor = false;
             this.btnAlarm.Click += new System.EventHandler(this.btnAlarm_Click);
@@ -328,7 +338,7 @@ namespace HarmoniaRemote
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(85, 189);
+            this.label10.Location = new System.Drawing.Point(72, 184);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(39, 20);
             this.label10.TabIndex = 29;
@@ -337,22 +347,22 @@ namespace HarmoniaRemote
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Green;
-            this.button1.Location = new System.Drawing.Point(130, 183);
+            this.button1.Location = new System.Drawing.Point(22, 178);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(32, 33);
+            this.button1.Size = new System.Drawing.Size(33, 33);
             this.button1.TabIndex = 28;
             this.button1.UseVisualStyleBackColor = false;
             // 
             // meta_id_3
             // 
-            this.meta_id_3.Location = new System.Drawing.Point(109, 338);
+            this.meta_id_3.Location = new System.Drawing.Point(92, 74);
             this.meta_id_3.Name = "meta_id_3";
             this.meta_id_3.Size = new System.Drawing.Size(174, 26);
             this.meta_id_3.TabIndex = 30;
             // 
             // meta_id_7
             // 
-            this.meta_id_7.Location = new System.Drawing.Point(453, 338);
+            this.meta_id_7.Location = new System.Drawing.Point(436, 74);
             this.meta_id_7.Name = "meta_id_7";
             this.meta_id_7.Size = new System.Drawing.Size(174, 26);
             this.meta_id_7.TabIndex = 34;
@@ -360,7 +370,7 @@ namespace HarmoniaRemote
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(313, 296);
+            this.label11.Location = new System.Drawing.Point(296, 32);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(133, 20);
             this.label11.TabIndex = 33;
@@ -368,7 +378,7 @@ namespace HarmoniaRemote
             // 
             // meta_id_1
             // 
-            this.meta_id_1.Location = new System.Drawing.Point(453, 293);
+            this.meta_id_1.Location = new System.Drawing.Point(436, 29);
             this.meta_id_1.Name = "meta_id_1";
             this.meta_id_1.Size = new System.Drawing.Size(174, 26);
             this.meta_id_1.TabIndex = 32;
@@ -376,7 +386,7 @@ namespace HarmoniaRemote
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(398, 338);
+            this.label12.Location = new System.Drawing.Point(381, 74);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(44, 20);
             this.label12.TabIndex = 31;
@@ -384,7 +394,7 @@ namespace HarmoniaRemote
             // 
             // meta_id_11
             // 
-            this.meta_id_11.Location = new System.Drawing.Point(812, 338);
+            this.meta_id_11.Location = new System.Drawing.Point(795, 74);
             this.meta_id_11.Name = "meta_id_11";
             this.meta_id_11.Size = new System.Drawing.Size(174, 26);
             this.meta_id_11.TabIndex = 38;
@@ -392,7 +402,7 @@ namespace HarmoniaRemote
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(663, 299);
+            this.label13.Location = new System.Drawing.Point(646, 35);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(129, 20);
             this.label13.TabIndex = 37;
@@ -400,7 +410,7 @@ namespace HarmoniaRemote
             // 
             // meta_id_10
             // 
-            this.meta_id_10.Location = new System.Drawing.Point(812, 293);
+            this.meta_id_10.Location = new System.Drawing.Point(795, 29);
             this.meta_id_10.Name = "meta_id_10";
             this.meta_id_10.Size = new System.Drawing.Size(174, 26);
             this.meta_id_10.TabIndex = 36;
@@ -408,62 +418,140 @@ namespace HarmoniaRemote
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(685, 344);
+            this.label14.Location = new System.Drawing.Point(668, 80);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(107, 20);
             this.label14.TabIndex = 35;
             this.label14.Text = "Internal temp.";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.btnIdle);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.btnManual);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.btnStaticTrim);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.btnDynamicTrim);
+            this.groupBox1.Controls.Add(this.btnAlarm);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Location = new System.Drawing.Point(15, 13);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(190, 260);
+            this.groupBox1.TabIndex = 39;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "State";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btnStopPump);
+            this.groupBox2.Controls.Add(this.lblFwdDive);
+            this.groupBox2.Controls.Add(this.lblThrottle);
+            this.groupBox2.Controls.Add(this.label16);
+            this.groupBox2.Controls.Add(this.label15);
+            this.groupBox2.Controls.Add(this.btnInflate);
+            this.groupBox2.Controls.Add(this.btnDeflate);
+            this.groupBox2.Controls.Add(this.btnReverse);
+            this.groupBox2.Controls.Add(this.btnForward);
+            this.groupBox2.Controls.Add(this.trackBar1);
+            this.groupBox2.Controls.Add(this.tbFwdDive);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Location = new System.Drawing.Point(223, 13);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(418, 260);
+            this.groupBox2.TabIndex = 40;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Manual control";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 40);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(105, 20);
+            this.label16.TabIndex = 21;
+            this.label16.Text = "Depth control";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(28, 172);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(96, 20);
+            this.label15.TabIndex = 20;
+            this.label15.Text = "Pitch control";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(661, 40);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(185, 20);
+            this.label17.TabIndex = 41;
+            this.label17.Text = "Send command via serial";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.meta_id_10);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.meta_id_13);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.meta_id_11);
+            this.groupBox3.Controls.Add(this.meta_id_3);
+            this.groupBox3.Controls.Add(this.label13);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Controls.Add(this.meta_id_1);
+            this.groupBox3.Controls.Add(this.label14);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.meta_id_7);
+            this.groupBox3.Location = new System.Drawing.Point(15, 286);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(1070, 208);
+            this.groupBox3.TabIndex = 42;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Incoming data";
+            // 
+            // btnStopPump
+            // 
+            this.btnStopPump.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStopPump.Location = new System.Drawing.Point(130, 77);
+            this.btnStopPump.Name = "btnStopPump";
+            this.btnStopPump.Size = new System.Drawing.Size(33, 33);
+            this.btnStopPump.TabIndex = 22;
+            this.btnStopPump.Text = "o";
+            this.btnStopPump.UseVisualStyleBackColor = true;
+            this.btnStopPump.Click += new System.EventHandler(this.btnStopPump_Click);
             // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1530, 665);
-            this.Controls.Add(this.meta_id_11);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.meta_id_10);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.meta_id_7);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.meta_id_1);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.meta_id_3);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.btnAlarm);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.btnDynamicTrim);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.btnStaticTrim);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.btnManual);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.btnIdle);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.meta_id_13);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.lblFwdDive);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.tbFwdDive);
-            this.Controls.Add(this.lblThrottle);
-            this.Controls.Add(this.trackBar1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnReverse);
-            this.Controls.Add(this.btnForward);
-            this.Controls.Add(this.btnInflate);
-            this.Controls.Add(this.btnDeflate);
+            this.ClientSize = new System.Drawing.Size(1103, 872);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.rtb);
             this.MinimumSize = new System.Drawing.Size(1025, 721);
             this.Name = "ControlForm";
-            this.Padding = new System.Windows.Forms.Padding(0, 400, 0, 0);
+            this.Padding = new System.Windows.Forms.Padding(0, 500, 0, 0);
             this.Text = "Harmonia Controller";
             this.Load += new System.EventHandler(this.ControlForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -508,6 +596,13 @@ namespace HarmoniaRemote
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox meta_id_10;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button btnStopPump;
     }
 }
 
