@@ -68,24 +68,24 @@ namespace HarmoniaRemote
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblRudder = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.tbRudder = new System.Windows.Forms.TrackBar();
+            this.label18 = new System.Windows.Forms.Label();
+            this.lblAftDive = new System.Windows.Forms.Label();
+            this.tbAftDive = new System.Windows.Forms.TrackBar();
+            this.btnStopPump = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnStopPump = new System.Windows.Forms.Button();
-            this.label18 = new System.Windows.Forms.Label();
-            this.lblAftDive = new System.Windows.Forms.Label();
-            this.tbAftDive = new System.Windows.Forms.TrackBar();
-            this.tbRudder = new System.Windows.Forms.TrackBar();
-            this.label19 = new System.Windows.Forms.Label();
-            this.lblRudder = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAftDive)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbRudder)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbAftDive)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // rtb
@@ -140,22 +140,22 @@ namespace HarmoniaRemote
             // btnForward
             // 
             this.btnForward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnForward.Location = new System.Drawing.Point(23, 200);
+            this.btnForward.Location = new System.Drawing.Point(89, 200);
             this.btnForward.Name = "btnForward";
             this.btnForward.Size = new System.Drawing.Size(48, 33);
             this.btnForward.TabIndex = 5;
-            this.btnForward.Text = "<<";
+            this.btnForward.Text = ">>";
             this.btnForward.UseVisualStyleBackColor = true;
             this.btnForward.Click += new System.EventHandler(this.btnForward_Click);
             // 
             // btnReverse
             // 
             this.btnReverse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReverse.Location = new System.Drawing.Point(78, 200);
+            this.btnReverse.Location = new System.Drawing.Point(22, 200);
             this.btnReverse.Name = "btnReverse";
             this.btnReverse.Size = new System.Drawing.Size(48, 33);
             this.btnReverse.TabIndex = 6;
-            this.btnReverse.Text = ">>";
+            this.btnReverse.Text = "<<";
             this.btnReverse.UseVisualStyleBackColor = true;
             this.btnReverse.Click += new System.EventHandler(this.btnReverse_Click);
             // 
@@ -481,6 +481,78 @@ namespace HarmoniaRemote
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Manual control";
             // 
+            // lblRudder
+            // 
+            this.lblRudder.AutoSize = true;
+            this.lblRudder.Location = new System.Drawing.Point(357, 236);
+            this.lblRudder.Name = "lblRudder";
+            this.lblRudder.Size = new System.Drawing.Size(27, 20);
+            this.lblRudder.TabIndex = 28;
+            this.lblRudder.Text = "90";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(289, 236);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(62, 20);
+            this.label19.TabIndex = 27;
+            this.label19.Text = "Rudder";
+            // 
+            // tbRudder
+            // 
+            this.tbRudder.Location = new System.Drawing.Point(211, 181);
+            this.tbRudder.Maximum = 180;
+            this.tbRudder.Name = "tbRudder";
+            this.tbRudder.Size = new System.Drawing.Size(219, 69);
+            this.tbRudder.TabIndex = 26;
+            this.tbRudder.TickFrequency = 10;
+            this.tbRudder.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.tbRudder.Value = 90;
+            this.tbRudder.Scroll += new System.EventHandler(this.tbRudder_Scroll);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(372, 151);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(65, 20);
+            this.label18.TabIndex = 24;
+            this.label18.Text = "Aft Dive";
+            // 
+            // lblAftDive
+            // 
+            this.lblAftDive.AutoSize = true;
+            this.lblAftDive.Location = new System.Drawing.Point(430, 78);
+            this.lblAftDive.Name = "lblAftDive";
+            this.lblAftDive.Size = new System.Drawing.Size(27, 20);
+            this.lblAftDive.TabIndex = 25;
+            this.lblAftDive.Text = "90";
+            // 
+            // tbAftDive
+            // 
+            this.tbAftDive.Location = new System.Drawing.Point(377, 15);
+            this.tbAftDive.Maximum = 180;
+            this.tbAftDive.Name = "tbAftDive";
+            this.tbAftDive.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.tbAftDive.Size = new System.Drawing.Size(69, 144);
+            this.tbAftDive.TabIndex = 23;
+            this.tbAftDive.TickFrequency = 10;
+            this.tbAftDive.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.tbAftDive.Value = 90;
+            this.tbAftDive.Scroll += new System.EventHandler(this.tbAftDive_Scroll);
+            // 
+            // btnStopPump
+            // 
+            this.btnStopPump.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStopPump.Location = new System.Drawing.Point(130, 77);
+            this.btnStopPump.Name = "btnStopPump";
+            this.btnStopPump.Size = new System.Drawing.Size(33, 33);
+            this.btnStopPump.TabIndex = 22;
+            this.btnStopPump.Text = "o";
+            this.btnStopPump.UseVisualStyleBackColor = true;
+            this.btnStopPump.Click += new System.EventHandler(this.btnStopPump_Click);
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -529,78 +601,6 @@ namespace HarmoniaRemote
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Incoming data";
             // 
-            // btnStopPump
-            // 
-            this.btnStopPump.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStopPump.Location = new System.Drawing.Point(130, 77);
-            this.btnStopPump.Name = "btnStopPump";
-            this.btnStopPump.Size = new System.Drawing.Size(33, 33);
-            this.btnStopPump.TabIndex = 22;
-            this.btnStopPump.Text = "o";
-            this.btnStopPump.UseVisualStyleBackColor = true;
-            this.btnStopPump.Click += new System.EventHandler(this.btnStopPump_Click);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(372, 151);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(65, 20);
-            this.label18.TabIndex = 24;
-            this.label18.Text = "Aft Dive";
-            // 
-            // lblAftDive
-            // 
-            this.lblAftDive.AutoSize = true;
-            this.lblAftDive.Location = new System.Drawing.Point(430, 78);
-            this.lblAftDive.Name = "lblAftDive";
-            this.lblAftDive.Size = new System.Drawing.Size(27, 20);
-            this.lblAftDive.TabIndex = 25;
-            this.lblAftDive.Text = "90";
-            // 
-            // tbAftDive
-            // 
-            this.tbAftDive.Location = new System.Drawing.Point(377, 15);
-            this.tbAftDive.Maximum = 180;
-            this.tbAftDive.Name = "tbAftDive";
-            this.tbAftDive.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAftDive.Size = new System.Drawing.Size(69, 144);
-            this.tbAftDive.TabIndex = 23;
-            this.tbAftDive.TickFrequency = 10;
-            this.tbAftDive.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAftDive.Value = 90;
-            this.tbAftDive.Scroll += new System.EventHandler(this.tbAftDive_Scroll);
-            // 
-            // tbRudder
-            // 
-            this.tbRudder.Location = new System.Drawing.Point(211, 181);
-            this.tbRudder.Maximum = 180;
-            this.tbRudder.Name = "tbRudder";
-            this.tbRudder.Size = new System.Drawing.Size(219, 69);
-            this.tbRudder.TabIndex = 26;
-            this.tbRudder.TickFrequency = 10;
-            this.tbRudder.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbRudder.Value = 90;
-            this.tbRudder.Scroll += new System.EventHandler(this.tbRudder_Scroll);
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(289, 236);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(62, 20);
-            this.label19.TabIndex = 27;
-            this.label19.Text = "Rudder";
-            // 
-            // lblRudder
-            // 
-            this.lblRudder.AutoSize = true;
-            this.lblRudder.Location = new System.Drawing.Point(357, 236);
-            this.lblRudder.Name = "lblRudder";
-            this.lblRudder.Size = new System.Drawing.Size(27, 20);
-            this.lblRudder.TabIndex = 28;
-            this.lblRudder.Text = "90";
-            // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -625,10 +625,10 @@ namespace HarmoniaRemote
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbRudder)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbAftDive)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAftDive)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbRudder)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
