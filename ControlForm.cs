@@ -57,6 +57,7 @@ namespace HarmoniaRemote
                             if (intMetadataID == 7) { SetControlText(this.meta_id_7,strValue); }
                             if (intMetadataID == 10) { SetControlText(this.meta_id_10,strValue); }
                             if (intMetadataID == 11) { SetControlText(this.meta_id_11,strValue); }
+                            if (intMetadataID == 17) { SetControlText(this.meta_id_17, strValue); }
 
                         }
 

@@ -79,6 +79,8 @@ namespace HarmoniaRemote
             this.label15 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.meta_id_17 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -582,6 +584,8 @@ namespace HarmoniaRemote
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label20);
+            this.groupBox3.Controls.Add(this.meta_id_17);
             this.groupBox3.Controls.Add(this.meta_id_10);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.meta_id_13);
@@ -600,6 +604,22 @@ namespace HarmoniaRemote
             this.groupBox3.TabIndex = 42;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Incoming data";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(18, 122);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(90, 20);
+            this.label20.TabIndex = 39;
+            this.label20.Text = "Weight Pos";
+            // 
+            // meta_id_17
+            // 
+            this.meta_id_17.Location = new System.Drawing.Point(120, 119);
+            this.meta_id_17.Name = "meta_id_17";
+            this.meta_id_17.Size = new System.Drawing.Size(174, 26);
+            this.meta_id_17.TabIndex = 40;
             // 
             // ControlForm
             // 
@@ -686,6 +706,8 @@ namespace HarmoniaRemote
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TrackBar tbRudder;
         private System.Windows.Forms.Label lblRudder;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox meta_id_17;
     }
 }
 
