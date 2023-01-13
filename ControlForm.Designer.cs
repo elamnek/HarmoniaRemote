@@ -81,6 +81,8 @@ namespace HarmoniaRemote
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label20 = new System.Windows.Forms.Label();
             this.meta_id_17 = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.tbPushrod = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -88,6 +90,7 @@ namespace HarmoniaRemote
             ((System.ComponentModel.ISupportInitialize)(this.tbRudder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbAftDive)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbPushrod)).BeginInit();
             this.SuspendLayout();
             // 
             // rtb
@@ -457,6 +460,7 @@ namespace HarmoniaRemote
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label21);
             this.groupBox2.Controls.Add(this.lblRudder);
             this.groupBox2.Controls.Add(this.label19);
             this.groupBox2.Controls.Add(this.tbRudder);
@@ -476,6 +480,7 @@ namespace HarmoniaRemote
             this.groupBox2.Controls.Add(this.btnForward);
             this.groupBox2.Controls.Add(this.trackBar1);
             this.groupBox2.Controls.Add(this.tbFwdDive);
+            this.groupBox2.Controls.Add(this.tbPushrod);
             this.groupBox2.Location = new System.Drawing.Point(223, 13);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(600, 260);
@@ -621,6 +626,27 @@ namespace HarmoniaRemote
             this.meta_id_17.Size = new System.Drawing.Size(174, 26);
             this.meta_id_17.TabIndex = 40;
             // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(460, 151);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(68, 20);
+            this.label21.TabIndex = 30;
+            this.label21.Text = "Pushrod";
+            // 
+            // tbPushrod
+            // 
+            this.tbPushrod.Location = new System.Drawing.Point(464, 15);
+            this.tbPushrod.Maximum = 100;
+            this.tbPushrod.Name = "tbPushrod";
+            this.tbPushrod.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.tbPushrod.Size = new System.Drawing.Size(69, 144);
+            this.tbPushrod.TabIndex = 31;
+            this.tbPushrod.TickFrequency = 10;
+            this.tbPushrod.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.tbPushrod.Scroll += new System.EventHandler(this.tbPushrod_Scroll);
+            // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -649,6 +675,7 @@ namespace HarmoniaRemote
             ((System.ComponentModel.ISupportInitialize)(this.tbAftDive)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbPushrod)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -708,6 +735,8 @@ namespace HarmoniaRemote
         private System.Windows.Forms.Label lblRudder;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox meta_id_17;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TrackBar tbPushrod;
     }
 }
 

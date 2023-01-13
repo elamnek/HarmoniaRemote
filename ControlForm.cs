@@ -175,5 +175,10 @@ namespace HarmoniaRemote
             sp.WriteLine("SERVOAFTRUDDER," + this.tbRudder.Value.ToString());
             this.lblRudder.Text = this.tbRudder.Value.ToString();
         }
+
+        private void tbPushrod_Scroll(object sender, EventArgs e)
+        {
+            sp.WriteLine("PUSHROD," + this.tbPushrod.Value.ToString());
+        }
     }
 }
