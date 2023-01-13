@@ -20,7 +20,7 @@ namespace HarmoniaRemote
 
         //create the serial connection
         private SerialPort sp = new SerialPort("COM4", 9600);
-        
+           
         private void ControlForm_Load(object sender, EventArgs e)
         {
             sp.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
@@ -52,7 +52,19 @@ namespace HarmoniaRemote
                             String strValue = arrayValue[1].ToString();
 
                             if (intMetadataID == 13) { SetControlText(this.meta_id_13,strValue); }
-                            if (intMetadataID == 3) { SetControlText(this.meta_id_3,strValue); }
+                            if (intMetadataID == 3) {
+                                //this is the state - check for alarm
+                                SetControlText(this.meta_id_3,strValue);
+                                Control ctl = this;
+                                if (strValue == "ALARM")
+                                { 
+                                    ctl.Invoke((MethodInvoker)delegate { ctl.BackColor = Color.Red; });
+                                    Console.Beep(500, 1000);
+                                } else
+                                {
+                                    ctl.Invoke((MethodInvoker)delegate { ctl.BackColor = Control.DefaultBackColor; });
+                                }
+                            }
                             if (intMetadataID == 1) { SetControlText(this.meta_id_1,strValue); }
                             if (intMetadataID == 7) { SetControlText(this.meta_id_7,strValue); }
                             if (intMetadataID == 10) { SetControlText(this.meta_id_10,strValue); }
