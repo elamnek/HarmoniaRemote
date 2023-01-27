@@ -47,14 +47,14 @@ namespace HarmoniaRemote
                         String[] arrayRaw = strRaw.Split(',');
                         foreach (String strPart in arrayRaw)
                         {
-                            String[] arrayValue = strPart.Trim().Split(':');
+                            String[] arrayValue = strPart.Trim().Split('|');
                             int intMetadataID = int.Parse(arrayValue[0].ToString());
                             String strValue = arrayValue[1].ToString();
 
-                            if (intMetadataID == 13) { SetControlText(this.meta_id_13,strValue); }
-                            if (intMetadataID == 3) {
+                            if (intMetadataID == 13) { SetControlText(this.meta_id_13,strValue); }//rtc
+                            if (intMetadataID == 4) {
                                 //this is the state - check for alarm
-                                SetControlText(this.meta_id_3,strValue);
+                                SetControlText(this.meta_id_4,strValue);
                                 Control ctl = this;
                                 if (strValue == "ALARM")
                                 { 
@@ -66,6 +66,24 @@ namespace HarmoniaRemote
                                 }
                             }
                             if (intMetadataID == 1) { SetControlText(this.meta_id_1,strValue); }
+                            
+                            //leak sensors
+                            if (intMetadataID == 2) { 
+                                SetControlText(this.meta_id_2, strValue);
+                                if (strValue == "1")
+                                { SetControlBackcolor(this.meta_id_2, Color.Red);
+                                } else { SetControlBackcolor(this.meta_id_2, TextBox.DefaultBackColor); }
+                                
+                            }
+                            if (intMetadataID == 3) {
+                                SetControlText(this.meta_id_3, strValue);
+                                if (strValue == "1")
+                                {
+                                    SetControlBackcolor(this.meta_id_3, Color.Red);
+                                }
+                                else { SetControlBackcolor(this.meta_id_3, TextBox.DefaultBackColor); }
+                                
+                            }
                             if (intMetadataID == 7) { SetControlText(this.meta_id_7,strValue); }
                             if (intMetadataID == 10) { SetControlText(this.meta_id_10,strValue); }
                             if (intMetadataID == 11) { SetControlText(this.meta_id_11,strValue); }
@@ -94,6 +112,10 @@ namespace HarmoniaRemote
         public static void SetControlText(Control ctl, string text)
         {
             ctl.Invoke((MethodInvoker)delegate { ctl.Text = text; });
+        }
+        public static void SetControlBackcolor(Control ctl, Color bcol)
+        {
+            ctl.Invoke((MethodInvoker)delegate { ctl.BackColor = bcol; });
         }
 
         private void button1_Click(object sender, EventArgs e)

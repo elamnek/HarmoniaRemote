@@ -57,7 +57,7 @@ namespace HarmoniaRemote
             this.btnAlarm = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.meta_id_3 = new System.Windows.Forms.TextBox();
+            this.meta_id_4 = new System.Windows.Forms.TextBox();
             this.meta_id_7 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.meta_id_1 = new System.Windows.Forms.TextBox();
@@ -83,6 +83,12 @@ namespace HarmoniaRemote
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label20 = new System.Windows.Forms.Label();
             this.meta_id_17 = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.meta_id_2 = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.meta_id_3 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -366,40 +372,40 @@ namespace HarmoniaRemote
             this.button1.TabIndex = 28;
             this.button1.UseVisualStyleBackColor = false;
             // 
-            // meta_id_3
+            // meta_id_4
             // 
-            this.meta_id_3.Location = new System.Drawing.Point(92, 74);
-            this.meta_id_3.Name = "meta_id_3";
-            this.meta_id_3.Size = new System.Drawing.Size(174, 26);
-            this.meta_id_3.TabIndex = 30;
+            this.meta_id_4.Location = new System.Drawing.Point(92, 74);
+            this.meta_id_4.Name = "meta_id_4";
+            this.meta_id_4.Size = new System.Drawing.Size(174, 26);
+            this.meta_id_4.TabIndex = 30;
             // 
             // meta_id_7
             // 
-            this.meta_id_7.Location = new System.Drawing.Point(436, 74);
+            this.meta_id_7.Location = new System.Drawing.Point(729, 84);
             this.meta_id_7.Name = "meta_id_7";
-            this.meta_id_7.Size = new System.Drawing.Size(174, 26);
+            this.meta_id_7.Size = new System.Drawing.Size(79, 26);
             this.meta_id_7.TabIndex = 34;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(296, 32);
+            this.label11.Location = new System.Drawing.Point(291, 32);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(133, 20);
+            this.label11.Size = new System.Drawing.Size(53, 20);
             this.label11.TabIndex = 33;
-            this.label11.Text = "External pressure";
+            this.label11.Text = "Depth";
             // 
             // meta_id_1
             // 
-            this.meta_id_1.Location = new System.Drawing.Point(436, 29);
+            this.meta_id_1.Location = new System.Drawing.Point(351, 32);
             this.meta_id_1.Name = "meta_id_1";
-            this.meta_id_1.Size = new System.Drawing.Size(174, 26);
+            this.meta_id_1.Size = new System.Drawing.Size(79, 26);
             this.meta_id_1.TabIndex = 32;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(381, 74);
+            this.label12.Location = new System.Drawing.Point(674, 84);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(44, 20);
             this.label12.TabIndex = 31;
@@ -407,35 +413,35 @@ namespace HarmoniaRemote
             // 
             // meta_id_11
             // 
-            this.meta_id_11.Location = new System.Drawing.Point(795, 74);
+            this.meta_id_11.Location = new System.Drawing.Point(183, 122);
             this.meta_id_11.Name = "meta_id_11";
-            this.meta_id_11.Size = new System.Drawing.Size(174, 26);
+            this.meta_id_11.Size = new System.Drawing.Size(83, 26);
             this.meta_id_11.TabIndex = 38;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(646, 35);
+            this.label13.Location = new System.Drawing.Point(300, 84);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(129, 20);
+            this.label13.Size = new System.Drawing.Size(179, 20);
             this.label13.TabIndex = 37;
-            this.label13.Text = "Internal pressure";
+            this.label13.Text = "Internal pressure (mbar)";
             // 
             // meta_id_10
             // 
-            this.meta_id_10.Location = new System.Drawing.Point(795, 29);
+            this.meta_id_10.Location = new System.Drawing.Point(499, 78);
             this.meta_id_10.Name = "meta_id_10";
-            this.meta_id_10.Size = new System.Drawing.Size(174, 26);
+            this.meta_id_10.Size = new System.Drawing.Size(78, 26);
             this.meta_id_10.TabIndex = 36;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(668, 80);
+            this.label14.Location = new System.Drawing.Point(39, 125);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(107, 20);
+            this.label14.Size = new System.Drawing.Size(132, 20);
             this.label14.TabIndex = 35;
-            this.label14.Text = "Internal temp.";
+            this.label14.Text = "Internal temp. (C)";
             // 
             // groupBox1
             // 
@@ -610,6 +616,12 @@ namespace HarmoniaRemote
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.textBox2);
+            this.groupBox3.Controls.Add(this.label24);
+            this.groupBox3.Controls.Add(this.label23);
+            this.groupBox3.Controls.Add(this.meta_id_3);
+            this.groupBox3.Controls.Add(this.label22);
+            this.groupBox3.Controls.Add(this.meta_id_2);
             this.groupBox3.Controls.Add(this.label20);
             this.groupBox3.Controls.Add(this.meta_id_17);
             this.groupBox3.Controls.Add(this.meta_id_10);
@@ -617,7 +629,7 @@ namespace HarmoniaRemote
             this.groupBox3.Controls.Add(this.meta_id_13);
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.meta_id_11);
-            this.groupBox3.Controls.Add(this.meta_id_3);
+            this.groupBox3.Controls.Add(this.meta_id_4);
             this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Controls.Add(this.label12);
             this.groupBox3.Controls.Add(this.meta_id_1);
@@ -634,18 +646,66 @@ namespace HarmoniaRemote
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(18, 122);
+            this.label20.Location = new System.Drawing.Point(458, 35);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(90, 20);
+            this.label20.Size = new System.Drawing.Size(146, 20);
             this.label20.TabIndex = 39;
-            this.label20.Text = "Weight Pos";
+            this.label20.Text = "Battery Pos (0-100)";
             // 
             // meta_id_17
             // 
-            this.meta_id_17.Location = new System.Drawing.Point(120, 119);
+            this.meta_id_17.Location = new System.Drawing.Point(610, 32);
             this.meta_id_17.Name = "meta_id_17";
-            this.meta_id_17.Size = new System.Drawing.Size(174, 26);
+            this.meta_id_17.Size = new System.Drawing.Size(76, 26);
             this.meta_id_17.TabIndex = 40;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(789, 28);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(78, 20);
+            this.label22.TabIndex = 41;
+            this.label22.Text = "Fwd Leak";
+            // 
+            // meta_id_2
+            // 
+            this.meta_id_2.Location = new System.Drawing.Point(871, 25);
+            this.meta_id_2.Name = "meta_id_2";
+            this.meta_id_2.Size = new System.Drawing.Size(40, 26);
+            this.meta_id_2.TabIndex = 42;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(938, 28);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(69, 20);
+            this.label23.TabIndex = 43;
+            this.label23.Text = "Aft Leak";
+            // 
+            // meta_id_3
+            // 
+            this.meta_id_3.Location = new System.Drawing.Point(1013, 25);
+            this.meta_id_3.Name = "meta_id_3";
+            this.meta_id_3.Size = new System.Drawing.Size(40, 26);
+            this.meta_id_3.TabIndex = 44;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(498, 122);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(75, 26);
+            this.textBox2.TabIndex = 45;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(314, 128);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(165, 20);
+            this.label24.TabIndex = 46;
+            this.label24.Text = "Air bag pressure (PSI)";
             // 
             // ControlForm
             // 
@@ -711,7 +771,7 @@ namespace HarmoniaRemote
         private System.Windows.Forms.Button btnAlarm;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox meta_id_3;
+        private System.Windows.Forms.TextBox meta_id_4;
         private System.Windows.Forms.TextBox meta_id_7;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox meta_id_1;
@@ -737,6 +797,12 @@ namespace HarmoniaRemote
         private System.Windows.Forms.TextBox meta_id_17;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TrackBar tbPushrod;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox meta_id_3;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox meta_id_2;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label24;
     }
 }
 
