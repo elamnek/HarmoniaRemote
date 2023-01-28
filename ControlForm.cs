@@ -43,7 +43,7 @@ namespace HarmoniaRemote
                     if (strReceived.StartsWith("{"))
                     {
                         //this is a data packet - display each part in the textboxes
-                        String strRaw = strReceived.TrimStart('{').TrimEnd('}');
+                        String strRaw = strReceived.Trim().TrimStart('{').TrimEnd('}');
                         String[] arrayRaw = strRaw.Split(',');
                         foreach (String strPart in arrayRaw)
                         {
@@ -88,6 +88,7 @@ namespace HarmoniaRemote
                             if (intMetadataID == 10) { SetControlText(this.meta_id_10,strValue); }
                             if (intMetadataID == 11) { SetControlText(this.meta_id_11,strValue); }
                             if (intMetadataID == 17) { SetControlText(this.meta_id_17, strValue); }
+                            if (intMetadataID == 18) { SetControlText(this.meta_id_18, strValue); }
 
                         }
 

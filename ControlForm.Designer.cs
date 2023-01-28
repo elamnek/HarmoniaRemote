@@ -87,7 +87,7 @@ namespace HarmoniaRemote
             this.meta_id_2 = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.meta_id_3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.meta_id_18 = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
@@ -616,7 +616,7 @@ namespace HarmoniaRemote
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.textBox2);
+            this.groupBox3.Controls.Add(this.meta_id_18);
             this.groupBox3.Controls.Add(this.label24);
             this.groupBox3.Controls.Add(this.label23);
             this.groupBox3.Controls.Add(this.meta_id_3);
@@ -691,12 +691,12 @@ namespace HarmoniaRemote
             this.meta_id_3.Size = new System.Drawing.Size(40, 26);
             this.meta_id_3.TabIndex = 44;
             // 
-            // textBox2
+            // meta_id_18
             // 
-            this.textBox2.Location = new System.Drawing.Point(498, 122);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(75, 26);
-            this.textBox2.TabIndex = 45;
+            this.meta_id_18.Location = new System.Drawing.Point(498, 122);
+            this.meta_id_18.Name = "meta_id_18";
+            this.meta_id_18.Size = new System.Drawing.Size(75, 26);
+            this.meta_id_18.TabIndex = 45;
             // 
             // label24
             // 
@@ -801,7 +801,7 @@ namespace HarmoniaRemote
         private System.Windows.Forms.TextBox meta_id_3;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox meta_id_2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox meta_id_18;
         private System.Windows.Forms.Label label24;
     }
 }
