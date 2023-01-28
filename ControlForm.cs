@@ -55,15 +55,7 @@ namespace HarmoniaRemote
                             if (intMetadataID == 4) {
                                 //this is the state - check for alarm
                                 SetControlText(this.meta_id_4,strValue);
-                                Control ctl = this;
-                                if (strValue == "ALARM")
-                                { 
-                                    ctl.Invoke((MethodInvoker)delegate { ctl.BackColor = Color.Red; });
-                                    Console.Beep(500, 1000);
-                                } else
-                                {
-                                    ctl.Invoke((MethodInvoker)delegate { ctl.BackColor = Control.DefaultBackColor; });
-                                }
+                                
                             }
                             if (intMetadataID == 1) { SetControlText(this.meta_id_1,strValue); }
                             
@@ -71,18 +63,15 @@ namespace HarmoniaRemote
                             if (intMetadataID == 2) { 
                                 SetControlText(this.meta_id_2, strValue);
                                 if (strValue == "1")
-                                { SetControlBackcolor(this.meta_id_2, Color.Red);
-                                } else { SetControlBackcolor(this.meta_id_2, TextBox.DefaultBackColor); }
+                                {AlertUser(true);} 
+                                else { AlertUser(false); }
                                 
                             }
                             if (intMetadataID == 3) {
                                 SetControlText(this.meta_id_3, strValue);
                                 if (strValue == "1")
-                                {
-                                    SetControlBackcolor(this.meta_id_3, Color.Red);
-                                }
-                                else { SetControlBackcolor(this.meta_id_3, TextBox.DefaultBackColor); }
-                                
+                                {AlertUser(true);}
+                                else { AlertUser(false); }   
                             }
                             if (intMetadataID == 7) { SetControlText(this.meta_id_7,strValue); }
                             if (intMetadataID == 10) { SetControlText(this.meta_id_10,strValue); }
@@ -100,6 +89,26 @@ namespace HarmoniaRemote
 
                 }
                 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        private void AlertUser(Boolean blnAlertON)
+        {
+            try
+            {
+                if (blnAlertON)
+                {
+                    SetControlBackcolor(this, Color.Red);
+                    Console.Beep(500, 1000);
+                }
+                else
+                {
+                    SetControlBackcolor(this, TextBox.DefaultBackColor);
+                }
+
             }
             catch (Exception ex)
             {
