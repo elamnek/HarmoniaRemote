@@ -89,6 +89,9 @@ namespace HarmoniaRemote
             this.meta_id_2 = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.meta_id_17 = new System.Windows.Forms.TextBox();
+            this.chkBeep = new System.Windows.Forms.CheckBox();
+            this.meta_id_19 = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -421,15 +424,15 @@ namespace HarmoniaRemote
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(300, 82);
+            this.label13.Location = new System.Drawing.Point(305, 120);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(179, 20);
+            this.label13.Size = new System.Drawing.Size(171, 20);
             this.label13.TabIndex = 37;
-            this.label13.Text = "Internal pressure (mbar)";
+            this.label13.Text = "Internal pressure (hPa)";
             // 
             // meta_id_10
             // 
-            this.meta_id_10.Location = new System.Drawing.Point(499, 78);
+            this.meta_id_10.Location = new System.Drawing.Point(494, 114);
             this.meta_id_10.Name = "meta_id_10";
             this.meta_id_10.Size = new System.Drawing.Size(78, 26);
             this.meta_id_10.TabIndex = 36;
@@ -616,6 +619,9 @@ namespace HarmoniaRemote
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.meta_id_19);
+            this.groupBox3.Controls.Add(this.label25);
+            this.groupBox3.Controls.Add(this.chkBeep);
             this.groupBox3.Controls.Add(this.meta_id_18);
             this.groupBox3.Controls.Add(this.label24);
             this.groupBox3.Controls.Add(this.label23);
@@ -645,19 +651,19 @@ namespace HarmoniaRemote
             // 
             // meta_id_18
             // 
-            this.meta_id_18.Location = new System.Drawing.Point(498, 122);
+            this.meta_id_18.Location = new System.Drawing.Point(493, 155);
             this.meta_id_18.Name = "meta_id_18";
-            this.meta_id_18.Size = new System.Drawing.Size(75, 26);
+            this.meta_id_18.Size = new System.Drawing.Size(79, 26);
             this.meta_id_18.TabIndex = 45;
             // 
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(314, 125);
+            this.label24.Location = new System.Drawing.Point(309, 158);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(165, 20);
+            this.label24.Size = new System.Drawing.Size(167, 20);
             this.label24.TabIndex = 46;
-            this.label24.Text = "Air bag pressure (PSI)";
+            this.label24.Text = "Air bag pressure (hPa)";
             // 
             // label23
             // 
@@ -706,6 +712,34 @@ namespace HarmoniaRemote
             this.meta_id_17.Name = "meta_id_17";
             this.meta_id_17.Size = new System.Drawing.Size(76, 26);
             this.meta_id_17.TabIndex = 40;
+            // 
+            // chkBeep
+            // 
+            this.chkBeep.AutoSize = true;
+            this.chkBeep.Checked = true;
+            this.chkBeep.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBeep.Location = new System.Drawing.Point(966, 121);
+            this.chkBeep.Name = "chkBeep";
+            this.chkBeep.Size = new System.Drawing.Size(73, 24);
+            this.chkBeep.TabIndex = 43;
+            this.chkBeep.Text = "Beep";
+            this.chkBeep.UseVisualStyleBackColor = true;
+            // 
+            // meta_id_19
+            // 
+            this.meta_id_19.Location = new System.Drawing.Point(494, 75);
+            this.meta_id_19.Name = "meta_id_19";
+            this.meta_id_19.Size = new System.Drawing.Size(78, 26);
+            this.meta_id_19.TabIndex = 47;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(316, 80);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(160, 20);
+            this.label25.TabIndex = 48;
+            this.label25.Text = "Water pressure (hPa)";
             // 
             // ControlForm
             // 
@@ -803,6 +837,9 @@ namespace HarmoniaRemote
         private System.Windows.Forms.TextBox meta_id_2;
         private System.Windows.Forms.TextBox meta_id_18;
         private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.CheckBox chkBeep;
+        private System.Windows.Forms.TextBox meta_id_19;
+        private System.Windows.Forms.Label label25;
     }
 }
 

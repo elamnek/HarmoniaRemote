@@ -78,6 +78,7 @@ namespace HarmoniaRemote
                             if (intMetadataID == 11) { SetControlText(this.meta_id_11,strValue); }
                             if (intMetadataID == 17) { SetControlText(this.meta_id_17, strValue); }
                             if (intMetadataID == 18) { SetControlText(this.meta_id_18, strValue); }
+                            if (intMetadataID == 19) { SetControlText(this.meta_id_19, strValue); }
 
                         }
 
@@ -102,7 +103,7 @@ namespace HarmoniaRemote
                 if (blnAlertON)
                 {
                     SetControlBackcolor(this, Color.Red);
-                    Console.Beep(500, 1000);
+                    if (this.chkBeep.Checked) { Console.Beep(500, 1000); }
                 }
                 else
                 {
