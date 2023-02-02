@@ -20,13 +20,29 @@ namespace HarmoniaRemote
 
         //create the serial connection
         private SerialPort sp = new SerialPort("COM4", 9600);
-           
+        private SerialPort sp_1 = new SerialPort("COM7", 115200);
         private void ControlForm_Load(object sender, EventArgs e)
         {
             sp.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
+            sp_1.DataReceived += new SerialDataReceivedEventHandler(sp_1_DataReceived);
             try
             {
                 sp.Open();
+                sp_1.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        private void sp_1_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            try
+            {
+                string strReceived = sp_1.ReadLine();
+
+                SetControlText(this.meta_id_20, strReceived);
+
             }
             catch (Exception ex)
             {
@@ -96,6 +112,7 @@ namespace HarmoniaRemote
                 MessageBox.Show(ex.ToString());
             }
         }
+        
         private void AlertUser(Boolean blnAlertON)
         {
             try
