@@ -95,6 +95,7 @@ namespace HarmoniaRemote
                             if (intMetadataID == 17) { SetControlText(this.meta_id_17, strValue); }
                             if (intMetadataID == 18) { SetControlText(this.meta_id_18, strValue); }
                             if (intMetadataID == 19) { SetControlText(this.meta_id_19, strValue); }
+                            if (intMetadataID == 21) { SetControlText(this.meta_id_21, strValue); }
 
                         }
 
@@ -161,15 +162,7 @@ namespace HarmoniaRemote
             sp.WriteLine("INFLATE,255");
         }
 
-        private void btnForward_Click(object sender, EventArgs e)
-        {
-            sp.WriteLine("FORWARD,100");
-        }
-
-        private void btnReverse_Click(object sender, EventArgs e)
-        {
-            sp.WriteLine("REVERSE,100");
-        }
+        
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -241,6 +234,11 @@ namespace HarmoniaRemote
         private void tbPushrod_Scroll(object sender, EventArgs e)
         {
             sp.WriteLine("PUSHROD," + this.tbPushrod.Value.ToString());
+        }
+
+        private void cboBatteryPos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            sp.WriteLine("PUSHROD," + this.cboBatteryPos.Text);
         }
     }
 }
