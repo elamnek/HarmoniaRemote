@@ -3,7 +3,7 @@ Harmonia research submarine PC remote control software.
 This software uses RF serial to communicate with the Harmonia submarine
 Harmonia is a University of Adelaide research submarine.
 
-[[https://user-images.githubusercontent.com/25494253/216794475-9916840a-314c-41d3-a09f-a29811e4e4dc.png | height=400px]]
+https://user-images.githubusercontent.com/25494253/216794475-9916840a-314c-41d3-a09f-a29811e4e4dc.png
 
 
 Please refer to Wiki for more detailed information:
