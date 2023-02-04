@@ -66,7 +66,9 @@ namespace HarmoniaRemote
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label27 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
+            this.cboBatteryPos = new System.Windows.Forms.ComboBox();
             this.lblRudder = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.tbRudder = new System.Windows.Forms.TrackBar();
@@ -78,6 +80,8 @@ namespace HarmoniaRemote
             this.tbPushrod = new System.Windows.Forms.TrackBar();
             this.label17 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.meta_id_21 = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.meta_id_20 = new System.Windows.Forms.TextBox();
             this.meta_id_19 = new System.Windows.Forms.TextBox();
@@ -91,10 +95,8 @@ namespace HarmoniaRemote
             this.meta_id_2 = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.meta_id_17 = new System.Windows.Forms.TextBox();
-            this.cboBatteryPos = new System.Windows.Forms.ComboBox();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.meta_id_21 = new System.Windows.Forms.TextBox();
+            this.btnUpload = new System.Windows.Forms.Button();
+            this.label28 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -110,7 +112,7 @@ namespace HarmoniaRemote
             this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb.Location = new System.Drawing.Point(0, 500);
             this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(1103, 372);
+            this.rtb.Size = new System.Drawing.Size(1420, 372);
             this.rtb.TabIndex = 0;
             this.rtb.Text = "";
             // 
@@ -429,6 +431,8 @@ namespace HarmoniaRemote
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnUpload);
+            this.groupBox1.Controls.Add(this.label28);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.btnIdle);
             this.groupBox1.Controls.Add(this.label5);
@@ -443,7 +447,7 @@ namespace HarmoniaRemote
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Location = new System.Drawing.Point(15, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(190, 260);
+            this.groupBox1.Size = new System.Drawing.Size(190, 474);
             this.groupBox1.TabIndex = 39;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "State";
@@ -477,6 +481,15 @@ namespace HarmoniaRemote
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Manual control";
             // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(20, 186);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(91, 20);
+            this.label27.TabIndex = 44;
+            this.label27.Text = "Battery Pos";
+            // 
             // label21
             // 
             this.label21.AutoSize = true;
@@ -485,6 +498,27 @@ namespace HarmoniaRemote
             this.label21.Size = new System.Drawing.Size(68, 20);
             this.label21.TabIndex = 30;
             this.label21.Text = "Pushrod";
+            // 
+            // cboBatteryPos
+            // 
+            this.cboBatteryPos.FormattingEnabled = true;
+            this.cboBatteryPos.Items.AddRange(new object[] {
+            "0",
+            "10",
+            "20",
+            "30",
+            "40",
+            "50",
+            "60",
+            "70",
+            "80",
+            "90",
+            "100"});
+            this.cboBatteryPos.Location = new System.Drawing.Point(24, 215);
+            this.cboBatteryPos.Name = "cboBatteryPos";
+            this.cboBatteryPos.Size = new System.Drawing.Size(87, 28);
+            this.cboBatteryPos.TabIndex = 43;
+            this.cboBatteryPos.SelectedIndexChanged += new System.EventHandler(this.cboBatteryPos_SelectedIndexChanged);
             // 
             // lblRudder
             // 
@@ -617,12 +651,28 @@ namespace HarmoniaRemote
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.meta_id_7);
-            this.groupBox3.Location = new System.Drawing.Point(15, 286);
+            this.groupBox3.Location = new System.Drawing.Point(223, 279);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(1070, 208);
             this.groupBox3.TabIndex = 42;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Incoming data";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(707, 38);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(98, 20);
+            this.label15.TabIndex = 51;
+            this.label15.Text = "Pump status";
+            // 
+            // meta_id_21
+            // 
+            this.meta_id_21.Location = new System.Drawing.Point(807, 35);
+            this.meta_id_21.Name = "meta_id_21";
+            this.meta_id_21.Size = new System.Drawing.Size(76, 26);
+            this.meta_id_21.TabIndex = 52;
             // 
             // label26
             // 
@@ -732,58 +782,31 @@ namespace HarmoniaRemote
             this.meta_id_17.Size = new System.Drawing.Size(76, 26);
             this.meta_id_17.TabIndex = 40;
             // 
-            // cboBatteryPos
+            // btnUpload
             // 
-            this.cboBatteryPos.FormattingEnabled = true;
-            this.cboBatteryPos.Items.AddRange(new object[] {
-            "0",
-            "10",
-            "20",
-            "30",
-            "40",
-            "50",
-            "60",
-            "70",
-            "80",
-            "90",
-            "100"});
-            this.cboBatteryPos.Location = new System.Drawing.Point(24, 215);
-            this.cboBatteryPos.Name = "cboBatteryPos";
-            this.cboBatteryPos.Size = new System.Drawing.Size(87, 28);
-            this.cboBatteryPos.TabIndex = 43;
-            this.cboBatteryPos.SelectedIndexChanged += new System.EventHandler(this.cboBatteryPos_SelectedIndexChanged);
+            this.btnUpload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnUpload.Location = new System.Drawing.Point(22, 260);
+            this.btnUpload.Name = "btnUpload";
+            this.btnUpload.Size = new System.Drawing.Size(33, 33);
+            this.btnUpload.TabIndex = 30;
+            this.btnUpload.UseVisualStyleBackColor = false;
+            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
             // 
-            // label27
+            // label28
             // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(20, 186);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(91, 20);
-            this.label27.TabIndex = 44;
-            this.label27.Text = "Battery Pos";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(707, 38);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(98, 20);
-            this.label15.TabIndex = 51;
-            this.label15.Text = "Pump status";
-            // 
-            // meta_id_21
-            // 
-            this.meta_id_21.Location = new System.Drawing.Point(807, 35);
-            this.meta_id_21.Name = "meta_id_21";
-            this.meta_id_21.Size = new System.Drawing.Size(76, 26);
-            this.meta_id_21.TabIndex = 52;
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(72, 266);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(96, 20);
+            this.label28.TabIndex = 31;
+            this.label28.Text = "Upload data";
             // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1103, 872);
+            this.ClientSize = new System.Drawing.Size(1420, 872);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.groupBox2);
@@ -880,6 +903,8 @@ namespace HarmoniaRemote
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox meta_id_21;
+        private System.Windows.Forms.Button btnUpload;
+        private System.Windows.Forms.Label label28;
     }
 }
 

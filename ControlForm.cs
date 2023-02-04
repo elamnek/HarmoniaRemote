@@ -240,5 +240,14 @@ namespace HarmoniaRemote
         {
             sp.WriteLine("PUSHROD," + this.cboBatteryPos.Text);
         }
+
+        private void btnUpload_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Putting the system into Upload state will result in no data flowing through to the display - do you want to continue?","Continue?",MessageBoxButtons.OKCancel,MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                sp.WriteLine("UPLOAD,0");
+            }
+         
+        }
     }
 }
