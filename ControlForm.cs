@@ -234,10 +234,7 @@ namespace HarmoniaRemote
             this.lblRudder.Text = this.tbRudder.Value.ToString();
         }
 
-        private void tbPushrod_Scroll(object sender, EventArgs e)
-        {
-            sp.WriteLine("PUSHROD," + this.tbPushrod.Value.ToString());
-        }
+        
 
         private void cboBatteryPos_SelectedIndexChanged(object sender, EventArgs e)
         {
