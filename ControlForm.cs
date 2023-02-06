@@ -99,17 +99,21 @@ namespace HarmoniaRemote
                             if (intMetadataID == 14) { SetControlText(this.meta_id_14, strValue); }
                             if (intMetadataID == 15) { SetControlText(this.meta_id_15, strValue); }
                             if (intMetadataID == 16) { SetControlText(this.meta_id_16, strValue); }
+                            if (intMetadataID == 22) { SetControlText(this.meta_id_22, strValue); }
+                            if (intMetadataID == 23) { SetControlText(this.meta_id_23, strValue); }
+                            if (intMetadataID == 24) { SetControlText(this.meta_id_24, strValue); }
+                            if (intMetadataID == 25) { SetControlText(this.meta_id_25, strValue); }
+                            if (intMetadataID == 26) { SetControlText(this.meta_id_26, strValue); }
 
                         }
 
                     }
-                    
-                    //log everything to the rich textbox
-                    //Console.WriteLine(txt);
-                    SetRTBText(rtb, strReceived);
-
                 }
-                
+
+                //log everything to the rich textbox
+                //Console.WriteLine(txt);
+                SetRTBText(rtb, strReceived);
+
             }
             catch (Exception ex)
             {

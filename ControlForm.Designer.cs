@@ -80,6 +80,12 @@ namespace HarmoniaRemote
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.meta_id_16 = new System.Windows.Forms.TextBox();
+            this.meta_id_15 = new System.Windows.Forms.TextBox();
+            this.meta_id_14 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.meta_id_21 = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
@@ -95,12 +101,16 @@ namespace HarmoniaRemote
             this.meta_id_2 = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.meta_id_17 = new System.Windows.Forms.TextBox();
-            this.meta_id_14 = new System.Windows.Forms.TextBox();
-            this.meta_id_15 = new System.Windows.Forms.TextBox();
-            this.meta_id_16 = new System.Windows.Forms.TextBox();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.meta_id_22 = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.meta_id_25 = new System.Windows.Forms.TextBox();
+            this.meta_id_24 = new System.Windows.Forms.TextBox();
+            this.meta_id_23 = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.meta_id_26 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -115,7 +125,7 @@ namespace HarmoniaRemote
             this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb.Location = new System.Drawing.Point(0, 500);
             this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(1089, 372);
+            this.rtb.Size = new System.Drawing.Size(1418, 372);
             this.rtb.TabIndex = 0;
             this.rtb.Text = "";
             // 
@@ -370,7 +380,7 @@ namespace HarmoniaRemote
             // 
             // meta_id_7
             // 
-            this.meta_id_7.Location = new System.Drawing.Point(672, 79);
+            this.meta_id_7.Location = new System.Drawing.Point(795, 73);
             this.meta_id_7.Name = "meta_id_7";
             this.meta_id_7.Size = new System.Drawing.Size(79, 26);
             this.meta_id_7.TabIndex = 34;
@@ -378,7 +388,7 @@ namespace HarmoniaRemote
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(291, 35);
+            this.label11.Location = new System.Drawing.Point(127, 164);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(53, 20);
             this.label11.TabIndex = 33;
@@ -386,7 +396,7 @@ namespace HarmoniaRemote
             // 
             // meta_id_1
             // 
-            this.meta_id_1.Location = new System.Drawing.Point(351, 32);
+            this.meta_id_1.Location = new System.Drawing.Point(187, 161);
             this.meta_id_1.Name = "meta_id_1";
             this.meta_id_1.Size = new System.Drawing.Size(79, 26);
             this.meta_id_1.TabIndex = 32;
@@ -394,7 +404,7 @@ namespace HarmoniaRemote
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(617, 82);
+            this.label12.Location = new System.Drawing.Point(740, 76);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(44, 20);
             this.label12.TabIndex = 31;
@@ -410,7 +420,7 @@ namespace HarmoniaRemote
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(305, 120);
+            this.label13.Location = new System.Drawing.Point(289, 123);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(171, 20);
             this.label13.TabIndex = 37;
@@ -418,7 +428,7 @@ namespace HarmoniaRemote
             // 
             // meta_id_10
             // 
-            this.meta_id_10.Location = new System.Drawing.Point(494, 114);
+            this.meta_id_10.Location = new System.Drawing.Point(478, 117);
             this.meta_id_10.Name = "meta_id_10";
             this.meta_id_10.Size = new System.Drawing.Size(78, 26);
             this.meta_id_10.TabIndex = 36;
@@ -623,7 +633,17 @@ namespace HarmoniaRemote
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label35);
+            this.groupBox3.Controls.Add(this.meta_id_26);
+            this.groupBox3.Controls.Add(this.label32);
+            this.groupBox3.Controls.Add(this.label33);
+            this.groupBox3.Controls.Add(this.label34);
+            this.groupBox3.Controls.Add(this.meta_id_25);
+            this.groupBox3.Controls.Add(this.meta_id_24);
+            this.groupBox3.Controls.Add(this.meta_id_23);
+            this.groupBox3.Controls.Add(this.label21);
             this.groupBox3.Controls.Add(this.label31);
+            this.groupBox3.Controls.Add(this.meta_id_22);
             this.groupBox3.Controls.Add(this.label30);
             this.groupBox3.Controls.Add(this.label29);
             this.groupBox3.Controls.Add(this.meta_id_16);
@@ -658,15 +678,63 @@ namespace HarmoniaRemote
             this.groupBox3.Controls.Add(this.meta_id_7);
             this.groupBox3.Location = new System.Drawing.Point(3, 286);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1070, 208);
+            this.groupBox3.Size = new System.Drawing.Size(1251, 208);
             this.groupBox3.TabIndex = 42;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Incoming data";
             // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(896, 118);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(36, 20);
+            this.label31.TabIndex = 58;
+            this.label31.Text = "Roll";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(750, 116);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(44, 20);
+            this.label30.TabIndex = 57;
+            this.label30.Text = "Pitch";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(591, 116);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(69, 20);
+            this.label29.TabIndex = 56;
+            this.label29.Text = "Heading";
+            // 
+            // meta_id_16
+            // 
+            this.meta_id_16.Location = new System.Drawing.Point(939, 113);
+            this.meta_id_16.Name = "meta_id_16";
+            this.meta_id_16.Size = new System.Drawing.Size(79, 26);
+            this.meta_id_16.TabIndex = 55;
+            // 
+            // meta_id_15
+            // 
+            this.meta_id_15.Location = new System.Drawing.Point(800, 113);
+            this.meta_id_15.Name = "meta_id_15";
+            this.meta_id_15.Size = new System.Drawing.Size(79, 26);
+            this.meta_id_15.TabIndex = 54;
+            // 
+            // meta_id_14
+            // 
+            this.meta_id_14.Location = new System.Drawing.Point(670, 113);
+            this.meta_id_14.Name = "meta_id_14";
+            this.meta_id_14.Size = new System.Drawing.Size(60, 26);
+            this.meta_id_14.TabIndex = 53;
+            // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(707, 38);
+            this.label15.Location = new System.Drawing.Point(516, 35);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(98, 20);
             this.label15.TabIndex = 51;
@@ -674,7 +742,7 @@ namespace HarmoniaRemote
             // 
             // meta_id_21
             // 
-            this.meta_id_21.Location = new System.Drawing.Point(807, 35);
+            this.meta_id_21.Location = new System.Drawing.Point(616, 32);
             this.meta_id_21.Name = "meta_id_21";
             this.meta_id_21.Size = new System.Drawing.Size(76, 26);
             this.meta_id_21.TabIndex = 52;
@@ -682,7 +750,7 @@ namespace HarmoniaRemote
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(607, 117);
+            this.label26.Location = new System.Drawing.Point(895, 35);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(57, 20);
             this.label26.TabIndex = 50;
@@ -690,14 +758,14 @@ namespace HarmoniaRemote
             // 
             // meta_id_20
             // 
-            this.meta_id_20.Location = new System.Drawing.Point(672, 114);
+            this.meta_id_20.Location = new System.Drawing.Point(960, 32);
             this.meta_id_20.Name = "meta_id_20";
             this.meta_id_20.Size = new System.Drawing.Size(79, 26);
             this.meta_id_20.TabIndex = 49;
             // 
             // meta_id_19
             // 
-            this.meta_id_19.Location = new System.Drawing.Point(494, 75);
+            this.meta_id_19.Location = new System.Drawing.Point(478, 78);
             this.meta_id_19.Name = "meta_id_19";
             this.meta_id_19.Size = new System.Drawing.Size(78, 26);
             this.meta_id_19.TabIndex = 47;
@@ -705,7 +773,7 @@ namespace HarmoniaRemote
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(316, 80);
+            this.label25.Location = new System.Drawing.Point(300, 83);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(160, 20);
             this.label25.TabIndex = 48;
@@ -716,7 +784,7 @@ namespace HarmoniaRemote
             this.chkBeep.AutoSize = true;
             this.chkBeep.Checked = true;
             this.chkBeep.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBeep.Location = new System.Drawing.Point(966, 121);
+            this.chkBeep.Location = new System.Drawing.Point(1128, 113);
             this.chkBeep.Name = "chkBeep";
             this.chkBeep.Size = new System.Drawing.Size(73, 24);
             this.chkBeep.TabIndex = 43;
@@ -725,7 +793,7 @@ namespace HarmoniaRemote
             // 
             // meta_id_18
             // 
-            this.meta_id_18.Location = new System.Drawing.Point(493, 155);
+            this.meta_id_18.Location = new System.Drawing.Point(477, 158);
             this.meta_id_18.Name = "meta_id_18";
             this.meta_id_18.Size = new System.Drawing.Size(79, 26);
             this.meta_id_18.TabIndex = 45;
@@ -733,7 +801,7 @@ namespace HarmoniaRemote
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(309, 158);
+            this.label24.Location = new System.Drawing.Point(293, 161);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(167, 20);
             this.label24.TabIndex = 46;
@@ -742,7 +810,7 @@ namespace HarmoniaRemote
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(924, 74);
+            this.label23.Location = new System.Drawing.Point(1086, 73);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(69, 20);
             this.label23.TabIndex = 43;
@@ -750,7 +818,7 @@ namespace HarmoniaRemote
             // 
             // meta_id_3
             // 
-            this.meta_id_3.Location = new System.Drawing.Point(999, 71);
+            this.meta_id_3.Location = new System.Drawing.Point(1161, 70);
             this.meta_id_3.Name = "meta_id_3";
             this.meta_id_3.Size = new System.Drawing.Size(40, 26);
             this.meta_id_3.TabIndex = 44;
@@ -758,7 +826,7 @@ namespace HarmoniaRemote
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(917, 29);
+            this.label22.Location = new System.Drawing.Point(1079, 28);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(78, 20);
             this.label22.TabIndex = 41;
@@ -766,7 +834,7 @@ namespace HarmoniaRemote
             // 
             // meta_id_2
             // 
-            this.meta_id_2.Location = new System.Drawing.Point(999, 25);
+            this.meta_id_2.Location = new System.Drawing.Point(1161, 24);
             this.meta_id_2.Name = "meta_id_2";
             this.meta_id_2.Size = new System.Drawing.Size(40, 26);
             this.meta_id_2.TabIndex = 42;
@@ -774,7 +842,7 @@ namespace HarmoniaRemote
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(458, 36);
+            this.label20.Location = new System.Drawing.Point(282, 33);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(146, 20);
             this.label20.TabIndex = 39;
@@ -782,65 +850,97 @@ namespace HarmoniaRemote
             // 
             // meta_id_17
             // 
-            this.meta_id_17.Location = new System.Drawing.Point(610, 32);
+            this.meta_id_17.Location = new System.Drawing.Point(434, 29);
             this.meta_id_17.Name = "meta_id_17";
             this.meta_id_17.Size = new System.Drawing.Size(76, 26);
             this.meta_id_17.TabIndex = 40;
             // 
-            // meta_id_14
+            // label21
             // 
-            this.meta_id_14.Location = new System.Drawing.Point(691, 164);
-            this.meta_id_14.Name = "meta_id_14";
-            this.meta_id_14.Size = new System.Drawing.Size(60, 26);
-            this.meta_id_14.TabIndex = 53;
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(710, 37);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(63, 20);
+            this.label21.TabIndex = 53;
+            this.label21.Text = "Throttle";
             // 
-            // meta_id_15
+            // meta_id_22
             // 
-            this.meta_id_15.Location = new System.Drawing.Point(821, 164);
-            this.meta_id_15.Name = "meta_id_15";
-            this.meta_id_15.Size = new System.Drawing.Size(79, 26);
-            this.meta_id_15.TabIndex = 54;
+            this.meta_id_22.Location = new System.Drawing.Point(795, 32);
+            this.meta_id_22.Name = "meta_id_22";
+            this.meta_id_22.Size = new System.Drawing.Size(76, 26);
+            this.meta_id_22.TabIndex = 54;
             // 
-            // meta_id_16
+            // label32
             // 
-            this.meta_id_16.Location = new System.Drawing.Point(960, 164);
-            this.meta_id_16.Name = "meta_id_16";
-            this.meta_id_16.Size = new System.Drawing.Size(79, 26);
-            this.meta_id_16.TabIndex = 55;
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(939, 168);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(62, 20);
+            this.label32.TabIndex = 64;
+            this.label32.Text = "Current";
             // 
-            // label29
+            // label33
             // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(612, 167);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(69, 20);
-            this.label29.TabIndex = 56;
-            this.label29.Text = "Heading";
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(735, 168);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(111, 20);
+            this.label33.TabIndex = 63;
+            this.label33.Text = "Shunt Voltage";
             // 
-            // label30
+            // label34
             // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(771, 167);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(44, 20);
-            this.label30.TabIndex = 57;
-            this.label30.Text = "Pitch";
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(566, 164);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(96, 20);
+            this.label34.TabIndex = 62;
+            this.label34.Text = "Bus Voltage";
             // 
-            // label31
+            // meta_id_25
             // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(917, 169);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(36, 20);
-            this.label31.TabIndex = 58;
-            this.label31.Text = "Roll";
+            this.meta_id_25.Location = new System.Drawing.Point(1001, 166);
+            this.meta_id_25.Name = "meta_id_25";
+            this.meta_id_25.Size = new System.Drawing.Size(69, 26);
+            this.meta_id_25.TabIndex = 61;
+            // 
+            // meta_id_24
+            // 
+            this.meta_id_24.Location = new System.Drawing.Point(853, 168);
+            this.meta_id_24.Name = "meta_id_24";
+            this.meta_id_24.Size = new System.Drawing.Size(79, 26);
+            this.meta_id_24.TabIndex = 60;
+            // 
+            // meta_id_23
+            // 
+            this.meta_id_23.Location = new System.Drawing.Point(669, 164);
+            this.meta_id_23.Name = "meta_id_23";
+            this.meta_id_23.Size = new System.Drawing.Size(60, 26);
+            this.meta_id_23.TabIndex = 59;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(1080, 168);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(53, 20);
+            this.label35.TabIndex = 66;
+            this.label35.Text = "Power";
+            // 
+            // meta_id_26
+            // 
+            this.meta_id_26.Location = new System.Drawing.Point(1138, 164);
+            this.meta_id_26.Name = "meta_id_26";
+            this.meta_id_26.Size = new System.Drawing.Size(79, 26);
+            this.meta_id_26.TabIndex = 65;
             // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1089, 872);
+            this.ClientSize = new System.Drawing.Size(1418, 872);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.groupBox2);
@@ -942,6 +1042,16 @@ namespace HarmoniaRemote
         private System.Windows.Forms.TextBox meta_id_16;
         private System.Windows.Forms.TextBox meta_id_15;
         private System.Windows.Forms.TextBox meta_id_14;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox meta_id_22;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.TextBox meta_id_26;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.TextBox meta_id_25;
+        private System.Windows.Forms.TextBox meta_id_24;
+        private System.Windows.Forms.TextBox meta_id_23;
     }
 }
 
