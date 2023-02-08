@@ -32,7 +32,7 @@ namespace HarmoniaRemote
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message);
             }
         }
         private void sp_1_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -252,6 +252,22 @@ namespace HarmoniaRemote
                 sp.WriteLine("UPLOAD,0");
             }
          
+        }
+
+        private void btnInterchangeToExcel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }
