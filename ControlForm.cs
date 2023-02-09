@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO.Ports;
 using System.Windows.Forms;
+using System.IO;
 
 namespace HarmoniaRemote
 {
@@ -259,7 +260,61 @@ namespace HarmoniaRemote
             try
             {
 
+                StreamReader reader = File.OpenText(@"C:\Business\Submarine\subjects\research_project\data\HARMONIA_06022023.LOG");
+                DateTime dteCurrent = DateTime.ParseExact("17:45:0 6/2/2023", "H:m:s d/M/yyyy", null); ;
+                DateTime dtePrevious = DateTime.Now;
+                int intRecord = 1;
+                while (reader.Peek() != -1)
+                {
 
+                    //read a line and split it up
+                    String strLine = reader.ReadLine().Trim().TrimStart('{').TrimEnd('}');
+                    String[] arrayLine = strLine.Split(new char[] { ',' }, StringSplitOptions.None);
+
+                    foreach (string strDataValue in arrayLine)
+                    {
+                        String[] arrayParts = strDataValue.Split(new char[] { '|' }, StringSplitOptions.None);
+
+                        string strMetaID = arrayParts[0];
+                        string strValue = arrayParts[1];
+
+                        if (strMetaID == "13")
+                        {
+                            DateTime dteThis = DateTime.ParseExact(strValue, "H:m:s d/M/yyyy", null); //16:56:13 5/2/2023
+                            //DateTime dteLoc = dteThis.ToLocalTime();
+                            //DateTime dteUTM = dteLoc.ToUniversalTime();
+
+                            if (intRecord > 1)
+                            {
+                                TimeSpan ts = dteThis - dtePrevious;
+                                if (ts.TotalSeconds >= 0)
+                                {
+                                    //Console.WriteLine(ts.TotalSeconds.ToString() + " gap at " + dteThis.ToString());
+                                    //MessageBox.Show(dteThis.ToString());
+
+                                    dteCurrent = dteCurrent.AddSeconds(ts.TotalSeconds);
+
+                                } else
+                                {
+                                    //time has been reset - just add a 5 minute can because sub was probably turned off
+                                    dteCurrent = dteCurrent.AddMinutes(5);
+                                }
+                            }
+
+                            Console.WriteLine(dteThis.ToString() + ">>" + dteCurrent.ToString());
+
+                            dtePrevious = dteThis;
+                        }
+                        
+
+
+
+                    }
+
+
+                    intRecord++;
+                }
+                reader.Close();
 
 
 
