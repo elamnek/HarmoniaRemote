@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.IO.Ports;
 using System.Windows.Forms;
 using System.IO;
+using Npgsql;
 
 namespace HarmoniaRemote
 {
@@ -260,10 +261,33 @@ namespace HarmoniaRemote
             try
             {
 
+                NpgsqlConnection connPG = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=euge;Database=example");
+                connPG.Open();
+
+                NpgsqlCommand commPG = new NpgsqlCommand("select metadata_id,data_label from dt_data_config order by metadata_id", connPG);
+                NpgsqlDataReader readerPG = commPG.ExecuteReader();
+
+                Hashtable hashDataLabels = new Hashtable();
+                while (readerPG.Read())
+                {
+                    object objMetaDataID = readerPG.GetValue(0);
+                    object objLabel = readerPG.GetValue(1);
+                    hashDataLabels.Add(int.Parse(objMetaDataID.ToString()), objLabel.ToString());
+                }
+                readerPG.Close();
+                commPG.Dispose();
+                connPG.Close();
+
+
+                StreamWriter swOut = new System.IO.StreamWriter(@"C:\Business\Submarine\subjects\research_project\data\HARMONIA_06022023.csv", false);
+
                 StreamReader reader = File.OpenText(@"C:\Business\Submarine\subjects\research_project\data\HARMONIA_06022023.LOG");
                 DateTime dteCurrent = DateTime.ParseExact("17:45:0 6/2/2023", "H:m:s d/M/yyyy", null); ;
                 DateTime dtePrevious = DateTime.Now;
                 int intRecord = 1;
+
+                String strFirstHeader = "";
+
                 while (reader.Peek() != -1)
                 {
 
@@ -271,51 +295,90 @@ namespace HarmoniaRemote
                     String strLine = reader.ReadLine().Trim().TrimStart('{').TrimEnd('}');
                     String[] arrayLine = strLine.Split(new char[] { ',' }, StringSplitOptions.None);
 
+                    string strCSV = "";
+                    string strComma = "";
+
+                    string strHeader = "";
+
+
                     foreach (string strDataValue in arrayLine)
                     {
                         String[] arrayParts = strDataValue.Split(new char[] { '|' }, StringSplitOptions.None);
 
-                        string strMetaID = arrayParts[0];
-                        string strValue = arrayParts[1];
+                        string strMetaID = arrayParts[0].Trim();
+                        string strValue = arrayParts[1].Trim();
 
-                        if (strMetaID == "13")
+                        int intMetaID = int.Parse(strMetaID);
+
+                        if (hashDataLabels.ContainsKey(intMetaID))
                         {
-                            DateTime dteThis = DateTime.ParseExact(strValue, "H:m:s d/M/yyyy", null); //16:56:13 5/2/2023
-                            //DateTime dteLoc = dteThis.ToLocalTime();
-                            //DateTime dteUTM = dteLoc.ToUniversalTime();
 
-                            if (intRecord > 1)
+                            string strLabel = hashDataLabels[intMetaID].ToString();
+
+                            if (strMetaID == "13")
                             {
-                                TimeSpan ts = dteThis - dtePrevious;
-                                if (ts.TotalSeconds >= 0)
-                                {
-                                    //Console.WriteLine(ts.TotalSeconds.ToString() + " gap at " + dteThis.ToString());
-                                    //MessageBox.Show(dteThis.ToString());
+                                DateTime dteThis = DateTime.ParseExact(strValue, "H:m:s d/M/yyyy", null); //16:56:13 5/2/2023
+                                                                                                          //DateTime dteLoc = dteThis.ToLocalTime();
+                                                                                                          //DateTime dteUTM = dteLoc.ToUniversalTime();
 
-                                    dteCurrent = dteCurrent.AddSeconds(ts.TotalSeconds);
-
-                                } else
+                                if (intRecord > 1)
                                 {
-                                    //time has been reset - just add a 5 minute can because sub was probably turned off
-                                    dteCurrent = dteCurrent.AddMinutes(5);
+                                    TimeSpan ts = dteThis - dtePrevious;
+                                    if (ts.TotalSeconds >= 0)
+                                    {
+                                        //Console.WriteLine(ts.TotalSeconds.ToString() + " gap at " + dteThis.ToString());
+                                        //MessageBox.Show(dteThis.ToString());
+
+                                        dteCurrent = dteCurrent.AddSeconds(ts.TotalSeconds);
+
+                                    }
+                                    else
+                                    {
+                                        //time has been reset - just add a 5 minute can because sub was probably turned off
+                                        dteCurrent = dteCurrent.AddMinutes(5);
+                                    }
                                 }
+
+                                //Console.WriteLine(dteThis.ToString() + ">>" + dteCurrent.ToString());
+
+                                strValue = dteCurrent.ToString();
+
+
+                                dtePrevious = dteThis;
                             }
 
-                            Console.WriteLine(dteThis.ToString() + ">>" + dteCurrent.ToString());
-
-                            dtePrevious = dteThis;
+                            strHeader = strHeader + strComma + strLabel;
+                            strCSV = strCSV + strComma + strValue;
+                            strComma = ",";    
                         }
-                        
-
-
-
+ 
                     }
+
+                    if (intRecord == 1)
+                    {
+                        strFirstHeader = strHeader;
+                        swOut.WriteLine(strHeader);
+                        swOut.WriteLine(strCSV);
+                    }
+                    else
+                    {
+                        if (strHeader == strFirstHeader)
+                        {
+                            swOut.WriteLine(strCSV);
+                        } else
+                        {
+                            Console.WriteLine("WARNING: line skipped format of line is not consistent with other data lines: " + strLine);
+                        }
+                    }
+
+
+                    
 
 
                     intRecord++;
                 }
                 reader.Close();
-
+                swOut.Close();
 
 
             }
