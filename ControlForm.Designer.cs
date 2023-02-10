@@ -67,6 +67,7 @@ namespace HarmoniaRemote
             this.btnUpload = new System.Windows.Forms.Button();
             this.label28 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.cboBatteryPos = new System.Windows.Forms.ComboBox();
             this.lblRudder = new System.Windows.Forms.Label();
@@ -77,7 +78,6 @@ namespace HarmoniaRemote
             this.tbAftDive = new System.Windows.Forms.TrackBar();
             this.btnStopPump = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label35 = new System.Windows.Forms.Label();
             this.meta_id_26 = new System.Windows.Forms.TextBox();
@@ -111,6 +111,7 @@ namespace HarmoniaRemote
             this.label20 = new System.Windows.Forms.Label();
             this.meta_id_17 = new System.Windows.Forms.TextBox();
             this.btnInterchangeToExcel = new System.Windows.Forms.Button();
+            this.btnSetTime = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -504,6 +505,15 @@ namespace HarmoniaRemote
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Manual control";
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(20, 205);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(185, 20);
+            this.label17.TabIndex = 41;
+            this.label17.Text = "Send command via serial";
+            // 
             // label27
             // 
             this.label27.AutoSize = true;
@@ -614,15 +624,6 @@ namespace HarmoniaRemote
             this.label16.Size = new System.Drawing.Size(105, 20);
             this.label16.TabIndex = 21;
             this.label16.Text = "Depth control";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(20, 205);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(185, 20);
-            this.label17.TabIndex = 41;
-            this.label17.Text = "Send command via serial";
             // 
             // groupBox3
             // 
@@ -938,12 +939,23 @@ namespace HarmoniaRemote
             this.btnInterchangeToExcel.UseVisualStyleBackColor = true;
             this.btnInterchangeToExcel.Click += new System.EventHandler(this.btnInterchangeToExcel_Click);
             // 
+            // btnSetTime
+            // 
+            this.btnSetTime.Location = new System.Drawing.Point(1131, 89);
+            this.btnSetTime.Name = "btnSetTime";
+            this.btnSetTime.Size = new System.Drawing.Size(94, 39);
+            this.btnSetTime.TabIndex = 45;
+            this.btnSetTime.Text = "Set Time";
+            this.btnSetTime.UseVisualStyleBackColor = true;
+            this.btnSetTime.Click += new System.EventHandler(this.btnSetTime_Click);
+            // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1418, 872);
+            this.Controls.Add(this.btnSetTime);
             this.Controls.Add(this.btnInterchangeToExcel);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -1049,6 +1061,7 @@ namespace HarmoniaRemote
         private System.Windows.Forms.TextBox meta_id_24;
         private System.Windows.Forms.TextBox meta_id_23;
         private System.Windows.Forms.Button btnInterchangeToExcel;
+        private System.Windows.Forms.Button btnSetTime;
     }
 }
 

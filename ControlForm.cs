@@ -387,5 +387,21 @@ namespace HarmoniaRemote
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        private void btnSetTime_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DateTime dteNow = DateTime.Now;
+                string strParam = dteNow.Year.ToString() + "|" + dteNow.Month.ToString() + "|" + dteNow.Day.ToString() + "|" + dteNow.Hour.ToString() + "|" + dteNow.Minute.ToString() + "|" + dteNow.Second.ToString();
+
+                sp.WriteLine("TIMESET," + strParam);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }
