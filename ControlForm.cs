@@ -26,15 +26,23 @@ namespace HarmoniaRemote
         private void ControlForm_Load(object sender, EventArgs e)
         {
             sp.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
-            sp_1.DataReceived += new SerialDataReceivedEventHandler(sp_1_DataReceived);
             try
             {
                 sp.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Could not open Harmonia port: " + ex.Message, "Port Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
+            sp_1.DataReceived += new SerialDataReceivedEventHandler(sp_1_DataReceived);
+            try
+            {
                 sp_1.Open();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Could not open Range Finder port: " + ex.Message,"Port Error",MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
         }
         private void sp_1_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -402,6 +410,11 @@ namespace HarmoniaRemote
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            this.rtb.Clear();
         }
     }
 }

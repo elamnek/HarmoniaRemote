@@ -112,6 +112,7 @@ namespace HarmoniaRemote
             this.meta_id_17 = new System.Windows.Forms.TextBox();
             this.btnInterchangeToExcel = new System.Windows.Forms.Button();
             this.btnSetTime = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -941,7 +942,7 @@ namespace HarmoniaRemote
             // 
             // btnSetTime
             // 
-            this.btnSetTime.Location = new System.Drawing.Point(1131, 89);
+            this.btnSetTime.Location = new System.Drawing.Point(1131, 68);
             this.btnSetTime.Name = "btnSetTime";
             this.btnSetTime.Size = new System.Drawing.Size(94, 39);
             this.btnSetTime.TabIndex = 45;
@@ -949,12 +950,23 @@ namespace HarmoniaRemote
             this.btnSetTime.UseVisualStyleBackColor = true;
             this.btnSetTime.Click += new System.EventHandler(this.btnSetTime_Click);
             // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(1131, 117);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(94, 39);
+            this.btnClear.TabIndex = 46;
+            this.btnClear.Text = "Clear log";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1418, 872);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnSetTime);
             this.Controls.Add(this.btnInterchangeToExcel);
             this.Controls.Add(this.groupBox3);
@@ -1062,6 +1074,7 @@ namespace HarmoniaRemote
         private System.Windows.Forms.TextBox meta_id_23;
         private System.Windows.Forms.Button btnInterchangeToExcel;
         private System.Windows.Forms.Button btnSetTime;
+        private System.Windows.Forms.Button btnClear;
     }
 }
 
