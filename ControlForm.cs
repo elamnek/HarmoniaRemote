@@ -32,7 +32,8 @@ namespace HarmoniaRemote
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Could not open Harmonia port: " + ex.Message, "Port Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                SetRTBText(rtb, "WARNING: could not open Harmonia port: " + ex.Message + Environment.NewLine);
+                //MessageBox.Show("Could not open Harmonia port: " + ex.Message, "Port Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             
             sp_1.DataReceived += new SerialDataReceivedEventHandler(sp_1_DataReceived);
@@ -42,7 +43,8 @@ namespace HarmoniaRemote
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Could not open Range Finder port: " + ex.Message,"Port Error",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                SetRTBText(rtb, "WARNING: could not open Range Finder port: " + ex.Message + Environment.NewLine);
+                //MessageBox.Show("Could not open Range Finder port: " + ex.Message,"Port Error",MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
         }
         private void sp_1_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -218,7 +220,7 @@ namespace HarmoniaRemote
 
         private void btnStaticTrim_Click(object sender, EventArgs e)
         {
-            sp.WriteLine("STATIC_TRIM,0");
+            sp.WriteLine("STATIC_TRIM,0.5");
         }
 
         private void btnDynamicTrim_Click(object sender, EventArgs e)
