@@ -113,6 +113,7 @@ namespace HarmoniaRemote
             this.btnInterchangeToExcel = new System.Windows.Forms.Button();
             this.btnSetTime = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
+            this.btnSaveLog = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -956,9 +957,19 @@ namespace HarmoniaRemote
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(94, 39);
             this.btnClear.TabIndex = 46;
-            this.btnClear.Text = "Clear log";
+            this.btnClear.Text = "Clear data";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnSaveLog
+            // 
+            this.btnSaveLog.Location = new System.Drawing.Point(1126, 241);
+            this.btnSaveLog.Name = "btnSaveLog";
+            this.btnSaveLog.Size = new System.Drawing.Size(99, 39);
+            this.btnSaveLog.TabIndex = 47;
+            this.btnSaveLog.Text = "Save Log";
+            this.btnSaveLog.UseVisualStyleBackColor = true;
+            this.btnSaveLog.Click += new System.EventHandler(this.btnSaveLog_Click);
             // 
             // ControlForm
             // 
@@ -966,6 +977,7 @@ namespace HarmoniaRemote
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1418, 872);
+            this.Controls.Add(this.btnSaveLog);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnSetTime);
             this.Controls.Add(this.btnInterchangeToExcel);
@@ -1075,6 +1087,7 @@ namespace HarmoniaRemote
         private System.Windows.Forms.Button btnInterchangeToExcel;
         private System.Windows.Forms.Button btnSetTime;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnSaveLog;
     }
 }
 

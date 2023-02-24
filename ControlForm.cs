@@ -23,6 +23,9 @@ namespace HarmoniaRemote
         //create the serial connection
         private SerialPort sp = new SerialPort("COM4", 9600);
         private SerialPort sp_1 = new SerialPort("COM7", 115200);
+        private Boolean m_blnUploading = false;
+        private System.IO.StreamWriter m_swLog;
+
         private void ControlForm_Load(object sender, EventArgs e)
         {
             sp.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
@@ -54,7 +57,7 @@ namespace HarmoniaRemote
                 string strReceived = sp_1.ReadLine();
 
                 SetControlText(this.meta_id_20, strReceived);
-
+      
             }
             catch (Exception ex)
             {
@@ -119,6 +122,13 @@ namespace HarmoniaRemote
 
                         }
 
+                        if (m_blnUploading)
+                        {
+                            //store record in current data file
+                            m_swLog.WriteLine(strReceived);
+                            m_swLog.Flush();
+                        }
+
                     }
                 }
 
@@ -129,7 +139,8 @@ namespace HarmoniaRemote
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
+                SetRTBText(rtb, ex.ToString());
             }
         }
         
@@ -220,7 +231,7 @@ namespace HarmoniaRemote
 
         private void btnStaticTrim_Click(object sender, EventArgs e)
         {
-            sp.WriteLine("STATIC_TRIM,0.5");
+            sp.WriteLine("STATIC_TRIM,0.1");
         }
 
         private void btnDynamicTrim_Click(object sender, EventArgs e)
@@ -259,9 +270,17 @@ namespace HarmoniaRemote
 
         private void btnUpload_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Putting the system into Upload state will result in no data flowing through to the display - do you want to continue?","Continue?",MessageBoxButtons.OKCancel,MessageBoxIcon.Question) == DialogResult.OK)
+            if (MessageBox.Show("Putting the system into Upload pause operation and upload SD Card data to a file - do you want to continue?","Continue?",MessageBoxButtons.OKCancel,MessageBoxIcon.Question) == DialogResult.OK)
             {
+                //have the file ready to go
+                m_swLog = new System.IO.StreamWriter(@"C:\Business\Submarine\subjects\research_project\data\HARMONIA_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".log", true);
+
+                m_blnUploading = true;
+
+                //change state to upload
                 sp.WriteLine("UPLOAD,0");
+                
+              
             }
          
         }
@@ -417,6 +436,23 @@ namespace HarmoniaRemote
         private void btnClear_Click(object sender, EventArgs e)
         {
             this.rtb.Clear();
+        }
+
+        private void btnSaveLog_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (m_swLog != null)
+                {
+                    m_swLog.Close();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }
