@@ -114,6 +114,8 @@ namespace HarmoniaRemote
             this.btnSetTime = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnSaveLog = new System.Windows.Forms.Button();
+            this.txtDepthSetpoint = new System.Windows.Forms.TextBox();
+            this.label36 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -465,6 +467,8 @@ namespace HarmoniaRemote
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label36);
+            this.groupBox2.Controls.Add(this.txtDepthSetpoint);
             this.groupBox2.Controls.Add(this.btnUpload);
             this.groupBox2.Controls.Add(this.label17);
             this.groupBox2.Controls.Add(this.label27);
@@ -971,6 +975,24 @@ namespace HarmoniaRemote
             this.btnSaveLog.UseVisualStyleBackColor = true;
             this.btnSaveLog.Click += new System.EventHandler(this.btnSaveLog_Click);
             // 
+            // txtDepthSetpoint
+            // 
+            this.txtDepthSetpoint.Location = new System.Drawing.Point(572, 225);
+            this.txtDepthSetpoint.Name = "txtDepthSetpoint";
+            this.txtDepthSetpoint.Size = new System.Drawing.Size(57, 26);
+            this.txtDepthSetpoint.TabIndex = 45;
+            this.txtDepthSetpoint.Text = "0.5";
+            this.txtDepthSetpoint.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(355, 228);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(213, 20);
+            this.label36.TabIndex = 46;
+            this.label36.Text = "Static trim depth setpoint (m)";
+            // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1088,6 +1110,8 @@ namespace HarmoniaRemote
         private System.Windows.Forms.Button btnSetTime;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnSaveLog;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.TextBox txtDepthSetpoint;
     }
 }
 

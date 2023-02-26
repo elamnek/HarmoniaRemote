@@ -24,6 +24,9 @@ namespace HarmoniaRemote
         private SerialPort sp = new SerialPort("COM4", 9600);
         private SerialPort sp_1 = new SerialPort("COM7", 115200);
         private Boolean m_blnUploading = false;
+        private int m_intRecordsToUpload = 0;
+        private int m_intRecordsUploaded = 0;
+        private string m_strUploadFile = "";
         private System.IO.StreamWriter m_swLog;
 
         private void ControlForm_Load(object sender, EventArgs e)
@@ -127,14 +130,37 @@ namespace HarmoniaRemote
                             //store record in current data file
                             m_swLog.WriteLine(strReceived);
                             m_swLog.Flush();
+                            m_intRecordsUploaded++;
                         }
 
+                    } else if (strReceived.StartsWith("records|")){
+                        if (m_blnUploading)
+                        {
+                            //this is the record count
+                            String[] arrayRaw = strReceived.Split('|');
+                            String strRecords = arrayRaw[1].ToString();
+                            m_intRecordsToUpload = int.Parse(strRecords);
+                            SetRTBText(rtb, "records to upload = " + m_intRecordsToUpload.ToString());
+                        }
                     }
-                }
+                    else if (strReceived.StartsWith("upload|done")){
+                        if (m_blnUploading)
+                        {
+                            //upload has finished
+                            MessageBox.Show("Upload has completed " + m_intRecordsUploaded.ToString() + " of " + m_intRecordsToUpload.ToString() + " records were uploaded to: " + m_strUploadFile, "Upload complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            m_swLog.Close();
+                            m_blnUploading = false;
 
-                //log everything to the rich textbox
-                //Console.WriteLine(txt);
-                SetRTBText(rtb, strReceived);
+                            //change state to idle
+                            sp.WriteLine("IDLE,0");
+                        }
+                    }
+
+                    //log everything to the rich textbox
+                    //Console.WriteLine(txt);
+                    SetRTBText(rtb, strReceived);
+
+                }
 
             }
             catch (Exception ex)
@@ -231,7 +257,7 @@ namespace HarmoniaRemote
 
         private void btnStaticTrim_Click(object sender, EventArgs e)
         {
-            sp.WriteLine("STATIC_TRIM,0.1");
+            sp.WriteLine("STATIC_TRIM," + this.txtDepthSetpoint.Text);
         }
 
         private void btnDynamicTrim_Click(object sender, EventArgs e)
@@ -273,7 +299,8 @@ namespace HarmoniaRemote
             if (MessageBox.Show("Putting the system into Upload pause operation and upload SD Card data to a file - do you want to continue?","Continue?",MessageBoxButtons.OKCancel,MessageBoxIcon.Question) == DialogResult.OK)
             {
                 //have the file ready to go
-                m_swLog = new System.IO.StreamWriter(@"C:\Business\Submarine\subjects\research_project\data\HARMONIA_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".log", true);
+                m_strUploadFile = @"C:\Business\Submarine\subjects\research_project\data\HARMONIA_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".log";
+                m_swLog = new System.IO.StreamWriter(m_strUploadFile, true);
 
                 m_blnUploading = true;
 
@@ -308,10 +335,9 @@ namespace HarmoniaRemote
                 connPG.Close();
 
 
-                StreamWriter swOut = new System.IO.StreamWriter(@"C:\Business\Submarine\subjects\research_project\data\HARMONIA_06022023.csv", false);
-
-                StreamReader reader = File.OpenText(@"C:\Business\Submarine\subjects\research_project\data\HARMONIA_06022023.LOG");
-                DateTime dteCurrent = DateTime.ParseExact("17:45:0 6/2/2023", "H:m:s d/M/yyyy", null); ;
+                StreamWriter swOut = new System.IO.StreamWriter(@"C:\Business\Submarine\subjects\research_project\data\HA_24022023.csv", false);
+                StreamReader reader = File.OpenText(@"C:\Business\Submarine\subjects\research_project\data\HA_24022023.LOG");
+                DateTime dteCurrent = DateTime.ParseExact("17:45:0 6/2/2023", "H:m:s d/M/yyyy", null);
                 DateTime dtePrevious = DateTime.Now;
                 int intRecord = 1;
 
@@ -349,31 +375,32 @@ namespace HarmoniaRemote
                                 DateTime dteThis = DateTime.ParseExact(strValue, "H:m:s d/M/yyyy", null); //16:56:13 5/2/2023
                                                                                                           //DateTime dteLoc = dteThis.ToLocalTime();
                                                                                                           //DateTime dteUTM = dteLoc.ToUniversalTime();
+                                strValue = dteThis.ToString();
 
-                                if (intRecord > 1)
-                                {
-                                    TimeSpan ts = dteThis - dtePrevious;
-                                    if (ts.TotalSeconds >= 0)
-                                    {
-                                        //Console.WriteLine(ts.TotalSeconds.ToString() + " gap at " + dteThis.ToString());
-                                        //MessageBox.Show(dteThis.ToString());
+                                //if (intRecord > 1)
+                                //{
+                                //    TimeSpan ts = dteThis - dtePrevious;
+                                //    if (ts.TotalSeconds >= 0)
+                                //    {
+                                //        //Console.WriteLine(ts.TotalSeconds.ToString() + " gap at " + dteThis.ToString());
+                                //        //MessageBox.Show(dteThis.ToString());
 
-                                        dteCurrent = dteCurrent.AddSeconds(ts.TotalSeconds);
+                                //        dteCurrent = dteCurrent.AddSeconds(ts.TotalSeconds);
 
-                                    }
-                                    else
-                                    {
-                                        //time has been reset - just add a 5 minute can because sub was probably turned off
-                                        dteCurrent = dteCurrent.AddMinutes(5);
-                                    }
-                                }
+                                //    }
+                                //    else
+                                //    {
+                                //        //time has been reset - just add a 5 minute can because sub was probably turned off
+                                //        dteCurrent = dteCurrent.AddMinutes(5);
+                                //    }
+                                //}
 
-                                //Console.WriteLine(dteThis.ToString() + ">>" + dteCurrent.ToString());
+                                ////Console.WriteLine(dteThis.ToString() + ">>" + dteCurrent.ToString());
 
-                                strValue = dteCurrent.ToString();
+                                //strValue = dteCurrent.ToString();
 
 
-                                dtePrevious = dteThis;
+                                //dtePrevious = dteThis;
                             }
 
                             strHeader = strHeader + strComma + strLabel;
@@ -399,9 +426,6 @@ namespace HarmoniaRemote
                             Console.WriteLine("WARNING: line skipped format of line is not consistent with other data lines: " + strLine);
                         }
                     }
-
-
-                    
 
 
                     intRecord++;
