@@ -236,13 +236,13 @@ namespace HarmoniaRemote
             sp.WriteLine("PROPELL," + this.trackBar1.Value.ToString());
             int intVal = this.trackBar1.Value;
             intVal = -90 * (90 - intVal)/100;
-            this.lblThrottle.Text = intVal.ToString() + "%";
+            
         }
 
         private void tbFwdDive_Scroll(object sender, EventArgs e)
         {
             sp.WriteLine("SERVOFWDDIVE," + this.tbFwdDive.Value.ToString());
-            this.lblFwdDive.Text = this.tbFwdDive.Value.ToString();
+            
         }
 
         private void btnIdle_Click(object sender, EventArgs e)
@@ -277,14 +277,12 @@ namespace HarmoniaRemote
 
         private void tbAftDive_Scroll(object sender, EventArgs e)
         {
-            sp.WriteLine("SERVOAFTDIVE," + this.tbAftDive.Value.ToString());
-            this.lblAftDive.Text = this.tbAftDive.Value.ToString();
+            sp.WriteLine("SERVOAFTDIVE," + this.tbAftDive.Value.ToString());  
         }
 
         private void tbRudder_Scroll(object sender, EventArgs e)
         {
-            sp.WriteLine("SERVOAFTRUDDER," + this.tbRudder.Value.ToString());
-            this.lblRudder.Text = this.tbRudder.Value.ToString();
+            sp.WriteLine("SERVOAFTRUDDER," + this.tbRudder.Value.ToString());    
         }
 
         
@@ -335,8 +333,8 @@ namespace HarmoniaRemote
                 connPG.Close();
 
 
-                StreamWriter swOut = new System.IO.StreamWriter(@"C:\Business\Submarine\subjects\research_project\data\HA_24022023.csv", false);
-                StreamReader reader = File.OpenText(@"C:\Business\Submarine\subjects\research_project\data\HA_24022023.LOG");
+                StreamWriter swOut = new System.IO.StreamWriter(@"C:\Business\Submarine\subjects\research_project\data\HARM_26022023.csv", false);
+                StreamReader reader = File.OpenText(@"C:\Business\Submarine\subjects\research_project\data\HARM_26022023.LOG");
                 DateTime dteCurrent = DateTime.ParseExact("17:45:0 6/2/2023", "H:m:s d/M/yyyy", null);
                 DateTime dtePrevious = DateTime.Now;
                 int intRecord = 1;
@@ -478,5 +476,19 @@ namespace HarmoniaRemote
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        private void btnRun_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strParam = this.txtStartDepth.Text + "|" + this.txtTargetDepth.Text + "|" + this.txtRunThrottle.Text + "|" + this.txtRunTime.Text;
+                sp.WriteLine("RUN," + strParam);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
     }
 }
