@@ -297,7 +297,7 @@ namespace HarmoniaRemote
             if (MessageBox.Show("Putting the system into Upload pause operation and upload SD Card data to a file - do you want to continue?","Continue?",MessageBoxButtons.OKCancel,MessageBoxIcon.Question) == DialogResult.OK)
             {
                 //have the file ready to go
-                m_strUploadFile = @"C:\Business\Submarine\subjects\research_project\data\HARMONIA_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".log";
+                m_strUploadFile = @"";
                 m_swLog = new System.IO.StreamWriter(m_strUploadFile, true);
 
                 m_blnUploading = true;
@@ -315,7 +315,7 @@ namespace HarmoniaRemote
             try
             {
 
-                NpgsqlConnection connPG = new NpgsqlConnection("Server=localhost;Port=5432;UserId=postgres;Password=euge;Database=example");
+                NpgsqlConnection connPG = new NpgsqlConnection("");
                 connPG.Open();
 
                 NpgsqlCommand commPG = new NpgsqlCommand("select metadata_id,data_label from dt_data_config order by metadata_id", connPG);
@@ -333,8 +333,8 @@ namespace HarmoniaRemote
                 connPG.Close();
 
 
-                StreamWriter swOut = new System.IO.StreamWriter(@"C:\Business\Submarine\subjects\research_project\data\HARM_26022023.csv", false);
-                StreamReader reader = File.OpenText(@"C:\Business\Submarine\subjects\research_project\data\HARM_26022023.LOG");
+                StreamWriter swOut = new System.IO.StreamWriter(@"", false);
+                StreamReader reader = File.OpenText(@"");
                 DateTime dteCurrent = DateTime.ParseExact("17:45:0 6/2/2023", "H:m:s d/M/yyyy", null);
                 DateTime dtePrevious = DateTime.Now;
                 int intRecord = 1;
