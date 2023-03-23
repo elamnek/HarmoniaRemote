@@ -58,7 +58,6 @@ namespace HarmoniaRemote
             try
             {
                 string strReceived = sp_1.ReadLine();
-
                 SetControlText(this.meta_id_20, strReceived);
       
             }
@@ -350,7 +349,7 @@ namespace HarmoniaRemote
                     MessageBox.Show("The log file path does not exist", "Settings Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-                string strOutCSVFile = Path.GetFileNameWithoutExtension(txtLogPath.Text) + ".csv";
+                string strOutCSVFile = Path.Combine(Path.GetDirectoryName(txtLogPath.Text),Path.GetFileNameWithoutExtension(txtLogPath.Text) + ".csv");
                 if (File.Exists(strOutCSVFile))
                 {
                     MessageBox.Show("An output file already exists with the name: " + strOutCSVFile + " (this file may have already been converted)", "Conversion Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -397,31 +396,32 @@ namespace HarmoniaRemote
                     foreach (string strDataValue in arrayLine)
                     {
                         String[] arrayParts = strDataValue.Split(new char[] { '|' }, StringSplitOptions.None);
-
-                        string strMetaID = arrayParts[0].Trim();
-                        string strValue = arrayParts[1].Trim();
-
-                        int intMetaID = int.Parse(strMetaID);
-
-                        if (hashDataLabels.ContainsKey(intMetaID))
+                        if (arrayParts.Length == 2)
                         {
+                            string strMetaID = arrayParts[0].Trim();
+                            string strValue = arrayParts[1].Trim();
 
-                            string strLabel = hashDataLabels[intMetaID].ToString();
+                            int intMetaID = int.Parse(strMetaID);
 
-                            if (strMetaID == "13")
+                            if (hashDataLabels.ContainsKey(intMetaID))
                             {
-                                DateTime dteThis = DateTime.ParseExact(strValue, "H:m:s d/M/yyyy", null); //16:56:13 5/2/2023
-                                                                                                          //DateTime dteLoc = dteThis.ToLocalTime();
-                                                                                                          //DateTime dteUTM = dteLoc.ToUniversalTime();
-                                strValue = dteThis.ToString();
 
+                                string strLabel = hashDataLabels[intMetaID].ToString();
+
+                                if (strMetaID == "13")
+                                {
+                                    DateTime dteThis = DateTime.ParseExact(strValue, "H:m:s d/M/yyyy", null); //16:56:13 5/2/2023
+                                                                                                              //DateTime dteLoc = dteThis.ToLocalTime();
+                                                                                                              //DateTime dteUTM = dteLoc.ToUniversalTime();
+                                    strValue = dteThis.ToString();
+
+                                }
+
+                                strHeader = strHeader + strComma + strLabel;
+                                strCSV = strCSV + strComma + strValue;
+                                strComma = ",";
                             }
-
-                            strHeader = strHeader + strComma + strLabel;
-                            strCSV = strCSV + strComma + strValue;
-                            strComma = ",";    
                         }
- 
                     }
 
                     if (intRecord == 1)

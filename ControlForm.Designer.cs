@@ -1150,7 +1150,7 @@ namespace HarmoniaRemote
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(14, 41);
+            this.label44.Location = new System.Drawing.Point(14, 32);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(189, 20);
             this.label44.TabIndex = 35;
@@ -1158,15 +1158,16 @@ namespace HarmoniaRemote
             // 
             // txtDBConn
             // 
-            this.txtDBConn.Location = new System.Drawing.Point(18, 64);
+            this.txtDBConn.Location = new System.Drawing.Point(18, 56);
+            this.txtDBConn.Multiline = true;
             this.txtDBConn.Name = "txtDBConn";
-            this.txtDBConn.Size = new System.Drawing.Size(359, 26);
+            this.txtDBConn.Size = new System.Drawing.Size(359, 68);
             this.txtDBConn.TabIndex = 36;
             // 
             // label45
             // 
             this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(14, 101);
+            this.label45.Location = new System.Drawing.Point(14, 127);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(121, 20);
             this.label45.TabIndex = 37;
@@ -1174,7 +1175,7 @@ namespace HarmoniaRemote
             // 
             // txtLogPath
             // 
-            this.txtLogPath.Location = new System.Drawing.Point(18, 124);
+            this.txtLogPath.Location = new System.Drawing.Point(18, 150);
             this.txtLogPath.Multiline = true;
             this.txtLogPath.Name = "txtLogPath";
             this.txtLogPath.Size = new System.Drawing.Size(359, 88);
