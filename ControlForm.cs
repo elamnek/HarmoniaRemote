@@ -22,7 +22,7 @@ namespace HarmoniaRemote
 
         //create the serial connection
         private SerialPort sp = new SerialPort("COM4", 9600);
-        private SerialPort sp_1 = new SerialPort("COM7", 115200);
+        private SerialPort sp_1 = new SerialPort("COM12", 9600);
         private Boolean m_blnUploading = false;
         private int m_intRecordsToUpload = 0;
         private int m_intRecordsUploaded = 0;
@@ -58,7 +58,8 @@ namespace HarmoniaRemote
             try
             {
                 string strReceived = sp_1.ReadLine();
-                SetControlText(this.meta_id_20, strReceived);
+                String[] arrayValue = strReceived.Trim().Split('|');
+                SetControlText(this.meta_id_20, arrayValue[0]);
       
             }
             catch (Exception ex)
