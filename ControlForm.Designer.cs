@@ -130,10 +130,11 @@ namespace HarmoniaRemote
             this.btnClear = new System.Windows.Forms.Button();
             this.btnSaveLog = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.txtDBConn = new System.Windows.Forms.TextBox();
-            this.label44 = new System.Windows.Forms.Label();
-            this.txtDataDir = new System.Windows.Forms.TextBox();
             this.label45 = new System.Windows.Forms.Label();
+            this.txtDataDir = new System.Windows.Forms.TextBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.txtDBConn = new System.Windows.Forms.TextBox();
+            this.btnBrowse = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -1136,6 +1137,7 @@ namespace HarmoniaRemote
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.btnBrowse);
             this.groupBox6.Controls.Add(this.label45);
             this.groupBox6.Controls.Add(this.txtDataDir);
             this.groupBox6.Controls.Add(this.label44);
@@ -1147,13 +1149,22 @@ namespace HarmoniaRemote
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Settings";
             // 
-            // txtDBConn
+            // label45
             // 
-            this.txtDBConn.Location = new System.Drawing.Point(18, 56);
-            this.txtDBConn.Multiline = true;
-            this.txtDBConn.Name = "txtDBConn";
-            this.txtDBConn.Size = new System.Drawing.Size(359, 55);
-            this.txtDBConn.TabIndex = 36;
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(14, 136);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(132, 20);
+            this.label45.TabIndex = 37;
+            this.label45.Text = "Data file directory";
+            // 
+            // txtDataDir
+            // 
+            this.txtDataDir.Location = new System.Drawing.Point(18, 164);
+            this.txtDataDir.Multiline = true;
+            this.txtDataDir.Name = "txtDataDir";
+            this.txtDataDir.Size = new System.Drawing.Size(359, 74);
+            this.txtDataDir.TabIndex = 38;
             // 
             // label44
             // 
@@ -1164,22 +1175,23 @@ namespace HarmoniaRemote
             this.label44.TabIndex = 35;
             this.label44.Text = "DT Database Connection";
             // 
-            // txtDataDir
+            // txtDBConn
             // 
-            this.txtDataDir.Location = new System.Drawing.Point(18, 138);
-            this.txtDataDir.Multiline = true;
-            this.txtDataDir.Name = "txtDataDir";
-            this.txtDataDir.Size = new System.Drawing.Size(359, 49);
-            this.txtDataDir.TabIndex = 38;
+            this.txtDBConn.Location = new System.Drawing.Point(18, 56);
+            this.txtDBConn.Multiline = true;
+            this.txtDBConn.Name = "txtDBConn";
+            this.txtDBConn.Size = new System.Drawing.Size(359, 62);
+            this.txtDBConn.TabIndex = 36;
             // 
-            // label45
+            // btnBrowse
             // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(14, 115);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(132, 20);
-            this.label45.TabIndex = 37;
-            this.label45.Text = "Data file directory";
+            this.btnBrowse.Location = new System.Drawing.Point(292, 130);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(85, 33);
+            this.btnBrowse.TabIndex = 39;
+            this.btnBrowse.Text = "Browse";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // ControlForm
             // 
@@ -1331,6 +1343,7 @@ namespace HarmoniaRemote
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.TextBox txtDataDir;
         private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Button btnBrowse;
     }
 }
 

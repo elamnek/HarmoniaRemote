@@ -112,15 +112,24 @@ namespace HarmoniaRemote
                             if (intMetadataID == 2) { 
                                 //SetControlText(this.meta_id_2, strValue);
                                 if (strValue == "1")
-                                {AlertUser(true);} 
-                                else { AlertUser(false); }
+                                {AlertUser(true, Color.Red);} 
+                                else { AlertUser(false, TextBox.DefaultBackColor); }
                                 
                             }
                             if (intMetadataID == 3) {
                                 //SetControlText(this.meta_id_3, strValue);
                                 if (strValue == "1")
-                                {AlertUser(true);}
-                                else { AlertUser(false); }   
+                                {AlertUser(true, Color.Red);}
+                                else { AlertUser(false, TextBox.DefaultBackColor); }   
+                            }
+                            
+                            //low voltage warning
+                            if (intMetadataID == 23)
+                            {
+                                double dblBusVoltage = double.Parse(strValue);
+                                if (dblBusVoltage < 7 && dblBusVoltage > 0)
+                                { AlertUser(true, Color.Blue); }
+                                else { AlertUser(false, TextBox.DefaultBackColor); }
                             }
                             //if (intMetadataID == 7) { SetControlText(this.meta_id_7,strValue); }
                             //if (intMetadataID == 10) { SetControlText(this.meta_id_10,strValue); }
@@ -188,18 +197,18 @@ namespace HarmoniaRemote
             }
         }
         
-        private void AlertUser(Boolean blnAlertON)
+        private void AlertUser(Boolean blnAlertON,Color col)
         {
             try
             {
                 if (blnAlertON)
                 {
-                    SetControlBackcolor(this, Color.Red);
+                    SetControlBackcolor(this, col);
                     if (this.chkBeep.Checked) { Console.Beep(500, 1000); }
                 }
                 else
                 {
-                    SetControlBackcolor(this, TextBox.DefaultBackColor);
+                    SetControlBackcolor(this, col);
                 }
 
             }
@@ -341,23 +350,47 @@ namespace HarmoniaRemote
             try
             {
 
+                OpenFileDialog fileBrowser = new OpenFileDialog();
+                fileBrowser.Filter = "txt files (*.log)|*.log|All files (*.*)|*.*";
+                fileBrowser.Title = "Specify a log file to load...";
+                if (txtDataDir.Text.Length > 0)
+                {
+                    fileBrowser.InitialDirectory = txtDataDir.Text;
+                }
+
+                if (fileBrowser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+
+                    string strFileName = fileBrowser.FileName;
+                    ConvertToExcel(strFileName);
+                    //MessageBox.Show(fileBrowser.FileName);
+                }
+
+                fileBrowser.Dispose();
+                fileBrowser = null;
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+        }
+
+        private void ConvertToExcel(string strInputFile)
+        {
+            try
+            {
+
                 //do checks
                 if (txtDBConn.Text.Length == 0)
                 {
                     MessageBox.Show("DT database connection has not been set", "Settings Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-                if (txtDataDir.Text.Length == 0)
-                {
-                    MessageBox.Show("Data file directory has not been set", "Settings Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-                if (!Directory.Exists(txtDataDir.Text))
-                {
-                    MessageBox.Show("Data file directory does not exist", "Settings Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-                string strOutCSVFile = Path.Combine(txtDataDir.Text, Path.GetFileNameWithoutExtension(txtDataDir.Text) + ".csv");
+                
+                string strOutCSVFile = Path.Combine(Path.GetDirectoryName(strInputFile), Path.GetFileNameWithoutExtension(strInputFile) + ".csv");
                 if (File.Exists(strOutCSVFile))
                 {
                     MessageBox.Show("An output file already exists with the name: " + strOutCSVFile + " (this file may have already been converted)", "Conversion Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -381,10 +414,10 @@ namespace HarmoniaRemote
                 readerPG.Close();
                 commPG.Dispose();
                 connPG.Close();
-  
+
                 //open the logfile
-                StreamReader reader = File.OpenText(txtDataDir.Text);
-                
+                StreamReader reader = File.OpenText(strInputFile);
+
                 //open the output csv file
                 StreamWriter swOut = new System.IO.StreamWriter(strOutCSVFile, false);
 
@@ -443,7 +476,8 @@ namespace HarmoniaRemote
                         if (strHeader == strFirstHeader)
                         {
                             swOut.WriteLine(strCSV);
-                        } else
+                        }
+                        else
                         {
                             Console.WriteLine("WARNING: line skipped format of line is not consistent with other data lines: " + strLine);
                         }
@@ -455,6 +489,8 @@ namespace HarmoniaRemote
                 reader.Close();
                 swOut.Close();
 
+
+                MessageBox.Show("Conversion complete!");
 
             }
             catch (Exception ex)
@@ -525,5 +561,32 @@ namespace HarmoniaRemote
             }
         }
 
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                FolderBrowserDialog fbd = new FolderBrowserDialog();
+
+                string strDataDir = this.txtDataDir.Text;
+                if (strDataDir.Length > 0)
+                {
+                    if (Directory.Exists(strDataDir))
+                    {
+                        fbd.SelectedPath = strDataDir;
+                    }
+                }
+
+                if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.txtDataDir.Text = fbd.SelectedPath;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }
