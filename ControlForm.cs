@@ -57,10 +57,17 @@ namespace HarmoniaRemote
         {
             try
             {
-                string strReceived = sp_1.ReadLine();
-                String[] arrayValue = strReceived.Trim().Split('|');
-                SetControlText(this.meta_id_20, arrayValue[0]);
-      
+                string strReceived = sp_1.ReadLine().Trim();
+                if (strReceived.StartsWith("{") && strReceived.EndsWith("}"))
+                {
+                    SetRTBText(rtb, strReceived + Environment.NewLine);
+                    String[] arrayValue = strReceived.Trim().TrimStart('{').TrimEnd('}').Split(',');
+                    string strRange = arrayValue[1];
+                    String[] arrayRange = strRange.Trim().Split('|');
+                    string strRangeValue = arrayRange[1];
+                    SetControlText(this.meta_id_20, strRangeValue);
+                }
+            
             }
             catch (Exception ex)
             {
@@ -303,12 +310,12 @@ namespace HarmoniaRemote
         private void btnUpload_Click(object sender, EventArgs e)
         {
             //do checks
-            if (txtLogPath.Text.Length == 0)
+            if (txtDataDir.Text.Length == 0)
             {
                 MessageBox.Show("Log path has not been set", "Settings Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            if (File.Exists(txtLogPath.Text))
+            if (File.Exists(txtDataDir.Text))
             {
                 MessageBox.Show("The log file already exists", "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -317,7 +324,7 @@ namespace HarmoniaRemote
             if (MessageBox.Show("Putting the system into Upload pause operation and upload SD Card data to a file - do you want to continue?","Continue?",MessageBoxButtons.OKCancel,MessageBoxIcon.Question) == DialogResult.OK)
             {
                 //have the file ready to go
-                m_strUploadFile = txtLogPath.Text;
+                m_strUploadFile = txtDataDir.Text;
                 m_swLog = new System.IO.StreamWriter(m_strUploadFile, true);
 
                 m_blnUploading = true;
@@ -340,17 +347,17 @@ namespace HarmoniaRemote
                     MessageBox.Show("DT database connection has not been set", "Settings Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-                if (txtLogPath.Text.Length == 0)
+                if (txtDataDir.Text.Length == 0)
                 {
-                    MessageBox.Show("Log path has not been set", "Settings Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Data file directory has not been set", "Settings Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-                if (!File.Exists(txtLogPath.Text))
+                if (!Directory.Exists(txtDataDir.Text))
                 {
-                    MessageBox.Show("The log file path does not exist", "Settings Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Data file directory does not exist", "Settings Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-                string strOutCSVFile = Path.Combine(Path.GetDirectoryName(txtLogPath.Text),Path.GetFileNameWithoutExtension(txtLogPath.Text) + ".csv");
+                string strOutCSVFile = Path.Combine(txtDataDir.Text, Path.GetFileNameWithoutExtension(txtDataDir.Text) + ".csv");
                 if (File.Exists(strOutCSVFile))
                 {
                     MessageBox.Show("An output file already exists with the name: " + strOutCSVFile + " (this file may have already been converted)", "Conversion Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -376,7 +383,7 @@ namespace HarmoniaRemote
                 connPG.Close();
   
                 //open the logfile
-                StreamReader reader = File.OpenText(txtLogPath.Text);
+                StreamReader reader = File.OpenText(txtDataDir.Text);
                 
                 //open the output csv file
                 StreamWriter swOut = new System.IO.StreamWriter(strOutCSVFile, false);
@@ -458,17 +465,28 @@ namespace HarmoniaRemote
 
         private void btnSetTime_Click(object sender, EventArgs e)
         {
+
+            DateTime dteNow = DateTime.Now;
+            string strParam = dteNow.Year.ToString() + "|" + dteNow.Month.ToString() + "|" + dteNow.Day.ToString() + "|" + dteNow.Hour.ToString() + "|" + dteNow.Minute.ToString() + "|" + dteNow.Second.ToString();
+
+            //try to set Harmonia time
             try
             {
-                DateTime dteNow = DateTime.Now;
-                string strParam = dteNow.Year.ToString() + "|" + dteNow.Month.ToString() + "|" + dteNow.Day.ToString() + "|" + dteNow.Hour.ToString() + "|" + dteNow.Minute.ToString() + "|" + dteNow.Second.ToString();
-
                 sp.WriteLine("TIMESET," + strParam);
-
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                SetRTBText(rtb, "Could not set time on harmonia: " + ex.Message + Environment.NewLine);
+            }
+
+            //try to set range finder time
+            try
+            {
+                sp_1.WriteLine("TIMESET," + strParam);
+            }
+            catch (Exception ex)
+            {
+                SetRTBText(rtb, "Could not set time on range finder: " + ex.Message + Environment.NewLine);
             }
         }
 
