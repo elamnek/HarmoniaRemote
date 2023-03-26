@@ -28,6 +28,7 @@ namespace HarmoniaRemote
         private int m_intRecordsUploaded = 0;
         private string m_strUploadFile = "";
         private System.IO.StreamWriter m_swLog;
+        private System.IO.StreamWriter m_swRangeDataFile;
 
         private void ControlForm_Load(object sender, EventArgs e)
         {
@@ -66,6 +67,12 @@ namespace HarmoniaRemote
                     String[] arrayRange = strRange.Trim().Split('|');
                     string strRangeValue = arrayRange[1];
                     SetControlText(this.meta_id_20, strRangeValue);
+
+                    if (m_swRangeDataFile != null)
+                    {
+                        m_swRangeDataFile.WriteLine(strReceived);
+                        m_swRangeDataFile.Flush();
+                    }
                 }
             
             }
@@ -99,6 +106,13 @@ namespace HarmoniaRemote
                                 Control ctr = this.Controls[strControlName];
                                 SetControlText(ctr, strValue);
                             }
+
+                            //check the state and if it has been changed to idle - check for range finder log and close it
+
+
+
+
+
 
                             //if (intMetadataID == 13) { SetControlText(this.meta_id_13,strValue); }//rtc
                             //if (intMetadataID == 4) {
@@ -397,23 +411,7 @@ namespace HarmoniaRemote
                     return;
                 }
 
-                //do the connect
-                NpgsqlConnection connPG = new NpgsqlConnection(txtDBConn.Text);
-                connPG.Open();
-
-                //get the metadata records
-                NpgsqlCommand commPG = new NpgsqlCommand("select metadata_id,data_label from dt_data_config order by metadata_id", connPG);
-                NpgsqlDataReader readerPG = commPG.ExecuteReader();
-                Hashtable hashDataLabels = new Hashtable();
-                while (readerPG.Read())
-                {
-                    object objMetaDataID = readerPG.GetValue(0);
-                    object objLabel = readerPG.GetValue(1);
-                    hashDataLabels.Add(int.Parse(objMetaDataID.ToString()), objLabel.ToString());
-                }
-                readerPG.Close();
-                commPG.Dispose();
-                connPG.Close();
+                Hashtable hashDataLabels = GetDataLabels(txtDBConn.Text);
 
                 //open the logfile
                 StreamReader reader = File.OpenText(strInputFile);
@@ -499,6 +497,37 @@ namespace HarmoniaRemote
             }
         }
 
+        private Hashtable GetDataLabels(string strDBConn) {
+            try
+            {
+                Hashtable hashDataLabels = new Hashtable();
+
+                //do the connect
+                NpgsqlConnection connPG = new NpgsqlConnection(strDBConn);
+                connPG.Open();
+
+                //get the metadata records
+                NpgsqlCommand commPG = new NpgsqlCommand("select metadata_id,data_label from dt_data_config order by metadata_id", connPG);
+                NpgsqlDataReader readerPG = commPG.ExecuteReader();  
+                while (readerPG.Read())
+                {
+                    object objMetaDataID = readerPG.GetValue(0);
+                    object objLabel = readerPG.GetValue(1);
+                    hashDataLabels.Add(int.Parse(objMetaDataID.ToString()), objLabel.ToString());
+                }
+                readerPG.Close();
+                commPG.Dispose();
+                connPG.Close();
+
+                return hashDataLabels;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                return null;
+            }
+        } 
+
         private void btnSetTime_Click(object sender, EventArgs e)
         {
 
@@ -552,7 +581,23 @@ namespace HarmoniaRemote
         {
             try
             {
-                string strParam = this.txtStartDepth.Text + "|" + this.txtTargetDepth.Text + "|" + this.txtRunThrottle.Text + "|" + this.txtRunTime.Text;
+
+                //make sure data file directory has been set
+                if (txtDataDir.Text.Length == 0)
+                {
+                    MessageBox.Show("Data file directory has not been set - need to set this before using the Run state", "Settings Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                if (!Directory.Exists(txtDataDir.Text))
+                {
+                    MessageBox.Show("Data file directory does not exist - need to fix this before using the Run state", "Settings Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                string strOutLogFile = Path.Combine(txtDataDir.Text, "range_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".log");
+                m_swRangeDataFile = new System.IO.StreamWriter(strOutLogFile, true);
+
+                string strParam = this.txtStartDepth.Text + "|" + this.txtRunHeading.Text + "|" + this.txtRunThrottle.Text + "|" + this.txtRunTime.Text;
                 sp.WriteLine("RUN," + strParam);
             }
             catch (Exception ex)

@@ -70,7 +70,7 @@ namespace HarmoniaRemote
             this.label39 = new System.Windows.Forms.Label();
             this.txtRunThrottle = new System.Windows.Forms.TextBox();
             this.label40 = new System.Windows.Forms.Label();
-            this.txtTargetDepth = new System.Windows.Forms.TextBox();
+            this.txtRunHeading = new System.Windows.Forms.TextBox();
             this.label38 = new System.Windows.Forms.Label();
             this.txtStartDepth = new System.Windows.Forms.TextBox();
             this.label37 = new System.Windows.Forms.Label();
@@ -130,11 +130,11 @@ namespace HarmoniaRemote
             this.btnClear = new System.Windows.Forms.Button();
             this.btnSaveLog = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnBrowse = new System.Windows.Forms.Button();
             this.label45 = new System.Windows.Forms.Label();
             this.txtDataDir = new System.Windows.Forms.TextBox();
             this.label44 = new System.Windows.Forms.Label();
             this.txtDBConn = new System.Windows.Forms.TextBox();
-            this.btnBrowse = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -497,7 +497,7 @@ namespace HarmoniaRemote
             this.groupBox5.Controls.Add(this.label39);
             this.groupBox5.Controls.Add(this.txtRunThrottle);
             this.groupBox5.Controls.Add(this.label40);
-            this.groupBox5.Controls.Add(this.txtTargetDepth);
+            this.groupBox5.Controls.Add(this.txtRunHeading);
             this.groupBox5.Controls.Add(this.label38);
             this.groupBox5.Controls.Add(this.txtStartDepth);
             this.groupBox5.Controls.Add(this.label37);
@@ -545,23 +545,23 @@ namespace HarmoniaRemote
             this.label40.TabIndex = 52;
             this.label40.Text = "Throttle";
             // 
-            // txtTargetDepth
+            // txtRunHeading
             // 
-            this.txtTargetDepth.Location = new System.Drawing.Point(147, 94);
-            this.txtTargetDepth.Name = "txtTargetDepth";
-            this.txtTargetDepth.Size = new System.Drawing.Size(57, 26);
-            this.txtTargetDepth.TabIndex = 49;
-            this.txtTargetDepth.Text = "0.5";
-            this.txtTargetDepth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtRunHeading.Location = new System.Drawing.Point(147, 94);
+            this.txtRunHeading.Name = "txtRunHeading";
+            this.txtRunHeading.Size = new System.Drawing.Size(57, 26);
+            this.txtRunHeading.TabIndex = 49;
+            this.txtRunHeading.Text = "0";
+            this.txtRunHeading.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label38
             // 
             this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(14, 97);
+            this.label38.Location = new System.Drawing.Point(70, 97);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(127, 20);
+            this.label38.Size = new System.Drawing.Size(69, 20);
             this.label38.TabIndex = 50;
-            this.label38.Text = "Target depth (m)";
+            this.label38.Text = "Heading";
             // 
             // txtStartDepth
             // 
@@ -1149,6 +1149,16 @@ namespace HarmoniaRemote
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Settings";
             // 
+            // btnBrowse
+            // 
+            this.btnBrowse.Location = new System.Drawing.Point(292, 130);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(85, 33);
+            this.btnBrowse.TabIndex = 39;
+            this.btnBrowse.Text = "Browse";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            // 
             // label45
             // 
             this.label45.AutoSize = true;
@@ -1182,16 +1192,6 @@ namespace HarmoniaRemote
             this.txtDBConn.Name = "txtDBConn";
             this.txtDBConn.Size = new System.Drawing.Size(359, 62);
             this.txtDBConn.TabIndex = 36;
-            // 
-            // btnBrowse
-            // 
-            this.btnBrowse.Location = new System.Drawing.Point(292, 130);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(85, 33);
-            this.btnBrowse.TabIndex = 39;
-            this.btnBrowse.Text = "Browse";
-            this.btnBrowse.UseVisualStyleBackColor = true;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // ControlForm
             // 
@@ -1324,7 +1324,7 @@ namespace HarmoniaRemote
         private System.Windows.Forms.TrackBar tbAftDive;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TextBox txtTargetDepth;
+        private System.Windows.Forms.TextBox txtRunHeading;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.TextBox txtStartDepth;
         private System.Windows.Forms.Label label37;
