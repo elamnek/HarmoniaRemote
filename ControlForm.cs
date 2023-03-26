@@ -108,20 +108,27 @@ namespace HarmoniaRemote
                             }
 
                             //check the state and if it has been changed to idle - check for range finder log and close it
-
-
-
-
-
+                            //this is because when run is complete onboard system will change to idle state
+                            if (intMetadataID == 4)
+                            {
+                                if (strValue == "IDLE")
+                                {
+                                    if (m_swRangeDataFile != null)
+                                    {
+                                        m_swRangeDataFile.Close();
+                                        m_swRangeDataFile = null;
+                                    }
+                                } 
+                            }
 
                             //if (intMetadataID == 13) { SetControlText(this.meta_id_13,strValue); }//rtc
                             //if (intMetadataID == 4) {
                             //    //this is the state - check for alarm
                             //    SetControlText(this.meta_id_4,strValue);
-                                
+
                             //}
                             //if (intMetadataID == 1) { SetControlText(this.meta_id_1,strValue); }
-                            
+
                             //leak sensors
                             if (intMetadataID == 2) { 
                                 //SetControlText(this.meta_id_2, strValue);
@@ -530,6 +537,10 @@ namespace HarmoniaRemote
 
         private void btnSetTime_Click(object sender, EventArgs e)
         {
+            SyncClocks();
+        }
+        private void SyncClocks()
+        {
 
             DateTime dteNow = DateTime.Now;
             string strParam = dteNow.Year.ToString() + "|" + dteNow.Month.ToString() + "|" + dteNow.Day.ToString() + "|" + dteNow.Hour.ToString() + "|" + dteNow.Minute.ToString() + "|" + dteNow.Second.ToString();
@@ -553,6 +564,7 @@ namespace HarmoniaRemote
             {
                 SetRTBText(rtb, "Could not set time on range finder: " + ex.Message + Environment.NewLine);
             }
+
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -581,6 +593,9 @@ namespace HarmoniaRemote
         {
             try
             {
+
+                //sync the two clocks
+                SyncClocks();
 
                 //make sure data file directory has been set
                 if (txtDataDir.Text.Length == 0)
