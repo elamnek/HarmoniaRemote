@@ -419,12 +419,17 @@ namespace HarmoniaRemote
                 }
 
                 Hashtable hashDataLabels = GetDataLabels(txtDBConn.Text);
+                Hashtable hashGetTableDefs = GetTableDefs(txtDBConn.Text);
 
                 //open the logfile
                 StreamReader reader = File.OpenText(strInputFile);
 
                 //open the output csv file
                 StreamWriter swOut = new System.IO.StreamWriter(strOutCSVFile, false);
+
+                //open database
+                NpgsqlConnection connPG = new NpgsqlConnection(txtDBConn.Text);
+                connPG.Open();
 
                 int intRecord = 1;
                 String strFirstHeader = "";
@@ -494,6 +499,7 @@ namespace HarmoniaRemote
                 reader.Close();
                 swOut.Close();
 
+                connPG.Close();
 
                 MessageBox.Show("Load complete!");
 
@@ -533,21 +539,93 @@ namespace HarmoniaRemote
                 MessageBox.Show(ex.ToString());
                 return null;
             }
-        } 
-        private void PGInsert(string strDBConn)
+        }
+        private Hashtable GetTableDefs(string strDBConn)
         {
             try
-
             {
+                Hashtable hashTableDefs = new Hashtable();
 
+                //do the connect
                 NpgsqlConnection connPG = new NpgsqlConnection(strDBConn);
                 connPG.Open();
 
-                NpgsqlCommand commPG = new NpgsqlCommand("insert into ....", connPG);
-                commPG.ExecuteNonQuery();
+                string strPreviousDestTable = "";
+
+                ArrayList listColDefs = new ArrayList();
+
+                //get the metadata records
+                NpgsqlCommand commPG = new NpgsqlCommand("select dest_table,dest_column,expected_min_value,expected_max_value,metadata_id from dt_data_config order by dest_table", connPG);
+                NpgsqlDataReader readerPG = commPG.ExecuteReader();
+                while (readerPG.Read())
+                {
+                    object objDestTable = readerPG.GetValue(0);
+                    object objDestColumn = readerPG.GetValue(1);
+                    object objMinVal = readerPG.GetValue(2);
+                    object objMaxVal = readerPG.GetValue(3);
+                    object objMetaDataID = readerPG.GetValue(4);
+
+                    if (objDestTable != null && objDestColumn != null && objMetaDataID != null)
+                    {
+                        string strDestTable = objDestTable.ToString();
+                        string strDestColumn = objDestColumn.ToString();
+
+                        if (strDestTable.Length > 0 && strDestColumn.Length > 0)
+                        {
+
+                            int intMetaDataID = int.Parse(objMetaDataID.ToString());
+
+                            Hashtable hashColumnDef = new Hashtable();
+                            hashColumnDef.Add("METADATAID", intMetaDataID);
+                            hashColumnDef.Add("DESTCOL", strDestColumn);
+                            hashColumnDef.Add("MINVAL", objMinVal);
+                            hashColumnDef.Add("MAXVAL", objMaxVal);
+
+                            if (strDestTable == strPreviousDestTable || strPreviousDestTable.Length == 0)
+                            {
+                                //same table - keep adding columns to the list of cols
+                                listColDefs.Add(hashColumnDef);
+
+                            }
+                            else
+                            {
+                                //new table - store the previous column list against the previous table name
+                                hashTableDefs.Add(strPreviousDestTable, listColDefs);
+
+                                //create a new column def list
+                                listColDefs = new ArrayList();
+                                listColDefs.Add(hashColumnDef);
+                            }
+
+                            strPreviousDestTable = strDestTable;
+                        }    
+                    }
+                }
+                //there will always be one last column def list - store this
+                hashTableDefs.Add(strPreviousDestTable, listColDefs);
+
+                readerPG.Close();
                 commPG.Dispose();
                 connPG.Close();
 
+                return hashTableDefs;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                return null;
+            }
+        }
+        private void PGInsert(NpgsqlConnection connPG,string strTable, Hashtable hashData)
+        {
+            try
+            {
+                string strSQL = "INSERT INTO " + strTable + " VALUES ('2017-07-28 11:42:42.846621+00', 'office', 70.1, 50.0) ON CONFLICT DO NOTHING";
+
+                NpgsqlCommand commPG = new NpgsqlCommand(strSQL, connPG);
+                commPG.ExecuteNonQuery();
+                commPG.Dispose();
+                
             }
             catch (Exception ex)
             {
