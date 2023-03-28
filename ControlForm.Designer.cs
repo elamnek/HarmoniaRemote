@@ -125,7 +125,7 @@ namespace HarmoniaRemote
             this.meta_id_2 = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.meta_id_17 = new System.Windows.Forms.TextBox();
-            this.btnInterchangeToExcel = new System.Windows.Forms.Button();
+            this.btnLoadIntoDT = new System.Windows.Forms.Button();
             this.btnSetTime = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnSaveLog = new System.Windows.Forms.Button();
@@ -135,6 +135,7 @@ namespace HarmoniaRemote
             this.txtDataDir = new System.Windows.Forms.TextBox();
             this.label44 = new System.Windows.Forms.Label();
             this.txtDBConn = new System.Windows.Forms.TextBox();
+            this.label46 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -150,16 +151,16 @@ namespace HarmoniaRemote
             // rtb
             // 
             this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb.Location = new System.Drawing.Point(0, 500);
+            this.rtb.Location = new System.Drawing.Point(0, 510);
             this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(1736, 372);
+            this.rtb.Size = new System.Drawing.Size(1736, 362);
             this.rtb.TabIndex = 0;
             this.rtb.Text = "";
             // 
             // btnSend
             // 
             this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSend.Location = new System.Drawing.Point(1642, 441);
+            this.btnSend.Location = new System.Drawing.Point(1642, 425);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(71, 39);
             this.btnSend.TabIndex = 1;
@@ -169,7 +170,7 @@ namespace HarmoniaRemote
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(1522, 407);
+            this.textBox1.Location = new System.Drawing.Point(1522, 391);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(191, 26);
             this.textBox1.TabIndex = 2;
@@ -731,7 +732,7 @@ namespace HarmoniaRemote
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(1528, 380);
+            this.label17.Location = new System.Drawing.Point(1528, 374);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(185, 20);
             this.label17.TabIndex = 41;
@@ -788,7 +789,7 @@ namespace HarmoniaRemote
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.meta_id_7);
-            this.groupBox3.Location = new System.Drawing.Point(3, 286);
+            this.groupBox3.Location = new System.Drawing.Point(3, 270);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(1387, 208);
             this.groupBox3.TabIndex = 42;
@@ -1095,19 +1096,19 @@ namespace HarmoniaRemote
             this.meta_id_17.Size = new System.Drawing.Size(76, 26);
             this.meta_id_17.TabIndex = 40;
             // 
-            // btnInterchangeToExcel
+            // btnLoadIntoDT
             // 
-            this.btnInterchangeToExcel.Location = new System.Drawing.Point(1411, 309);
-            this.btnInterchangeToExcel.Name = "btnInterchangeToExcel";
-            this.btnInterchangeToExcel.Size = new System.Drawing.Size(99, 39);
-            this.btnInterchangeToExcel.TabIndex = 43;
-            this.btnInterchangeToExcel.Text = "Convert";
-            this.btnInterchangeToExcel.UseVisualStyleBackColor = true;
-            this.btnInterchangeToExcel.Click += new System.EventHandler(this.btnInterchangeToExcel_Click);
+            this.btnLoadIntoDT.Location = new System.Drawing.Point(1411, 293);
+            this.btnLoadIntoDT.Name = "btnLoadIntoDT";
+            this.btnLoadIntoDT.Size = new System.Drawing.Size(302, 39);
+            this.btnLoadIntoDT.TabIndex = 43;
+            this.btnLoadIntoDT.Text = "Load data into DT";
+            this.btnLoadIntoDT.UseVisualStyleBackColor = true;
+            this.btnLoadIntoDT.Click += new System.EventHandler(this.btnLoadIntoDT_Click);
             // 
             // btnSetTime
             // 
-            this.btnSetTime.Location = new System.Drawing.Point(1411, 352);
+            this.btnSetTime.Location = new System.Drawing.Point(1411, 336);
             this.btnSetTime.Name = "btnSetTime";
             this.btnSetTime.Size = new System.Drawing.Size(99, 39);
             this.btnSetTime.TabIndex = 45;
@@ -1117,17 +1118,17 @@ namespace HarmoniaRemote
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(1411, 395);
+            this.btnClear.Location = new System.Drawing.Point(1402, 379);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(99, 39);
+            this.btnClear.Size = new System.Drawing.Size(111, 39);
             this.btnClear.TabIndex = 46;
-            this.btnClear.Text = "Clear data";
+            this.btnClear.Text = "Clear output";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnSaveLog
             // 
-            this.btnSaveLog.Location = new System.Drawing.Point(1411, 438);
+            this.btnSaveLog.Location = new System.Drawing.Point(1411, 422);
             this.btnSaveLog.Name = "btnSaveLog";
             this.btnSaveLog.Size = new System.Drawing.Size(99, 39);
             this.btnSaveLog.TabIndex = 47;
@@ -1193,18 +1194,28 @@ namespace HarmoniaRemote
             this.txtDBConn.Size = new System.Drawing.Size(359, 62);
             this.txtDBConn.TabIndex = 36;
             // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(3, 487);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(118, 20);
+            this.label46.TabIndex = 49;
+            this.label46.Text = "Output Window";
+            // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1736, 872);
+            this.Controls.Add(this.label46);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.btnSaveLog);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnSetTime);
             this.Controls.Add(this.label17);
-            this.Controls.Add(this.btnInterchangeToExcel);
+            this.Controls.Add(this.btnLoadIntoDT);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.textBox1);
@@ -1212,7 +1223,7 @@ namespace HarmoniaRemote
             this.Controls.Add(this.btnSend);
             this.MinimumSize = new System.Drawing.Size(1025, 721);
             this.Name = "ControlForm";
-            this.Padding = new System.Windows.Forms.Padding(0, 500, 0, 0);
+            this.Padding = new System.Windows.Forms.Padding(0, 510, 0, 0);
             this.Text = "Harmonia Controller";
             this.Load += new System.EventHandler(this.ControlForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
@@ -1314,7 +1325,7 @@ namespace HarmoniaRemote
         private System.Windows.Forms.TextBox meta_id_25;
         private System.Windows.Forms.TextBox meta_id_24;
         private System.Windows.Forms.TextBox meta_id_23;
-        private System.Windows.Forms.Button btnInterchangeToExcel;
+        private System.Windows.Forms.Button btnLoadIntoDT;
         private System.Windows.Forms.Button btnSetTime;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnSaveLog;
@@ -1344,6 +1355,7 @@ namespace HarmoniaRemote
         private System.Windows.Forms.TextBox txtDataDir;
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.Button btnBrowse;
+        private System.Windows.Forms.Label label46;
     }
 }
 

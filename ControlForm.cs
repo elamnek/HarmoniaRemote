@@ -101,9 +101,9 @@ namespace HarmoniaRemote
 
                             //search for the matching control and write the value to it
                             string strControlName = "meta_id_" + intMetadataID.ToString();
-                            if (this.Controls.ContainsKey(strControlName))
+                            if (this.groupBox3.Controls.ContainsKey(strControlName))
                             {
-                                Control ctr = this.Controls[strControlName];
+                                Control ctr = this.groupBox3.Controls[strControlName];
                                 SetControlText(ctr, strValue);
                             }
 
@@ -366,14 +366,14 @@ namespace HarmoniaRemote
          
         }
 
-        private void btnInterchangeToExcel_Click(object sender, EventArgs e)
+        private void btnLoadIntoDT_Click(object sender, EventArgs e)
         {
             try
             {
 
                 OpenFileDialog fileBrowser = new OpenFileDialog();
                 fileBrowser.Filter = "txt files (*.log)|*.log|All files (*.*)|*.*";
-                fileBrowser.Title = "Specify a log file to load...";
+                fileBrowser.Title = "Specify a log file to load into DT database...";
                 if (txtDataDir.Text.Length > 0)
                 {
                     fileBrowser.InitialDirectory = txtDataDir.Text;
@@ -383,7 +383,7 @@ namespace HarmoniaRemote
                 {
 
                     string strFileName = fileBrowser.FileName;
-                    ConvertToExcel(strFileName);
+                    LoadIntoDT(strFileName);
                     //MessageBox.Show(fileBrowser.FileName);
                 }
 
@@ -399,7 +399,7 @@ namespace HarmoniaRemote
 
         }
 
-        private void ConvertToExcel(string strInputFile)
+        private void LoadIntoDT(string strInputFile)
         {
             try
             {
@@ -414,7 +414,7 @@ namespace HarmoniaRemote
                 string strOutCSVFile = Path.Combine(Path.GetDirectoryName(strInputFile), Path.GetFileNameWithoutExtension(strInputFile) + ".csv");
                 if (File.Exists(strOutCSVFile))
                 {
-                    MessageBox.Show("An output file already exists with the name: " + strOutCSVFile + " (this file may have already been converted)", "Conversion Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("An output file already exists with the name: " + strOutCSVFile + " (this file may have already been loaded)", "Load Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
@@ -484,7 +484,7 @@ namespace HarmoniaRemote
                         }
                         else
                         {
-                            Console.WriteLine("WARNING: line skipped format of line is not consistent with other data lines: " + strLine);
+                            SetRTBText(rtb, "WARNING: line skipped format of line is not consistent with other data lines: " + strLine);
                         }
                     }
 
@@ -495,7 +495,7 @@ namespace HarmoniaRemote
                 swOut.Close();
 
 
-                MessageBox.Show("Conversion complete!");
+                MessageBox.Show("Load complete!");
 
             }
             catch (Exception ex)
@@ -534,6 +534,26 @@ namespace HarmoniaRemote
                 return null;
             }
         } 
+        private void PGInsert(string strDBConn)
+        {
+            try
+
+            {
+
+                NpgsqlConnection connPG = new NpgsqlConnection(strDBConn);
+                connPG.Open();
+
+                NpgsqlCommand commPG = new NpgsqlCommand("insert into ....", connPG);
+                commPG.ExecuteNonQuery();
+                commPG.Dispose();
+                connPG.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
 
         private void btnSetTime_Click(object sender, EventArgs e)
         {
