@@ -121,6 +121,17 @@ namespace HarmoniaRemote
                                 } 
                             }
 
+                            //convert heading to direction -180 - +180
+                            if (intMetadataID == 15)
+                            {
+                                double dblHeading;
+                                if (double.TryParse(strValue,out dblHeading)){
+                                    double dblDirection = dblHeading;
+                                    if (dblDirection > 180) { dblDirection = dblDirection - 360; }
+                                    txtDirection.Text = dblDirection.ToString();
+                                }
+                            }
+
                             //if (intMetadataID == 13) { SetControlText(this.meta_id_13,strValue); }//rtc
                             //if (intMetadataID == 4) {
                             //    //this is the state - check for alarm
@@ -707,11 +718,12 @@ namespace HarmoniaRemote
                     return;
                 }
 
+                string strParam = this.txtStartDepth.Text + "|" + this.txtRunDirection.Text + "|" + this.txtRunThrottle.Text + "|" + this.txtRunTime.Text + "|" + this.txtFwdDive0Pos.Text + "|" + this.txtAftPitch0Pos.Text + "|" + this.txtAftRudder0Pos.Text;
+                sp.WriteLine("RUN," + strParam);
+
                 string strOutLogFile = Path.Combine(txtDataDir.Text, "range_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".log");
                 m_swRangeDataFile = new System.IO.StreamWriter(strOutLogFile, true);
-
-                string strParam = this.txtStartDepth.Text + "|" + this.txtRunHeading.Text + "|" + this.txtRunThrottle.Text + "|" + this.txtRunTime.Text;
-                sp.WriteLine("RUN," + strParam);
+   
             }
             catch (Exception ex)
             {
@@ -740,6 +752,18 @@ namespace HarmoniaRemote
                     this.txtDataDir.Text = fbd.SelectedPath;
                 }
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                txtRunDirection.Text = txtDirection.Text;
             }
             catch (Exception ex)
             {

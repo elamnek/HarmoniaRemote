@@ -66,11 +66,17 @@ namespace HarmoniaRemote
             this.label28 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.txtAftRudder0Pos = new System.Windows.Forms.TextBox();
+            this.label47 = new System.Windows.Forms.Label();
+            this.txtAftPitch0Pos = new System.Windows.Forms.TextBox();
+            this.label48 = new System.Windows.Forms.Label();
+            this.txtFwdDive0Pos = new System.Windows.Forms.TextBox();
+            this.label49 = new System.Windows.Forms.Label();
             this.txtRunTime = new System.Windows.Forms.TextBox();
             this.label39 = new System.Windows.Forms.Label();
             this.txtRunThrottle = new System.Windows.Forms.TextBox();
             this.label40 = new System.Windows.Forms.Label();
-            this.txtRunHeading = new System.Windows.Forms.TextBox();
+            this.txtRunDirection = new System.Windows.Forms.TextBox();
             this.label38 = new System.Windows.Forms.Label();
             this.txtStartDepth = new System.Windows.Forms.TextBox();
             this.label37 = new System.Windows.Forms.Label();
@@ -136,6 +142,10 @@ namespace HarmoniaRemote
             this.label44 = new System.Windows.Forms.Label();
             this.txtDBConn = new System.Windows.Forms.TextBox();
             this.label46 = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
+            this.txtDirection = new System.Windows.Forms.TextBox();
+            this.label51 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -309,7 +319,7 @@ namespace HarmoniaRemote
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(970, 48);
+            this.label7.Location = new System.Drawing.Point(48, 189);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(100, 20);
             this.label7.TabIndex = 25;
@@ -318,7 +328,7 @@ namespace HarmoniaRemote
             // btnDynamicTrim
             // 
             this.btnDynamicTrim.BackColor = System.Drawing.Color.Blue;
-            this.btnDynamicTrim.Location = new System.Drawing.Point(920, 42);
+            this.btnDynamicTrim.Location = new System.Drawing.Point(14, 183);
             this.btnDynamicTrim.Name = "btnDynamicTrim";
             this.btnDynamicTrim.Size = new System.Drawing.Size(33, 33);
             this.btnDynamicTrim.TabIndex = 24;
@@ -494,21 +504,83 @@ namespace HarmoniaRemote
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.button1);
+            this.groupBox5.Controls.Add(this.label51);
+            this.groupBox5.Controls.Add(this.txtAftRudder0Pos);
+            this.groupBox5.Controls.Add(this.label47);
+            this.groupBox5.Controls.Add(this.txtAftPitch0Pos);
+            this.groupBox5.Controls.Add(this.label48);
+            this.groupBox5.Controls.Add(this.txtFwdDive0Pos);
+            this.groupBox5.Controls.Add(this.label49);
             this.groupBox5.Controls.Add(this.txtRunTime);
             this.groupBox5.Controls.Add(this.label39);
             this.groupBox5.Controls.Add(this.txtRunThrottle);
             this.groupBox5.Controls.Add(this.label40);
-            this.groupBox5.Controls.Add(this.txtRunHeading);
+            this.groupBox5.Controls.Add(this.txtRunDirection);
             this.groupBox5.Controls.Add(this.label38);
             this.groupBox5.Controls.Add(this.txtStartDepth);
             this.groupBox5.Controls.Add(this.label37);
             this.groupBox5.Controls.Add(this.label10);
             this.groupBox5.Controls.Add(this.btnRun);
-            this.groupBox5.Location = new System.Drawing.Point(1076, 20);
+            this.groupBox5.Location = new System.Drawing.Point(909, 19);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(224, 210);
+            this.groupBox5.Size = new System.Drawing.Size(397, 219);
             this.groupBox5.TabIndex = 49;
             this.groupBox5.TabStop = false;
+            // 
+            // txtAftRudder0Pos
+            // 
+            this.txtAftRudder0Pos.Location = new System.Drawing.Point(324, 168);
+            this.txtAftRudder0Pos.Name = "txtAftRudder0Pos";
+            this.txtAftRudder0Pos.Size = new System.Drawing.Size(57, 26);
+            this.txtAftRudder0Pos.TabIndex = 59;
+            this.txtAftRudder0Pos.Text = "135";
+            this.txtAftRudder0Pos.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(231, 171);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(87, 20);
+            this.label47.TabIndex = 60;
+            this.label47.Text = "Aft Rudder";
+            // 
+            // txtAftPitch0Pos
+            // 
+            this.txtAftPitch0Pos.Location = new System.Drawing.Point(324, 132);
+            this.txtAftPitch0Pos.Name = "txtAftPitch0Pos";
+            this.txtAftPitch0Pos.Size = new System.Drawing.Size(57, 26);
+            this.txtAftPitch0Pos.TabIndex = 57;
+            this.txtAftPitch0Pos.Text = "105";
+            this.txtAftPitch0Pos.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(249, 135);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(69, 20);
+            this.label48.TabIndex = 58;
+            this.label48.Text = "Aft Pitch";
+            // 
+            // txtFwdDive0Pos
+            // 
+            this.txtFwdDive0Pos.Location = new System.Drawing.Point(324, 93);
+            this.txtFwdDive0Pos.Name = "txtFwdDive0Pos";
+            this.txtFwdDive0Pos.Size = new System.Drawing.Size(57, 26);
+            this.txtFwdDive0Pos.TabIndex = 55;
+            this.txtFwdDive0Pos.Text = "105";
+            this.txtFwdDive0Pos.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(246, 96);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(74, 20);
+            this.label49.TabIndex = 56;
+            this.label49.Text = "Fwd Dive";
             // 
             // txtRunTime
             // 
@@ -546,23 +618,23 @@ namespace HarmoniaRemote
             this.label40.TabIndex = 52;
             this.label40.Text = "Throttle";
             // 
-            // txtRunHeading
+            // txtRunDirection
             // 
-            this.txtRunHeading.Location = new System.Drawing.Point(147, 94);
-            this.txtRunHeading.Name = "txtRunHeading";
-            this.txtRunHeading.Size = new System.Drawing.Size(57, 26);
-            this.txtRunHeading.TabIndex = 49;
-            this.txtRunHeading.Text = "0";
-            this.txtRunHeading.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtRunDirection.Location = new System.Drawing.Point(147, 94);
+            this.txtRunDirection.Name = "txtRunDirection";
+            this.txtRunDirection.Size = new System.Drawing.Size(57, 26);
+            this.txtRunDirection.TabIndex = 49;
+            this.txtRunDirection.Text = "0";
+            this.txtRunDirection.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label38
             // 
             this.label38.AutoSize = true;
             this.label38.Location = new System.Drawing.Point(70, 97);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(69, 20);
+            this.label38.Size = new System.Drawing.Size(72, 20);
             this.label38.TabIndex = 50;
-            this.label38.Text = "Heading";
+            this.label38.Text = "Direction";
             // 
             // txtStartDepth
             // 
@@ -740,6 +812,8 @@ namespace HarmoniaRemote
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label50);
+            this.groupBox3.Controls.Add(this.txtDirection);
             this.groupBox3.Controls.Add(this.label41);
             this.groupBox3.Controls.Add(this.label42);
             this.groupBox3.Controls.Add(this.label43);
@@ -920,7 +994,7 @@ namespace HarmoniaRemote
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(920, 85);
+            this.label31.Location = new System.Drawing.Point(1070, 85);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(36, 20);
             this.label31.TabIndex = 58;
@@ -936,7 +1010,7 @@ namespace HarmoniaRemote
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(774, 83);
+            this.label30.Location = new System.Drawing.Point(924, 83);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(44, 20);
             this.label30.TabIndex = 57;
@@ -945,7 +1019,7 @@ namespace HarmoniaRemote
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(615, 83);
+            this.label29.Location = new System.Drawing.Point(576, 83);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(69, 20);
             this.label29.TabIndex = 56;
@@ -953,21 +1027,21 @@ namespace HarmoniaRemote
             // 
             // meta_id_16
             // 
-            this.meta_id_16.Location = new System.Drawing.Point(963, 80);
+            this.meta_id_16.Location = new System.Drawing.Point(1113, 80);
             this.meta_id_16.Name = "meta_id_16";
             this.meta_id_16.Size = new System.Drawing.Size(79, 26);
             this.meta_id_16.TabIndex = 55;
             // 
             // meta_id_15
             // 
-            this.meta_id_15.Location = new System.Drawing.Point(824, 80);
+            this.meta_id_15.Location = new System.Drawing.Point(974, 80);
             this.meta_id_15.Name = "meta_id_15";
             this.meta_id_15.Size = new System.Drawing.Size(79, 26);
             this.meta_id_15.TabIndex = 54;
             // 
             // meta_id_14
             // 
-            this.meta_id_14.Location = new System.Drawing.Point(694, 80);
+            this.meta_id_14.Location = new System.Drawing.Point(655, 80);
             this.meta_id_14.Name = "meta_id_14";
             this.meta_id_14.Size = new System.Drawing.Size(60, 26);
             this.meta_id_14.TabIndex = 53;
@@ -1203,6 +1277,41 @@ namespace HarmoniaRemote
             this.label46.TabIndex = 49;
             this.label46.Text = "Output Window";
             // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(719, 83);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(72, 20);
+            this.label50.TabIndex = 74;
+            this.label50.Text = "Direction";
+            // 
+            // txtDirection
+            // 
+            this.txtDirection.Location = new System.Drawing.Point(798, 80);
+            this.txtDirection.Name = "txtDirection";
+            this.txtDirection.Size = new System.Drawing.Size(60, 26);
+            this.txtDirection.TabIndex = 73;
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(272, 58);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(93, 20);
+            this.label51.TabIndex = 61;
+            this.label51.Text = "Servo 0 pos";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(29, 97);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(36, 25);
+            this.button1.TabIndex = 75;
+            this.button1.Text = ">>";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1335,7 +1444,7 @@ namespace HarmoniaRemote
         private System.Windows.Forms.TrackBar tbAftDive;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TextBox txtRunHeading;
+        private System.Windows.Forms.TextBox txtRunDirection;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.TextBox txtStartDepth;
         private System.Windows.Forms.Label label37;
@@ -1356,6 +1465,16 @@ namespace HarmoniaRemote
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.TextBox txtAftRudder0Pos;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.TextBox txtAftPitch0Pos;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.TextBox txtFwdDive0Pos;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.TextBox txtDirection;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.Button button1;
     }
 }
 
