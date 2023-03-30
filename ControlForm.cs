@@ -122,13 +122,13 @@ namespace HarmoniaRemote
                             }
 
                             //convert heading to direction -180 - +180
-                            if (intMetadataID == 15)
+                            if (intMetadataID == 14)
                             {
                                 double dblHeading;
                                 if (double.TryParse(strValue,out dblHeading)){
                                     double dblDirection = dblHeading;
                                     if (dblDirection > 180) { dblDirection = dblDirection - 360; }
-                                    txtDirection.Text = dblDirection.ToString();
+                                    SetControlText(this.txtDirection, dblDirection.ToString());
                                 }
                             }
 
@@ -422,21 +422,11 @@ namespace HarmoniaRemote
                     return;
                 }
                 
-                string strOutCSVFile = Path.Combine(Path.GetDirectoryName(strInputFile), Path.GetFileNameWithoutExtension(strInputFile) + ".csv");
-                if (File.Exists(strOutCSVFile))
-                {
-                    MessageBox.Show("An output file already exists with the name: " + strOutCSVFile + " (this file may have already been loaded)", "Load Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
-                Hashtable hashDataLabels = GetDataLabels(txtDBConn.Text);
-                Hashtable hashGetTableDefs = GetTableDefs(txtDBConn.Text);
+                //get DT table defs
+                Hashtable hashTableDefs = GetTableDefs(txtDBConn.Text);
 
                 //open the logfile
                 StreamReader reader = File.OpenText(strInputFile);
-
-                //open the output csv file
-                StreamWriter swOut = new System.IO.StreamWriter(strOutCSVFile, false);
 
                 //open database
                 NpgsqlConnection connPG = new NpgsqlConnection(txtDBConn.Text);
@@ -451,65 +441,53 @@ namespace HarmoniaRemote
                     String strLine = reader.ReadLine().Trim().TrimStart('{').TrimEnd('}');
                     String[] arrayLine = strLine.Split(new char[] { ',' }, StringSplitOptions.None);
 
-                    string strCSV = "";
-                    string strComma = "";
-                    string strHeader = "";
-
+                 
+                    Hashtable hashInsertData = new Hashtable(); 
                     foreach (string strDataValue in arrayLine)
                     {
+                        
                         String[] arrayParts = strDataValue.Split(new char[] { '|' }, StringSplitOptions.None);
                         if (arrayParts.Length == 2)
                         {
                             string strMetaID = arrayParts[0].Trim();
                             string strValue = arrayParts[1].Trim();
-
                             int intMetaID = int.Parse(strMetaID);
+                            if (!hashInsertData.ContainsKey(intMetaID)) { hashInsertData.Add(intMetaID, strValue); } 
+                        }
+                    }
 
-                            if (hashDataLabels.ContainsKey(intMetaID))
+
+                    ArrayList listSQLInserts = new ArrayList();
+                    foreach (string strDestTable in hashTableDefs.Keys)
+                    {
+                        //this is a destination table
+                        string strColumns = "";  
+                        string strValues = "";
+                        string strComma = "";
+
+                        //go through columns and build sql
+                        ArrayList listColDefs = (ArrayList)hashTableDefs[strDestTable];
+                        foreach (Hashtable hashColDef in listColDefs)
+                        {
+                            int intThisMetaID = (int)hashColDef["METADATAID"];
+                            if (hashInsertData.ContainsKey(intThisMetaID))
                             {
-
-                                string strLabel = hashDataLabels[intMetaID].ToString();
-
-                                if (strMetaID == "13")
-                                {
-                                    DateTime dteThis = DateTime.ParseExact(strValue, "H:m:s d/M/yyyy", null); //16:56:13 5/2/2023
-                                                                                                              //DateTime dteLoc = dteThis.ToLocalTime();
-                                                                                                              //DateTime dteUTM = dteLoc.ToUniversalTime();
-                                    strValue = dteThis.ToString();
-
-                                }
-
-                                strHeader = strHeader + strComma + strLabel;
-                                strCSV = strCSV + strComma + strValue;
+                                //the log record contains this metadata id
+                                strColumns = strColumns + strComma + hashColDef["DESTCOL"].ToString();
+                                strValues = strValues + strComma + hashInsertData[intThisMetaID].ToString();
                                 strComma = ",";
+
                             }
                         }
-                    }
 
-                    if (intRecord == 1)
-                    {
-                        strFirstHeader = strHeader;
-                        swOut.WriteLine(strHeader);
-                        swOut.WriteLine(strCSV);
+                        //build sql insert for this table
+                        listSQLInserts.Add("insert into " + strDestTable + " (" + strColumns + ")" + " values (" + strValues + ")");
                     }
-                    else
-                    {
-                        if (strHeader == strFirstHeader)
-                        {
-                            swOut.WriteLine(strCSV);
-                        }
-                        else
-                        {
-                            SetRTBText(rtb, "WARNING: line skipped format of line is not consistent with other data lines: " + strLine);
-                        }
-                    }
-
 
                     intRecord++;
                 }
                 reader.Close();
-                swOut.Close();
-
+                
                 connPG.Close();
 
                 MessageBox.Show("Load complete!");
@@ -764,6 +742,189 @@ namespace HarmoniaRemote
             try
             {
                 txtRunDirection.Text = txtDirection.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                sp.WriteLine("SERVOFWDDIVE," + this.txtFwdDive0Pos.Text);
+                
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                
+                sp.WriteLine("SERVOAFTDIVE," + this.txtAftPitch0Pos.Text);
+                
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                
+                sp.WriteLine("SERVOAFTRUDDER," + this.txtAftRudder0Pos.Text);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnExportExcel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                OpenFileDialog fileBrowser = new OpenFileDialog();
+                fileBrowser.Filter = "txt files (*.log)|*.log|All files (*.*)|*.*";
+                fileBrowser.Title = "Specify a log file to export to excel...";
+                if (txtDataDir.Text.Length > 0)
+                {
+                    fileBrowser.InitialDirectory = txtDataDir.Text;
+                }
+
+                if (fileBrowser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+
+                    string strFileName = fileBrowser.FileName;
+                    ExportToExcel(strFileName);
+                    //MessageBox.Show(fileBrowser.FileName);
+                }
+
+                fileBrowser.Dispose();
+                fileBrowser = null;
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void ExportToExcel(string strInputFile)
+        {
+            try
+            {
+
+                //do checks
+                if (txtDBConn.Text.Length == 0)
+                {
+                    MessageBox.Show("DT database connection has not been set", "Settings Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                string strOutCSVFile = Path.Combine(Path.GetDirectoryName(strInputFile), Path.GetFileNameWithoutExtension(strInputFile) + ".csv");
+                if (File.Exists(strOutCSVFile))
+                {
+                    MessageBox.Show("An output file already exists with the name: " + strOutCSVFile + " (delete this first before exporting)", "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                Hashtable hashDataLabels = GetDataLabels(txtDBConn.Text);
+                
+                //open the logfile
+                StreamReader reader = File.OpenText(strInputFile);
+
+                //open the output csv file
+                StreamWriter swOut = new System.IO.StreamWriter(strOutCSVFile, false);
+
+                int intRecord = 1;
+                String strFirstHeader = "";
+                while (reader.Peek() != -1)
+                {
+
+                    //read a line and split it up
+                    String strLine = reader.ReadLine().Trim().TrimStart('{').TrimEnd('}');
+                    String[] arrayLine = strLine.Split(new char[] { ',' }, StringSplitOptions.None);
+
+                    string strCSV = "";
+                    string strComma = "";
+                    string strHeader = "";
+
+                 
+                    foreach (string strDataValue in arrayLine)
+                    {
+
+                        String[] arrayParts = strDataValue.Split(new char[] { '|' }, StringSplitOptions.None);
+                        if (arrayParts.Length == 2)
+                        {
+                            string strMetaID = arrayParts[0].Trim();
+                            string strValue = arrayParts[1].Trim();
+                            int intMetaID = int.Parse(strMetaID);
+                           
+                            if (hashDataLabels.ContainsKey(intMetaID))
+                            {
+
+                                string strLabel = hashDataLabels[intMetaID].ToString();
+
+                                if (strMetaID == "13")
+                                {
+                                    DateTime dteThis = DateTime.ParseExact(strValue, "H:m:s d/M/yyyy", null); //16:56:13 5/2/2023
+                                                                                                              //DateTime dteLoc = dteThis.ToLocalTime();
+                                                                                                              //DateTime dteUTM = dteLoc.ToUniversalTime();
+                                    strValue = dteThis.ToString();
+
+                                }
+
+                                strHeader = strHeader + strComma + strLabel;
+                                strCSV = strCSV + strComma + strValue;
+                                strComma = ",";
+                            }
+                        }
+                    }
+
+                    if (intRecord == 1)
+                    {
+                        strFirstHeader = strHeader;
+                        swOut.WriteLine(strHeader);
+                        swOut.WriteLine(strCSV);
+                    }
+                    else
+                    {
+                        if (strHeader == strFirstHeader)
+                        {
+                            swOut.WriteLine(strCSV);
+                        }
+                        else
+                        {
+                            SetRTBText(rtb, "WARNING: line skipped format of line is not consistent with other data lines: " + strLine);
+                        }
+                    }
+
+
+                    intRecord++;
+                }
+                reader.Close();
+                swOut.Close();
+  
+                MessageBox.Show("Export complete!");
+
             }
             catch (Exception ex)
             {
