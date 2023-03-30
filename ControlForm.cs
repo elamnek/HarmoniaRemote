@@ -433,7 +433,6 @@ namespace HarmoniaRemote
                 connPG.Open();
 
                 int intRecord = 1;
-                String strFirstHeader = "";
                 while (reader.Peek() != -1)
                 {
 
@@ -441,7 +440,8 @@ namespace HarmoniaRemote
                     String strLine = reader.ReadLine().Trim().TrimStart('{').TrimEnd('}');
                     String[] arrayLine = strLine.Split(new char[] { ',' }, StringSplitOptions.None);
 
-                 
+                    //get a hash of all data values
+                    string strTime = "";
                     Hashtable hashInsertData = new Hashtable(); 
                     foreach (string strDataValue in arrayLine)
                     {
@@ -453,35 +453,57 @@ namespace HarmoniaRemote
                             string strValue = arrayParts[1].Trim();
                             int intMetaID = int.Parse(strMetaID);
                             if (!hashInsertData.ContainsKey(intMetaID)) { hashInsertData.Add(intMetaID, strValue); } 
+
+                            if (intMetaID == 13)
+                            {
+                                //'2017-07-28 11:42:42.846621+00'
+                               
+                                DateTime dteThis = DateTime.ParseExact(strValue, "H:m:s d/M/yyyy", null); //16:56:13 5/2/2023
+
+                                //TimeZoneInfo myZone = TimeZoneInfo.Local;
+                                //myZone.IsDaylightSavingTime(dteThis);
+                                
+                                //DateTime dtUTC = TimeZoneInfo.ConvertTimeToUtc(dteThis, myZone);
+
+                                //DateTime dteLoc = dteThis.ToLocalTime();
+                                //DateTime dteUTM = dteLoc.ToUniversalTime();
+
+                                //datetimes need to be inserted in the local timezone
+                                //the postgres timestamptz field type is time zone aware and assumes any insert dattime is local
+                                //it will store the actual datetime as utc, but whenever it is queried using sql the local time will be returned
+                                //the postgres database timezone is stored against the postghres serbver properties and this is used to define
+                                //what timezone the data is displayed in
+                                strTime = dteThis.ToString("yyyy-MM-dd HH:mm:ss zzz");
+                            }
                         }
                     }
 
 
-                    ArrayList listSQLInserts = new ArrayList();
-                    foreach (string strDestTable in hashTableDefs.Keys)
+                    if (strTime.Length > 0)
                     {
-                        //this is a destination table
-                        string strColumns = "";  
-                        string strValues = "";
-                        string strComma = "";
-
-                        //go through columns and build sql
-                        ArrayList listColDefs = (ArrayList)hashTableDefs[strDestTable];
-                        foreach (Hashtable hashColDef in listColDefs)
+                        ArrayList listSQLInserts = new ArrayList();
+                        foreach (string strDestTable in hashTableDefs.Keys)
                         {
-                            int intThisMetaID = (int)hashColDef["METADATAID"];
-                            if (hashInsertData.ContainsKey(intThisMetaID))
+                            //this is a destination table
+                            string strColumns = "time";
+                            string strValues = strTime;
+
+                            //go through columns and build sql
+                            ArrayList listColDefs = (ArrayList)hashTableDefs[strDestTable];
+                            foreach (Hashtable hashColDef in listColDefs)
                             {
-                                //the log record contains this metadata id
-                                strColumns = strColumns + strComma + hashColDef["DESTCOL"].ToString();
-                                strValues = strValues + strComma + hashInsertData[intThisMetaID].ToString();
-                                strComma = ",";
-
+                                int intThisMetaID = (int)hashColDef["METADATAID"];
+                                if (hashInsertData.ContainsKey(intThisMetaID))
+                                {
+                                    //the log record contains this metadata id
+                                    strColumns = strColumns + "," + hashColDef["DESTCOL"].ToString();
+                                    strValues = strValues + "," + hashInsertData[intThisMetaID].ToString();
+                                }
                             }
-                        }
 
-                        //build sql insert for this table
-                        listSQLInserts.Add("insert into " + strDestTable + " (" + strColumns + ")" + " values (" + strValues + ")");
+                            //build sql insert for this table
+                            listSQLInserts.Add("insert into " + strDestTable + " (" + strColumns + ")" + " values (" + strValues + ") ON CONFLICT DO NOTHING");
+                        }
                     }
 
                     intRecord++;
@@ -924,6 +946,20 @@ namespace HarmoniaRemote
                 swOut.Close();
   
                 MessageBox.Show("Export complete!");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //TimeZoneInfo myZone = TimeZoneInfo.Local;
+                //myZone.IsDaylightSavingTime();
 
             }
             catch (Exception ex)

@@ -150,6 +150,7 @@ namespace HarmoniaRemote
             this.txtDBConn = new System.Windows.Forms.TextBox();
             this.label46 = new System.Windows.Forms.Label();
             this.btnExportExcel = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -1362,12 +1363,23 @@ namespace HarmoniaRemote
             this.btnExportExcel.UseVisualStyleBackColor = true;
             this.btnExportExcel.Click += new System.EventHandler(this.btnExportExcel_Click);
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(1522, 380);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 51;
+            this.button5.Text = "button5";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1736, 872);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.btnExportExcel);
             this.Controls.Add(this.label46);
             this.Controls.Add(this.groupBox6);
@@ -1530,6 +1542,7 @@ namespace HarmoniaRemote
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button btnExportExcel;
+        private System.Windows.Forms.Button button5;
     }
 }
 
