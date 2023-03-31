@@ -473,7 +473,7 @@ namespace HarmoniaRemote
                                 //it will store the actual datetime as utc, but whenever it is queried using sql the local time will be returned
                                 //the postgres database timezone is stored against the postghres serbver properties and this is used to define
                                 //what timezone the data is displayed in
-                                strTime = dteThis.ToString("yyyy-MM-dd HH:mm:ss zzz");
+                                strTime = "'" + dteThis.ToString("yyyy-MM-dd HH:mm:ss") + "'";
                             } 
                             else
                             {
@@ -486,6 +486,9 @@ namespace HarmoniaRemote
                     if (strTime.Length > 0)
                     {
                         ArrayList listSQLInserts = new ArrayList();
+                        //add the time series master record
+                        listSQLInserts.Add("insert into dt_ts_master (time)" + " values ("+ strTime + ") ON CONFLICT DO NOTHING");
+
                         foreach (string strDestTable in hashTableDefs.Keys)
                         {
                             //this is a destination table
@@ -500,31 +503,56 @@ namespace HarmoniaRemote
                                 if (hashInsertData.ContainsKey(intThisMetaID))
                                 {
                                     //the log record contains this metadata id
-                                    strColumns = strColumns + "," + hashColDef["DESTCOL"].ToString();
-                                    
+                                                                       
                                     string strValue = hashInsertData[intThisMetaID].ToString();
                                     string strType = hashColDef["DESTCOLTYPE"].ToString();
                                     if (strType == "str")
                                     {
-                                        strValue = "'" + strValue + "'";
+                                        if (strValue.Length > 0)
+                                        {
+                                            strValue = "'" + strValue + "'";
+                                        }   
                                     } else if (strType == "int")
                                     {
                                         int intValue;
                                         if (int.TryParse(strValue, out intValue))
                                         {
+                                            strValue = intValue.ToString();
 
-                                        }
+                                            //check min and max
+
+                                        } else { strValue = ""; }
+                                    } else if (strType == "dbl")
+                                    {
+                                        double dblValue;
+                                        if (double.TryParse(strValue, out dblValue))
+                                        {
+                                            strValue = dblValue.ToString();
+
+                                            //check min and max
+
+                                        } else { strValue = ""; }
                                     }
 
-
-                                    strValues = strValues + "," + ;
+                                    if (strValue.Length > 0)
+                                    {
+                                        strColumns = strColumns + "," + hashColDef["DESTCOL"].ToString();
+                                        strValues = strValues + "," + strValue;
+                                    }
+                                    
                                 }
                             }
 
-                           
-                            //build sql insert for this table
-                            listSQLInserts.Add("insert into " + strDestTable + " (" + strColumns + ")" + " values (" + strValues + ") ON CONFLICT DO NOTHING");
+                            if (strColumns != "time")
+                            {
+                                //build sql insert for this table
+                                listSQLInserts.Add("insert into " + strDestTable + " (" + strColumns + ")" + " values (" + strValues + ") ON CONFLICT DO NOTHING");
+                            }        
                         }
+
+                        //do the inserts for this record (time point)
+                        PGInsert(connPG, listSQLInserts);
+
                     }
 
                     intRecord++;
@@ -651,16 +679,17 @@ namespace HarmoniaRemote
                 return null;
             }
         }
-        private void PGInsert(NpgsqlConnection connPG,string strTable, Hashtable hashData)
+        private void PGInsert(NpgsqlConnection connPG,ArrayList listSQLInserts)
         {
             try
             {
-                string strSQL = "INSERT INTO " + strTable + " VALUES ('2017-07-28 11:42:42.846621+00', 'office', 70.1, 50.0) ON CONFLICT DO NOTHING";
-
-                NpgsqlCommand commPG = new NpgsqlCommand(strSQL, connPG);
-                commPG.ExecuteNonQuery();
-                commPG.Dispose();
-                
+                foreach (string strSQL in listSQLInserts)
+                {
+                    NpgsqlCommand commPG = new NpgsqlCommand(strSQL, connPG);
+                    commPG.ExecuteNonQuery();
+                    commPG.Dispose();
+                }
+      
             }
             catch (Exception ex)
             {
