@@ -452,7 +452,7 @@ namespace HarmoniaRemote
                             string strMetaID = arrayParts[0].Trim();
                             string strValue = arrayParts[1].Trim();
                             int intMetaID = int.Parse(strMetaID);
-                            if (!hashInsertData.ContainsKey(intMetaID)) { hashInsertData.Add(intMetaID, strValue); } 
+                            
 
                             if (intMetaID == 13)
                             {
@@ -474,6 +474,10 @@ namespace HarmoniaRemote
                                 //the postgres database timezone is stored against the postghres serbver properties and this is used to define
                                 //what timezone the data is displayed in
                                 strTime = dteThis.ToString("yyyy-MM-dd HH:mm:ss zzz");
+                            } 
+                            else
+                            {
+                                if (!hashInsertData.ContainsKey(intMetaID)) { hashInsertData.Add(intMetaID, strValue); }
                             }
                         }
                     }
@@ -497,10 +501,14 @@ namespace HarmoniaRemote
                                 {
                                     //the log record contains this metadata id
                                     strColumns = strColumns + "," + hashColDef["DESTCOL"].ToString();
+
+
+
                                     strValues = strValues + "," + hashInsertData[intThisMetaID].ToString();
                                 }
                             }
 
+                           
                             //build sql insert for this table
                             listSQLInserts.Add("insert into " + strDestTable + " (" + strColumns + ")" + " values (" + strValues + ") ON CONFLICT DO NOTHING");
                         }
@@ -566,7 +574,7 @@ namespace HarmoniaRemote
                 ArrayList listColDefs = new ArrayList();
 
                 //get the metadata records
-                NpgsqlCommand commPG = new NpgsqlCommand("select dest_table,dest_column,expected_min_value,expected_max_value,metadata_id from dt_data_config order by dest_table", connPG);
+                NpgsqlCommand commPG = new NpgsqlCommand("select dest_table,dest_column,expected_min_value,expected_max_value,metadata_id,dest_column_type from dt_data_config order by dest_table", connPG);
                 NpgsqlDataReader readerPG = commPG.ExecuteReader();
                 while (readerPG.Read())
                 {
@@ -575,13 +583,15 @@ namespace HarmoniaRemote
                     object objMinVal = readerPG.GetValue(2);
                     object objMaxVal = readerPG.GetValue(3);
                     object objMetaDataID = readerPG.GetValue(4);
+                    object objDestColumnType = readerPG.GetValue(5);
 
-                    if (objDestTable != null && objDestColumn != null && objMetaDataID != null)
+                    if (objDestTable != null && objDestColumn != null && objMetaDataID != null && objDestColumnType != null)
                     {
                         string strDestTable = objDestTable.ToString();
                         string strDestColumn = objDestColumn.ToString();
+                        string strDestColumnType = objDestColumnType.ToString();
 
-                        if (strDestTable.Length > 0 && strDestColumn.Length > 0)
+                        if (strDestTable.Length > 0 && strDestColumn.Length > 0 && strDestColumnType.Length > 0)
                         {
 
                             int intMetaDataID = int.Parse(objMetaDataID.ToString());
@@ -589,6 +599,7 @@ namespace HarmoniaRemote
                             Hashtable hashColumnDef = new Hashtable();
                             hashColumnDef.Add("METADATAID", intMetaDataID);
                             hashColumnDef.Add("DESTCOL", strDestColumn);
+                            hashColumnDef.Add("DESTCOLTYPE", strDestColumnType);
                             hashColumnDef.Add("MINVAL", objMinVal);
                             hashColumnDef.Add("MAXVAL", objMaxVal);
 
