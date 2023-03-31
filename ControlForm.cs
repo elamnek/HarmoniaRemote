@@ -469,7 +469,7 @@ namespace HarmoniaRemote
                                 //DateTime dteUTM = dteLoc.ToUniversalTime();
 
                                 //datetimes need to be inserted in the local timezone
-                                //the postgres timestamptz field type is time zone aware and assumes any insert dattime is local
+                                //the postgres timestamptz field type is time zone aware and assumes any insert datetime is local
                                 //it will store the actual datetime as utc, but whenever it is queried using sql the local time will be returned
                                 //the postgres database timezone is stored against the postghres serbver properties and this is used to define
                                 //what timezone the data is displayed in
@@ -501,10 +501,23 @@ namespace HarmoniaRemote
                                 {
                                     //the log record contains this metadata id
                                     strColumns = strColumns + "," + hashColDef["DESTCOL"].ToString();
+                                    
+                                    string strValue = hashInsertData[intThisMetaID].ToString();
+                                    string strType = hashColDef["DESTCOLTYPE"].ToString();
+                                    if (strType == "str")
+                                    {
+                                        strValue = "'" + strValue + "'";
+                                    } else if (strType == "int")
+                                    {
+                                        int intValue;
+                                        if (int.TryParse(strValue, out intValue))
+                                        {
+
+                                        }
+                                    }
 
 
-
-                                    strValues = strValues + "," + hashInsertData[intThisMetaID].ToString();
+                                    strValues = strValues + "," + ;
                                 }
                             }
 
