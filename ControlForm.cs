@@ -436,6 +436,8 @@ namespace HarmoniaRemote
                 while (reader.Peek() != -1)
                 {
 
+                    Console.WriteLine(intRecord.ToString());
+
                     //read a line and split it up
                     String strLine = reader.ReadLine().Trim().TrimStart('{').TrimEnd('}');
                     String[] arrayLine = strLine.Split(new char[] { ',' }, StringSplitOptions.None);
@@ -505,7 +507,13 @@ namespace HarmoniaRemote
                                     //the log record contains this metadata id
                                                                        
                                     string strValue = hashInsertData[intThisMetaID].ToString();
+                                    int intDQ = 1;
+
+                                    string strColName = hashColDef["DESTCOL"].ToString();
+                                    Console.WriteLine(strColName);
                                     string strType = hashColDef["DESTCOLTYPE"].ToString();
+                                    object objMinValue = hashColDef["MINVAL"];
+                                    object objMaxValue = hashColDef["MAXVAL"];
                                     if (strType == "str")
                                     {
                                         if (strValue.Length > 0)
@@ -520,6 +528,8 @@ namespace HarmoniaRemote
                                             strValue = intValue.ToString();
 
                                             //check min and max
+                                            if (objMinValue != DBNull.Value){ if (intValue < double.Parse(objMinValue.ToString())) { intDQ = 2;}}
+                                            if (objMaxValue != DBNull.Value) { if (intValue > double.Parse(objMaxValue.ToString())) { intDQ = 2; } }
 
                                         } else { strValue = ""; }
                                     } else if (strType == "dbl")
@@ -530,17 +540,20 @@ namespace HarmoniaRemote
                                             strValue = dblValue.ToString();
 
                                             //check min and max
+                                            if (objMinValue != DBNull.Value) { if (dblValue < double.Parse(objMinValue.ToString())) { intDQ = 2; } }
+                                            if (objMaxValue != DBNull.Value) { if (dblValue > double.Parse(objMaxValue.ToString())) { intDQ = 2; } }
 
                                         } else { strValue = ""; }
                                     }
 
                                     if (strValue.Length > 0)
                                     {
-                                        strColumns = strColumns + "," + hashColDef["DESTCOL"].ToString();
-                                        strValues = strValues + "," + strValue;
-                                    }
-                                    
+                                        
+                                        strColumns = strColumns + "," + strColName + "," + strColName + "_dq";
+                                        strValues = strValues + "," + strValue + "," + intDQ.ToString();
+                                    }    
                                 }
+
                             }
 
                             if (strColumns != "time")
