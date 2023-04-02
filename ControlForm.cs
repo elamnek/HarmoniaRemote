@@ -423,7 +423,7 @@ namespace HarmoniaRemote
                 }
                 
                 //get DT table defs
-                Hashtable hashTableDefs = GetTableDefs(txtDBConn.Text);
+                Hashtable hashTableDefs = GetTableDefs(txtDBConn.Text,"dest_table","dest_col");
 
                 //open the logfile
                 StreamReader reader = File.OpenText(strInputFile);
@@ -613,7 +613,7 @@ namespace HarmoniaRemote
                 return null;
             }
         }
-        private Hashtable GetTableDefs(string strDBConn)
+        private Hashtable GetTableDefs(string strDBConn,string strDestTableCol,string strDestColCol)
         {
             try
             {
@@ -628,7 +628,7 @@ namespace HarmoniaRemote
                 ArrayList listColDefs = new ArrayList();
 
                 //get the metadata records
-                NpgsqlCommand commPG = new NpgsqlCommand("select dest_table,dest_column,expected_min_value,expected_max_value,metadata_id,dest_column_type from dt_data_config order by dest_table", connPG);
+                NpgsqlCommand commPG = new NpgsqlCommand("select "+ strDestTableCol + ","+ strDestColCol + ",expected_min_value,expected_max_value,metadata_id,dest_column_type from dt_data_config order by " + strDestTableCol, connPG);
                 NpgsqlDataReader readerPG = commPG.ExecuteReader();
                 while (readerPG.Read())
                 {
