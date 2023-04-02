@@ -29,6 +29,8 @@ namespace HarmoniaRemote
         private string m_strUploadFile = "";
         private System.IO.StreamWriter m_swLog;
         private System.IO.StreamWriter m_swRangeDataFile;
+        private ArrayList m_listRealtimeDataTableColDefs = null;
+        private NpgsqlConnection m_connPG = null;
 
         private void ControlForm_Load(object sender, EventArgs e)
         {
@@ -73,6 +75,9 @@ namespace HarmoniaRemote
                         m_swRangeDataFile.WriteLine(strReceived);
                         m_swRangeDataFile.Flush();
                     }
+
+                    //do the insert into the postgres realtime table here
+                    RealtimeInsertIntoDT(strReceived, m_listRealtimeDataTableColDefs);
                 }
             
             }
@@ -163,26 +168,11 @@ namespace HarmoniaRemote
                                 { AlertUser(true, Color.Blue); }
                                 else { AlertUser(false, TextBox.DefaultBackColor); }
                             }
-                            //if (intMetadataID == 7) { SetControlText(this.meta_id_7,strValue); }
-                            //if (intMetadataID == 10) { SetControlText(this.meta_id_10,strValue); }
-                            //if (intMetadataID == 11) { SetControlText(this.meta_id_11,strValue); }
-                            //if (intMetadataID == 17) { SetControlText(this.meta_id_17, strValue); }
-                            //if (intMetadataID == 18) { SetControlText(this.meta_id_18, strValue); }
-                            //if (intMetadataID == 19) { SetControlText(this.meta_id_19, strValue); }
-                            //if (intMetadataID == 21) { SetControlText(this.meta_id_21, strValue); }
-                            //if (intMetadataID == 14) { SetControlText(this.meta_id_14, strValue); }
-                            //if (intMetadataID == 15) { SetControlText(this.meta_id_15, strValue); }
-                            //if (intMetadataID == 16) { SetControlText(this.meta_id_16, strValue); }
-                            //if (intMetadataID == 22) { SetControlText(this.meta_id_22, strValue); }
-                            //if (intMetadataID == 23) { SetControlText(this.meta_id_23, strValue); }
-                            //if (intMetadataID == 24) { SetControlText(this.meta_id_24, strValue); }
-                            //if (intMetadataID == 25) { SetControlText(this.meta_id_25, strValue); }
-                            //if (intMetadataID == 26) { SetControlText(this.meta_id_26, strValue); }
-                            //if (intMetadataID == 32) { SetControlText(this.meta_id_32, strValue); }
-                            //if (intMetadataID == 33) { SetControlText(this.meta_id_33, strValue); }
-                            //if (intMetadataID == 34) { SetControlText(this.meta_id_34, strValue); }
-
+                            
                         }
+
+                        //do the insert into the postgres realtime table here
+                        RealtimeInsertIntoDT(strReceived, m_listRealtimeDataTableColDefs);
 
                         if (m_blnUploading)
                         {
@@ -423,20 +413,16 @@ namespace HarmoniaRemote
                 }
                 
                 //get DT table defs
-                Hashtable hashTableDefs = GetTableDefs(txtDBConn.Text,"dest_table","dest_col");
+                Hashtable hashTableDefs = GetTableDefs("dest_table","dest_column");
 
                 //open the logfile
                 StreamReader reader = File.OpenText(strInputFile);
-
-                //open database
-                NpgsqlConnection connPG = new NpgsqlConnection(txtDBConn.Text);
-                connPG.Open();
 
                 int intRecord = 1;
                 while (reader.Peek() != -1)
                 {
 
-                    Console.WriteLine(intRecord.ToString());
+                    //Console.WriteLine(intRecord.ToString());
 
                     //read a line and split it up
                     String strLine = reader.ReadLine().Trim().TrimStart('{').TrimEnd('}');
@@ -510,7 +496,7 @@ namespace HarmoniaRemote
                                     int intDQ = 1;
 
                                     string strColName = hashColDef["DESTCOL"].ToString();
-                                    Console.WriteLine(strColName);
+                                    //Console.WriteLine(strColName);
                                     string strType = hashColDef["DESTCOLTYPE"].ToString();
                                     object objMinValue = hashColDef["MINVAL"];
                                     object objMaxValue = hashColDef["MAXVAL"];
@@ -564,15 +550,13 @@ namespace HarmoniaRemote
                         }
 
                         //do the inserts for this record (time point)
-                        PGInsert(connPG, listSQLInserts);
+                        PGInsert(listSQLInserts);
 
                     }
 
                     intRecord++;
                 }
                 reader.Close();
-                
-                connPG.Close();
 
                 MessageBox.Show("Load complete!");
 
@@ -583,17 +567,13 @@ namespace HarmoniaRemote
             }
         }
 
-        private Hashtable GetDataLabels(string strDBConn) {
+        private Hashtable GetDataLabels() {
             try
             {
                 Hashtable hashDataLabels = new Hashtable();
 
-                //do the connect
-                NpgsqlConnection connPG = new NpgsqlConnection(strDBConn);
-                connPG.Open();
-
                 //get the metadata records
-                NpgsqlCommand commPG = new NpgsqlCommand("select metadata_id,data_label from dt_data_config order by metadata_id", connPG);
+                NpgsqlCommand commPG = new NpgsqlCommand("select metadata_id,data_label from dt_data_config order by metadata_id", m_connPG);
                 NpgsqlDataReader readerPG = commPG.ExecuteReader();  
                 while (readerPG.Read())
                 {
@@ -603,7 +583,6 @@ namespace HarmoniaRemote
                 }
                 readerPG.Close();
                 commPG.Dispose();
-                connPG.Close();
 
                 return hashDataLabels;
             }
@@ -613,22 +592,18 @@ namespace HarmoniaRemote
                 return null;
             }
         }
-        private Hashtable GetTableDefs(string strDBConn,string strDestTableCol,string strDestColCol)
+        private Hashtable GetTableDefs(string strDestTableCol,string strDestColCol)
         {
             try
             {
                 Hashtable hashTableDefs = new Hashtable();
-
-                //do the connect
-                NpgsqlConnection connPG = new NpgsqlConnection(strDBConn);
-                connPG.Open();
-
+    
                 string strPreviousDestTable = "";
 
                 ArrayList listColDefs = new ArrayList();
 
                 //get the metadata records
-                NpgsqlCommand commPG = new NpgsqlCommand("select "+ strDestTableCol + ","+ strDestColCol + ",expected_min_value,expected_max_value,metadata_id,dest_column_type from dt_data_config order by " + strDestTableCol, connPG);
+                NpgsqlCommand commPG = new NpgsqlCommand("select "+ strDestTableCol + ","+ strDestColCol + ",expected_min_value,expected_max_value,metadata_id,dest_column_type from dt_data_config order by " + strDestTableCol, m_connPG);
                 NpgsqlDataReader readerPG = commPG.ExecuteReader();
                 while (readerPG.Read())
                 {
@@ -682,8 +657,7 @@ namespace HarmoniaRemote
 
                 readerPG.Close();
                 commPG.Dispose();
-                connPG.Close();
-
+                
                 return hashTableDefs;
             }
             catch (Exception ex)
@@ -692,13 +666,13 @@ namespace HarmoniaRemote
                 return null;
             }
         }
-        private void PGInsert(NpgsqlConnection connPG,ArrayList listSQLInserts)
+        private void PGInsert(ArrayList listSQLInserts)
         {
             try
             {
                 foreach (string strSQL in listSQLInserts)
                 {
-                    NpgsqlCommand commPG = new NpgsqlCommand(strSQL, connPG);
+                    NpgsqlCommand commPG = new NpgsqlCommand(strSQL, m_connPG);
                     commPG.ExecuteNonQuery();
                     commPG.Dispose();
                 }
@@ -920,13 +894,6 @@ namespace HarmoniaRemote
             try
             {
 
-                //do checks
-                if (txtDBConn.Text.Length == 0)
-                {
-                    MessageBox.Show("DT database connection has not been set", "Settings Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
                 string strOutCSVFile = Path.Combine(Path.GetDirectoryName(strInputFile), Path.GetFileNameWithoutExtension(strInputFile) + ".csv");
                 if (File.Exists(strOutCSVFile))
                 {
@@ -934,7 +901,7 @@ namespace HarmoniaRemote
                     return;
                 }
 
-                Hashtable hashDataLabels = GetDataLabels(txtDBConn.Text);
+                Hashtable hashDataLabels = GetDataLabels();
                 
                 //open the logfile
                 StreamReader reader = File.OpenText(strInputFile);
@@ -1020,12 +987,163 @@ namespace HarmoniaRemote
             }
         }
 
+        private void RealtimeInsertIntoDT(string strReceived, ArrayList listColDefs)
+        {
+            try
+            {
+
+                if (listColDefs == null)
+                {
+                    return;
+                }
+               
+                //read a line and split it up
+                String strLine = strReceived.Trim().TrimStart('{').TrimEnd('}');
+                String[] arrayLine = strLine.Split(new char[] { ',' }, StringSplitOptions.None);
+
+                //get a hash of all data values
+                string strTime = "";
+                Hashtable hashInsertData = new Hashtable();
+                foreach (string strDataValue in arrayLine)
+                {
+
+                    String[] arrayParts = strDataValue.Split(new char[] { '|' }, StringSplitOptions.None);
+                    if (arrayParts.Length == 2)
+                    {
+                        string strMetaID = arrayParts[0].Trim();
+                        string strValue = arrayParts[1].Trim();
+                        int intMetaID = int.Parse(strMetaID);
+
+                        if (intMetaID == 13)
+                        {
+
+                            DateTime dteThis = DateTime.ParseExact(strValue, "H:m:s d/M/yyyy", null); //16:56:13 5/2/2023
+
+                            //datetimes need to be inserted in the local timezone
+                            //the postgres timestamptz field type is time zone aware and assumes any insert datetime is local
+                            //it will store the actual datetime as utc, but whenever it is queried using sql the local time will be returned
+                            //the postgres database timezone is stored against the postghres serbver properties and this is used to define
+                            //what timezone the data is displayed in
+                            strTime = "'" + dteThis.ToString("yyyy-MM-dd HH:mm:ss") + "'";
+                        }
+                        else
+                        {
+                            if (!hashInsertData.ContainsKey(intMetaID)) { hashInsertData.Add(intMetaID, strValue); }
+                        }
+                    }
+                }
+
+
+                if (strTime.Length > 0)
+                {
+                    ArrayList listSQLInserts = new ArrayList();
+
+                    //this is a destination table
+                    string strColumns = "time";
+                    string strValues = strTime;
+
+                    //go through columns and build sql 
+                    foreach (Hashtable hashColDef in listColDefs)
+                    {
+                        int intThisMetaID = (int)hashColDef["METADATAID"];
+                        if (hashInsertData.ContainsKey(intThisMetaID))
+                        {
+                            //the log record contains this metadata id
+
+                            string strValue = hashInsertData[intThisMetaID].ToString();
+                            string strColName = hashColDef["DESTCOL"].ToString();
+                            string strType = hashColDef["DESTCOLTYPE"].ToString();
+
+                            if (strType == "str")
+                            {
+                                if (strValue.Length > 0)
+                                {
+                                    strValue = "'" + strValue + "'";
+                                }
+                            }
+                            else if (strType == "int")
+                            {
+                                int intValue;
+                                if (int.TryParse(strValue, out intValue))
+                                {
+                                    strValue = intValue.ToString();
+                                }
+                                else { strValue = ""; }
+                            }
+                            else if (strType == "dbl")
+                            {
+                                double dblValue;
+                                if (double.TryParse(strValue, out dblValue))
+                                {
+                                    strValue = dblValue.ToString();
+                                }
+                                else { strValue = ""; }
+                            }
+
+                            if (strValue.Length > 0)
+                            {
+
+                                strColumns = strColumns + "," + strColName;
+                                strValues = strValues + "," + strValue;
+                            }
+                        }
+
+                    }
+
+                    if (strColumns != "time")
+                    {
+                        //build sql insert for this table
+                        listSQLInserts.Add("insert into dt_ts_realtime_data (" + strColumns + ")" + " values (" + strValues + ") ON CONFLICT DO NOTHING");
+                    }
+
+
+                    //do the inserts for this record (time point)
+                    PGInsert(listSQLInserts);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+
         private void button5_Click(object sender, EventArgs e)
         {
             try
             {
                 //TimeZoneInfo myZone = TimeZoneInfo.Local;
                 //myZone.IsDaylightSavingTime();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                //do checks
+                if (txtDBConn.Text.Length == 0)
+                {
+                    MessageBox.Show("DT database connection has not been set", "Settings Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                //open database
+                m_connPG = new NpgsqlConnection(txtDBConn.Text);
+                m_connPG.Open();
+
+                //get DT realtime data table def
+                Hashtable hashTableDefs = GetTableDefs("realtime_table", "realtime_column");
+                m_listRealtimeDataTableColDefs = (ArrayList)hashTableDefs["dt_ts_realtime_data"];
+
 
             }
             catch (Exception ex)

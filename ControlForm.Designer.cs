@@ -151,6 +151,7 @@ namespace HarmoniaRemote
             this.label46 = new System.Windows.Forms.Label();
             this.btnExportExcel = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.btnConnect = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -1288,6 +1289,7 @@ namespace HarmoniaRemote
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.btnConnect);
             this.groupBox6.Controls.Add(this.btnBrowse);
             this.groupBox6.Controls.Add(this.label45);
             this.groupBox6.Controls.Add(this.txtDataDir);
@@ -1372,6 +1374,16 @@ namespace HarmoniaRemote
             this.button5.Text = "button5";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // btnConnect
+            // 
+            this.btnConnect.Location = new System.Drawing.Point(275, 19);
+            this.btnConnect.Name = "btnConnect";
+            this.btnConnect.Size = new System.Drawing.Size(103, 34);
+            this.btnConnect.TabIndex = 40;
+            this.btnConnect.Text = "Connect";
+            this.btnConnect.UseVisualStyleBackColor = true;
+            this.btnConnect.Click += new System.EventHandler(this.button6_Click);
             // 
             // ControlForm
             // 
@@ -1543,6 +1555,7 @@ namespace HarmoniaRemote
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button btnExportExcel;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnConnect;
     }
 }
 
