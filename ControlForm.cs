@@ -63,7 +63,7 @@ namespace HarmoniaRemote
                 string strReceived = sp_1.ReadLine().Trim();
                 if (strReceived.StartsWith("{") && strReceived.EndsWith("}"))
                 {
-                    SetRTBText(rtb, strReceived + Environment.NewLine);
+                    //SetRTBText(rtb, strReceived + Environment.NewLine);
                     String[] arrayValue = strReceived.Trim().TrimStart('{').TrimEnd('}').Split(',');
                     string strRange = arrayValue[1];
                     String[] arrayRange = strRange.Trim().Split('|');
@@ -207,7 +207,7 @@ namespace HarmoniaRemote
 
                     //log everything to the rich textbox
                     //Console.WriteLine(txt);
-                    SetRTBText(rtb, strReceived);
+                    //SetRTBText(rtb, strReceived);
 
                 }
 
@@ -758,6 +758,9 @@ namespace HarmoniaRemote
                     return;
                 }
 
+                System.Threading.Thread.Sleep(2000);
+
+                
                 string strParam = this.txtStartDepth.Text + "|" + this.txtRunDirection.Text + "|" + this.txtRunThrottle.Text + "|" + this.txtRunTime.Text + "|" + this.txtFwdDive0Pos.Text + "|" + this.txtAftPitch0Pos.Text + "|" + this.txtAftRudder0Pos.Text;
                 sp.WriteLine("RUN," + strParam);
 

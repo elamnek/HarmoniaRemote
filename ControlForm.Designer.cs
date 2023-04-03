@@ -143,6 +143,7 @@ namespace HarmoniaRemote
             this.btnClear = new System.Windows.Forms.Button();
             this.btnSaveLog = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnConnect = new System.Windows.Forms.Button();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.label45 = new System.Windows.Forms.Label();
             this.txtDataDir = new System.Windows.Forms.TextBox();
@@ -151,7 +152,6 @@ namespace HarmoniaRemote
             this.label46 = new System.Windows.Forms.Label();
             this.btnExportExcel = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.btnConnect = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -169,14 +169,14 @@ namespace HarmoniaRemote
             this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb.Location = new System.Drawing.Point(0, 511);
             this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(1736, 361);
+            this.rtb.Size = new System.Drawing.Size(1736, 115);
             this.rtb.TabIndex = 0;
             this.rtb.Text = "";
             // 
             // btnSend
             // 
             this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSend.Location = new System.Drawing.Point(1642, 439);
+            this.btnSend.Location = new System.Drawing.Point(1642, 438);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(70, 38);
             this.btnSend.TabIndex = 1;
@@ -186,9 +186,9 @@ namespace HarmoniaRemote
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(1397, 449);
+            this.textBox1.Location = new System.Drawing.Point(1396, 449);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(239, 26);
+            this.textBox1.Size = new System.Drawing.Size(240, 26);
             this.textBox1.TabIndex = 2;
             // 
             // btnDeflate
@@ -550,7 +550,7 @@ namespace HarmoniaRemote
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(364, 133);
+            this.button3.Location = new System.Drawing.Point(364, 132);
             this.button3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(32, 28);
@@ -591,11 +591,11 @@ namespace HarmoniaRemote
             // 
             // txtAftRudder0Pos
             // 
-            this.txtAftRudder0Pos.Location = new System.Drawing.Point(305, 168);
+            this.txtAftRudder0Pos.Location = new System.Drawing.Point(304, 168);
             this.txtAftRudder0Pos.Name = "txtAftRudder0Pos";
             this.txtAftRudder0Pos.Size = new System.Drawing.Size(56, 26);
             this.txtAftRudder0Pos.TabIndex = 59;
-            this.txtAftRudder0Pos.Text = "135";
+            this.txtAftRudder0Pos.Text = "90";
             this.txtAftRudder0Pos.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label47
@@ -609,11 +609,11 @@ namespace HarmoniaRemote
             // 
             // txtAftPitch0Pos
             // 
-            this.txtAftPitch0Pos.Location = new System.Drawing.Point(305, 132);
+            this.txtAftPitch0Pos.Location = new System.Drawing.Point(304, 132);
             this.txtAftPitch0Pos.Name = "txtAftPitch0Pos";
             this.txtAftPitch0Pos.Size = new System.Drawing.Size(56, 26);
             this.txtAftPitch0Pos.TabIndex = 57;
-            this.txtAftPitch0Pos.Text = "120";
+            this.txtAftPitch0Pos.Text = "90";
             this.txtAftPitch0Pos.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label48
@@ -627,7 +627,7 @@ namespace HarmoniaRemote
             // 
             // txtFwdDive0Pos
             // 
-            this.txtFwdDive0Pos.Location = new System.Drawing.Point(305, 96);
+            this.txtFwdDive0Pos.Location = new System.Drawing.Point(304, 95);
             this.txtFwdDive0Pos.Name = "txtFwdDive0Pos";
             this.txtFwdDive0Pos.Size = new System.Drawing.Size(56, 26);
             this.txtFwdDive0Pos.TabIndex = 55;
@@ -637,7 +637,7 @@ namespace HarmoniaRemote
             // label49
             // 
             this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(227, 99);
+            this.label49.Location = new System.Drawing.Point(226, 98);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(74, 20);
             this.label49.TabIndex = 56;
@@ -865,7 +865,7 @@ namespace HarmoniaRemote
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(1403, 423);
+            this.label17.Location = new System.Drawing.Point(1402, 423);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(185, 20);
             this.label17.TabIndex = 41;
@@ -1302,6 +1302,16 @@ namespace HarmoniaRemote
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Settings";
             // 
+            // btnConnect
+            // 
+            this.btnConnect.Location = new System.Drawing.Point(274, 18);
+            this.btnConnect.Name = "btnConnect";
+            this.btnConnect.Size = new System.Drawing.Size(104, 34);
+            this.btnConnect.TabIndex = 40;
+            this.btnConnect.Text = "Connect";
+            this.btnConnect.UseVisualStyleBackColor = true;
+            this.btnConnect.Click += new System.EventHandler(this.button6_Click);
+            // 
             // btnBrowse
             // 
             this.btnBrowse.Location = new System.Drawing.Point(292, 129);
@@ -1375,22 +1385,12 @@ namespace HarmoniaRemote
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // btnConnect
-            // 
-            this.btnConnect.Location = new System.Drawing.Point(275, 19);
-            this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(103, 34);
-            this.btnConnect.TabIndex = 40;
-            this.btnConnect.Text = "Connect";
-            this.btnConnect.UseVisualStyleBackColor = true;
-            this.btnConnect.Click += new System.EventHandler(this.button6_Click);
-            // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1736, 872);
+            this.ClientSize = new System.Drawing.Size(1736, 626);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.btnExportExcel);
             this.Controls.Add(this.label46);
@@ -1405,7 +1405,7 @@ namespace HarmoniaRemote
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.rtb);
             this.Controls.Add(this.btnSend);
-            this.MinimumSize = new System.Drawing.Size(1022, 711);
+            this.MinimumSize = new System.Drawing.Size(1748, 656);
             this.Name = "ControlForm";
             this.Padding = new System.Windows.Forms.Padding(0, 511, 0, 0);
             this.Text = "Harmonia Controller";
