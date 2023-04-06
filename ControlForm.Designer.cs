@@ -154,7 +154,7 @@ namespace HarmoniaRemote
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.label52 = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
+            this.btnTestServos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -567,9 +567,9 @@ namespace HarmoniaRemote
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(28, 97);
+            this.button1.Location = new System.Drawing.Point(28, 92);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(36, 25);
+            this.button1.Size = new System.Drawing.Size(36, 32);
             this.button1.TabIndex = 75;
             this.button1.Text = ">>";
             this.button1.UseVisualStyleBackColor = true;
@@ -578,7 +578,7 @@ namespace HarmoniaRemote
             // label51
             // 
             this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(69, 70);
+            this.label51.Location = new System.Drawing.Point(75, 70);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(93, 20);
             this.label51.TabIndex = 61;
@@ -1266,7 +1266,7 @@ namespace HarmoniaRemote
             // 
             this.btnClear.Location = new System.Drawing.Point(1407, 337);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(99, 38);
+            this.btnClear.Size = new System.Drawing.Size(99, 34);
             this.btnClear.TabIndex = 46;
             this.btnClear.Text = "Clear output";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -1274,9 +1274,9 @@ namespace HarmoniaRemote
             // 
             // btnSaveLog
             // 
-            this.btnSaveLog.Location = new System.Drawing.Point(1407, 378);
+            this.btnSaveLog.Location = new System.Drawing.Point(1407, 376);
             this.btnSaveLog.Name = "btnSaveLog";
-            this.btnSaveLog.Size = new System.Drawing.Size(99, 38);
+            this.btnSaveLog.Size = new System.Drawing.Size(99, 37);
             this.btnSaveLog.TabIndex = 47;
             this.btnSaveLog.Text = "Save Log";
             this.btnSaveLog.UseVisualStyleBackColor = true;
@@ -1333,7 +1333,6 @@ namespace HarmoniaRemote
             this.txtDataDir.Name = "txtDataDir";
             this.txtDataDir.Size = new System.Drawing.Size(360, 75);
             this.txtDataDir.TabIndex = 38;
-            this.txtDataDir.Text = "C:\\Business\\Submarine\\subjects\\research_project\\data";
             // 
             // label44
             // 
@@ -1351,7 +1350,6 @@ namespace HarmoniaRemote
             this.txtDBConn.Name = "txtDBConn";
             this.txtDBConn.Size = new System.Drawing.Size(360, 62);
             this.txtDBConn.TabIndex = 36;
-            this.txtDBConn.Text = "Server=localhost;Port=5432;UserId=postgres;Password=euge2;Database=example";
             // 
             // label46
             // 
@@ -1386,7 +1384,7 @@ namespace HarmoniaRemote
             // 
             this.groupBox7.Controls.Add(this.button4);
             this.groupBox7.Controls.Add(this.label52);
-            this.groupBox7.Controls.Add(this.button6);
+            this.groupBox7.Controls.Add(this.btnTestServos);
             this.groupBox7.Controls.Add(this.txtAftRudder0Pos);
             this.groupBox7.Controls.Add(this.button3);
             this.groupBox7.Controls.Add(this.label47);
@@ -1411,14 +1409,15 @@ namespace HarmoniaRemote
             this.label52.TabIndex = 31;
             this.label52.Text = "Test Servos";
             // 
-            // button6
+            // btnTestServos
             // 
-            this.button6.BackColor = System.Drawing.Color.Gold;
-            this.button6.Location = new System.Drawing.Point(12, 16);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(33, 32);
-            this.button6.TabIndex = 30;
-            this.button6.UseVisualStyleBackColor = false;
+            this.btnTestServos.BackColor = System.Drawing.Color.Gold;
+            this.btnTestServos.Location = new System.Drawing.Point(12, 16);
+            this.btnTestServos.Name = "btnTestServos";
+            this.btnTestServos.Size = new System.Drawing.Size(33, 32);
+            this.btnTestServos.TabIndex = 30;
+            this.btnTestServos.UseVisualStyleBackColor = false;
+            this.btnTestServos.Click += new System.EventHandler(this.btnTestServos_Click);
             // 
             // ControlForm
             // 
@@ -1596,7 +1595,7 @@ namespace HarmoniaRemote
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Label label52;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button btnTestServos;
     }
 }
 

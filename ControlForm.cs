@@ -785,7 +785,6 @@ namespace HarmoniaRemote
 
                 System.Threading.Thread.Sleep(2000);
 
-                
                 string strParam = this.txtStartDepth.Text + "|" + this.txtRunDirection.Text + "|" + this.txtRunThrottle.Text + "|" + this.txtRunTime.Text + "|" + this.txtFwdDive0Pos.Text + "|" + this.txtAftPitch0Pos.Text + "|" + this.txtAftRudder0Pos.Text;
                 sp.WriteLine("RUN," + strParam);
 
@@ -1180,6 +1179,18 @@ namespace HarmoniaRemote
             }
         }
 
-        
+        private void btnTestServos_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strParam = this.txtFwdDive0Pos.Text + "|" + this.txtAftPitch0Pos.Text + "|" + this.txtAftRudder0Pos.Text;
+                sp.WriteLine("SERVO_TEST," + strParam);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            
+        }
     }
 }
