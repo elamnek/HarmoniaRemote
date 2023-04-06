@@ -22,5 +22,41 @@ namespace HarmoniaRemote.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("90")]
+        public string FwdDive0Pos {
+            get {
+                return ((string)(this["FwdDive0Pos"]));
+            }
+            set {
+                this["FwdDive0Pos"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("90")]
+        public string AftPitch0Pos {
+            get {
+                return ((string)(this["AftPitch0Pos"]));
+            }
+            set {
+                this["AftPitch0Pos"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("90")]
+        public string AftRudder0Pos {
+            get {
+                return ((string)(this["AftRudder0Pos"]));
+            }
+            set {
+                this["AftRudder0Pos"] = value;
+            }
+        }
     }
 }

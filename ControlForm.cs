@@ -34,6 +34,17 @@ namespace HarmoniaRemote
 
         private void ControlForm_Load(object sender, EventArgs e)
         {
+            try
+            {
+                txtFwdDive0Pos.Text = Properties.Settings.Default.FwdDive0Pos;
+                txtAftRudder0Pos.Text = Properties.Settings.Default.AftRudder0Pos;
+                txtAftPitch0Pos.Text = Properties.Settings.Default.AftPitch0Pos;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
             sp.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
             try
             {
@@ -54,6 +65,20 @@ namespace HarmoniaRemote
             {
                 SetRTBText(rtb, "WARNING: could not open Range Finder port: " + ex.Message + Environment.NewLine);
                 //MessageBox.Show("Could not open Range Finder port: " + ex.Message,"Port Error",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            }
+        }
+        private void ControlForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                Properties.Settings.Default.FwdDive0Pos = txtFwdDive0Pos.Text;
+                Properties.Settings.Default.AftRudder0Pos = txtAftRudder0Pos.Text;
+                Properties.Settings.Default.AftPitch0Pos = txtAftPitch0Pos.Text;
+                Properties.Settings.Default.Save();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
         private void sp_1_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -1154,5 +1179,7 @@ namespace HarmoniaRemote
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        
     }
 }
