@@ -102,7 +102,7 @@ namespace HarmoniaRemote
                     }
 
                     //do the insert into the postgres realtime table here
-                    RealtimeInsertIntoDT(strReceived, m_listRealtimeDataTableColDefs);
+                    RealtimeInsertIntoDT(strReceived, 3, m_listRealtimeDataTableColDefs);
                 }
             
             }
@@ -120,6 +120,9 @@ namespace HarmoniaRemote
                 {
                     if (strReceived.StartsWith("{"))
                     {
+
+                        ArrayList listMetadataIDs = new ArrayList();
+
                         //this is a data packet - display each part in the textboxes
                         String strRaw = strReceived.Trim().TrimStart('{').TrimEnd('}');
                         String[] arrayRaw = strRaw.Split(',');
@@ -127,6 +130,8 @@ namespace HarmoniaRemote
                         {
                             String[] arrayValue = strPart.Trim().Split('|');
                             int intMetadataID = int.Parse(arrayValue[0].ToString());
+                            listMetadataIDs.Add(intMetadataID);
+
                             String strValue = arrayValue[1].ToString();
 
                             //search for the matching control and write the value to it
@@ -197,8 +202,15 @@ namespace HarmoniaRemote
                         }
 
                         //do the insert into the postgres realtime table here
-                        RealtimeInsertIntoDT(strReceived, m_listRealtimeDataTableColDefs);
-
+                        if (listMetadataIDs.Contains(29))
+                        {
+                            //29 is a control plane position value - load this record into channel 2 (4Hz data)
+                            RealtimeInsertIntoDT(strReceived, 2, m_listRealtimeDataTableColDefs);
+                        } else
+                        {
+                            RealtimeInsertIntoDT(strReceived, 1, m_listRealtimeDataTableColDefs);
+                        }
+      
                         if (m_blnUploading)
                         {
                             //store record in current data file
@@ -1015,7 +1027,7 @@ namespace HarmoniaRemote
             }
         }
 
-        private void RealtimeInsertIntoDT(string strReceived, ArrayList listColDefs)
+        private void RealtimeInsertIntoDT(string strReceived, int intDataChannel, ArrayList listColDefs)
         {
             try
             {
@@ -1067,8 +1079,8 @@ namespace HarmoniaRemote
                     ArrayList listSQLInserts = new ArrayList();
 
                     //this is a destination table
-                    string strColumns = "time";
-                    string strValues = strTime;
+                    string strColumns = "time,data_channel";
+                    string strValues = strTime + "," + intDataChannel.ToString();
 
                     //go through columns and build sql 
                     foreach (Hashtable hashColDef in listColDefs)
