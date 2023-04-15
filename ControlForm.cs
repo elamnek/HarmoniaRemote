@@ -856,8 +856,11 @@ namespace HarmoniaRemote
             try
             {
 
-                sp.WriteLine("SERVOFWDDIVE," + this.txtFwdDive0Pos.Text);
-                
+                //sp.WriteLine("SERVOFWDDIVE," + this.txtFwdDive0Pos.Text);
+
+                string strParam = this.txtFwdDive0Pos.Text + "|555|555";
+                sp.WriteLine("SERVO_TEST," + strParam);
+
 
             }
             catch (Exception ex)
@@ -871,9 +874,12 @@ namespace HarmoniaRemote
             try
             {
 
-                
-                sp.WriteLine("SERVOAFTDIVE," + this.txtAftPitch0Pos.Text);
-                
+
+                //sp.WriteLine("SERVOAFTDIVE," + this.txtAftPitch0Pos.Text);
+
+                string strParam = "555|" + this.txtAftPitch0Pos.Text + "|555";
+                sp.WriteLine("SERVO_TEST," + strParam);
+
 
             }
             catch (Exception ex)
@@ -887,8 +893,11 @@ namespace HarmoniaRemote
             try
             {
 
-                
-                sp.WriteLine("SERVOAFTRUDDER," + this.txtAftRudder0Pos.Text);
+
+                //sp.WriteLine("SERVOAFTRUDDER," + this.txtAftRudder0Pos.Text);
+
+                string strParam = "555|555|" + this.txtAftRudder0Pos.Text;
+                sp.WriteLine("SERVO_TEST," + strParam);
 
             }
             catch (Exception ex)
@@ -1056,13 +1065,22 @@ namespace HarmoniaRemote
 
                         if (intMetaID == 13)
                         {
+                            int intMillis = -1;
+                            if (strValue.Contains("#"))
+                            {
+                                //this is a sub second time with millis at the start - split this off
+                                string[] arrayTime = strValue.Split(new char[] { '#' }, StringSplitOptions.None);
+                                intMillis = int.Parse(arrayTime[0]);
+                                strValue = arrayTime[1].Trim();
+                            }
+
 
                             DateTime dteThis = DateTime.ParseExact(strValue, "H:m:s d/M/yyyy", null); //16:56:13 5/2/2023
 
                             //datetimes need to be inserted in the local timezone
                             //the postgres timestamptz field type is time zone aware and assumes any insert datetime is local
                             //it will store the actual datetime as utc, but whenever it is queried using sql the local time will be returned
-                            //the postgres database timezone is stored against the postghres serbver properties and this is used to define
+                            //the postgres database timezone is stored against the postgres server properties and this is used to define
                             //what timezone the data is displayed in
                             strTime = "'" + dteThis.ToString("yyyy-MM-dd HH:mm:ss") + "'";
                         }
