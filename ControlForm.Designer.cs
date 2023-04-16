@@ -65,18 +65,21 @@ namespace HarmoniaRemote
             this.btnUpload = new System.Windows.Forms.Button();
             this.label28 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label51 = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
+            this.btnTestServos = new System.Windows.Forms.Button();
             this.txtAftRudder0Pos = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.label47 = new System.Windows.Forms.Label();
-            this.txtAftPitch0Pos = new System.Windows.Forms.TextBox();
             this.label48 = new System.Windows.Forms.Label();
+            this.txtAftPitch0Pos = new System.Windows.Forms.TextBox();
+            this.label51 = new System.Windows.Forms.Label();
             this.txtFwdDive0Pos = new System.Windows.Forms.TextBox();
             this.label49 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.txtRunTime = new System.Windows.Forms.TextBox();
             this.label39 = new System.Windows.Forms.Label();
             this.txtRunThrottle = new System.Windows.Forms.TextBox();
@@ -152,12 +155,10 @@ namespace HarmoniaRemote
             this.label46 = new System.Windows.Forms.Label();
             this.btnExportExcel = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.label52 = new System.Windows.Forms.Label();
-            this.btnTestServos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -165,7 +166,6 @@ namespace HarmoniaRemote
             ((System.ComponentModel.ISupportInitialize)(this.tbAftDive)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            this.groupBox7.SuspendLayout();
             this.SuspendLayout();
             // 
             // rtb
@@ -513,6 +513,141 @@ namespace HarmoniaRemote
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Control states";
             // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.button4);
+            this.groupBox7.Controls.Add(this.label52);
+            this.groupBox7.Controls.Add(this.btnTestServos);
+            this.groupBox7.Controls.Add(this.txtAftRudder0Pos);
+            this.groupBox7.Controls.Add(this.button3);
+            this.groupBox7.Controls.Add(this.label47);
+            this.groupBox7.Controls.Add(this.label48);
+            this.groupBox7.Controls.Add(this.txtAftPitch0Pos);
+            this.groupBox7.Controls.Add(this.label51);
+            this.groupBox7.Controls.Add(this.txtFwdDive0Pos);
+            this.groupBox7.Controls.Add(this.label49);
+            this.groupBox7.Controls.Add(this.button2);
+            this.groupBox7.Location = new System.Drawing.Point(1126, 18);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(180, 218);
+            this.groupBox7.TabIndex = 50;
+            this.groupBox7.TabStop = false;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(141, 174);
+            this.button4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(32, 28);
+            this.button4.TabIndex = 78;
+            this.button4.Text = "t";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(55, 23);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(93, 20);
+            this.label52.TabIndex = 31;
+            this.label52.Text = "Test Servos";
+            // 
+            // btnTestServos
+            // 
+            this.btnTestServos.BackColor = System.Drawing.Color.Gold;
+            this.btnTestServos.Location = new System.Drawing.Point(12, 16);
+            this.btnTestServos.Name = "btnTestServos";
+            this.btnTestServos.Size = new System.Drawing.Size(33, 32);
+            this.btnTestServos.TabIndex = 30;
+            this.btnTestServos.UseVisualStyleBackColor = false;
+            this.btnTestServos.Click += new System.EventHandler(this.btnTestServos_Click);
+            // 
+            // txtAftRudder0Pos
+            // 
+            this.txtAftRudder0Pos.Location = new System.Drawing.Point(85, 174);
+            this.txtAftRudder0Pos.Name = "txtAftRudder0Pos";
+            this.txtAftRudder0Pos.Size = new System.Drawing.Size(52, 26);
+            this.txtAftRudder0Pos.TabIndex = 59;
+            this.txtAftRudder0Pos.Text = "90";
+            this.txtAftRudder0Pos.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(141, 138);
+            this.button3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(32, 28);
+            this.button3.TabIndex = 77;
+            this.button3.Text = "t";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(17, 178);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(62, 20);
+            this.label47.TabIndex = 60;
+            this.label47.Text = "Rudder";
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(30, 142);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(44, 20);
+            this.label48.TabIndex = 58;
+            this.label48.Text = "Pitch";
+            // 
+            // txtAftPitch0Pos
+            // 
+            this.txtAftPitch0Pos.Location = new System.Drawing.Point(85, 138);
+            this.txtAftPitch0Pos.Name = "txtAftPitch0Pos";
+            this.txtAftPitch0Pos.Size = new System.Drawing.Size(52, 26);
+            this.txtAftPitch0Pos.TabIndex = 57;
+            this.txtAftPitch0Pos.Text = "90";
+            this.txtAftPitch0Pos.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(75, 70);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(93, 20);
+            this.label51.TabIndex = 61;
+            this.label51.Text = "Servo 0 pos";
+            // 
+            // txtFwdDive0Pos
+            // 
+            this.txtFwdDive0Pos.Location = new System.Drawing.Point(85, 101);
+            this.txtFwdDive0Pos.Name = "txtFwdDive0Pos";
+            this.txtFwdDive0Pos.Size = new System.Drawing.Size(52, 26);
+            this.txtFwdDive0Pos.TabIndex = 55;
+            this.txtFwdDive0Pos.Text = "123";
+            this.txtFwdDive0Pos.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(8, 104);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(74, 20);
+            this.label49.TabIndex = 56;
+            this.label49.Text = "Fwd Dive";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(141, 101);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(32, 28);
+            this.button2.TabIndex = 76;
+            this.button2.Text = "t";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.button1);
@@ -532,39 +667,6 @@ namespace HarmoniaRemote
             this.groupBox5.TabIndex = 49;
             this.groupBox5.TabStop = false;
             // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(141, 174);
-            this.button4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(32, 28);
-            this.button4.TabIndex = 78;
-            this.button4.Text = "t";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(141, 138);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(32, 28);
-            this.button3.TabIndex = 77;
-            this.button3.Text = "t";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(141, 101);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(32, 28);
-            this.button2.TabIndex = 76;
-            this.button2.Text = "t";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(28, 92);
@@ -574,69 +676,6 @@ namespace HarmoniaRemote
             this.button1.Text = ">>";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // label51
-            // 
-            this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(75, 70);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(93, 20);
-            this.label51.TabIndex = 61;
-            this.label51.Text = "Servo 0 pos";
-            // 
-            // txtAftRudder0Pos
-            // 
-            this.txtAftRudder0Pos.Location = new System.Drawing.Point(85, 174);
-            this.txtAftRudder0Pos.Name = "txtAftRudder0Pos";
-            this.txtAftRudder0Pos.Size = new System.Drawing.Size(52, 26);
-            this.txtAftRudder0Pos.TabIndex = 59;
-            this.txtAftRudder0Pos.Text = "90";
-            this.txtAftRudder0Pos.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(17, 178);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(62, 20);
-            this.label47.TabIndex = 60;
-            this.label47.Text = "Rudder";
-            // 
-            // txtAftPitch0Pos
-            // 
-            this.txtAftPitch0Pos.Location = new System.Drawing.Point(85, 138);
-            this.txtAftPitch0Pos.Name = "txtAftPitch0Pos";
-            this.txtAftPitch0Pos.Size = new System.Drawing.Size(52, 26);
-            this.txtAftPitch0Pos.TabIndex = 57;
-            this.txtAftPitch0Pos.Text = "90";
-            this.txtAftPitch0Pos.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label48
-            // 
-            this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(30, 142);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(44, 20);
-            this.label48.TabIndex = 58;
-            this.label48.Text = "Pitch";
-            // 
-            // txtFwdDive0Pos
-            // 
-            this.txtFwdDive0Pos.Location = new System.Drawing.Point(85, 101);
-            this.txtFwdDive0Pos.Name = "txtFwdDive0Pos";
-            this.txtFwdDive0Pos.Size = new System.Drawing.Size(52, 26);
-            this.txtFwdDive0Pos.TabIndex = 55;
-            this.txtFwdDive0Pos.Text = "123";
-            this.txtFwdDive0Pos.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label49
-            // 
-            this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(8, 104);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(74, 20);
-            this.label49.TabIndex = 56;
-            this.label49.Text = "Fwd Dive";
             // 
             // txtRunTime
             // 
@@ -1380,45 +1419,6 @@ namespace HarmoniaRemote
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.button4);
-            this.groupBox7.Controls.Add(this.label52);
-            this.groupBox7.Controls.Add(this.btnTestServos);
-            this.groupBox7.Controls.Add(this.txtAftRudder0Pos);
-            this.groupBox7.Controls.Add(this.button3);
-            this.groupBox7.Controls.Add(this.label47);
-            this.groupBox7.Controls.Add(this.label48);
-            this.groupBox7.Controls.Add(this.txtAftPitch0Pos);
-            this.groupBox7.Controls.Add(this.label51);
-            this.groupBox7.Controls.Add(this.txtFwdDive0Pos);
-            this.groupBox7.Controls.Add(this.label49);
-            this.groupBox7.Controls.Add(this.button2);
-            this.groupBox7.Location = new System.Drawing.Point(1126, 18);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(180, 218);
-            this.groupBox7.TabIndex = 50;
-            this.groupBox7.TabStop = false;
-            // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(55, 23);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(93, 20);
-            this.label52.TabIndex = 31;
-            this.label52.Text = "Test Servos";
-            // 
-            // btnTestServos
-            // 
-            this.btnTestServos.BackColor = System.Drawing.Color.Gold;
-            this.btnTestServos.Location = new System.Drawing.Point(12, 16);
-            this.btnTestServos.Name = "btnTestServos";
-            this.btnTestServos.Size = new System.Drawing.Size(33, 32);
-            this.btnTestServos.TabIndex = 30;
-            this.btnTestServos.UseVisualStyleBackColor = false;
-            this.btnTestServos.Click += new System.EventHandler(this.btnTestServos_Click);
-            // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1449,6 +1449,8 @@ namespace HarmoniaRemote
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -1461,8 +1463,6 @@ namespace HarmoniaRemote
             this.groupBox3.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
