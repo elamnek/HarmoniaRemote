@@ -798,7 +798,7 @@ namespace HarmoniaRemote
                 //need a pause between clock sync and run command, otherwise it doesn't get through
                 System.Threading.Thread.Sleep(2000);
 
-                string strParam = this.txtStartDepth.Text + "|" + this.txtStartPitch.Text + "|" + this.txtFwdThrottle.Text + "|" + this.txtFwdTime.Text + "|" + this.txtRevThrottle.Text + "|" + this.txtRevTime.Text + "|" + this.txtFwdDive0Pos.Text + "|" + this.txtAftPitch0Pos.Text + "|" + this.txtAftRudder0Pos.Text;
+                string strParam = this.txtDepthSP.Text + "|" + this.txtPitchSP.Text + "|" + this.txtFwdThrottle.Text + "|" + this.txtFwdTime.Text + "|" + this.txtRevThrottle.Text + "|" + this.txtRevTime.Text + "|" + this.txtFwdDive0Pos.Text + "|" + this.txtAftPitch0Pos.Text + "|" + this.txtAftRudder0Pos.Text + "|" + this.txtTrimTime.Text + "|" + this.txtDirectionSP.Text;
                 sp.WriteLine("RUN," + strParam);
 
                 string strOutLogFile = Path.Combine(txtDataDir.Text, "range_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".log");
@@ -843,7 +843,7 @@ namespace HarmoniaRemote
         {
             try
             {
-                txtRunDirection.Text = txtDirection.Text;
+                txtDirectionSP.Text = txtDirection.Text;
             }
             catch (Exception ex)
             {
@@ -1222,6 +1222,30 @@ namespace HarmoniaRemote
                 MessageBox.Show(ex.ToString());
             }
             
+        }
+
+        private void button6_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                txtPitchSP.Text = meta_id_15.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                txtDepthSP.Text = meta_id_1.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }
