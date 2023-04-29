@@ -240,6 +240,10 @@ namespace HarmoniaRemote
                             //change state to idle
                             sp.WriteLine("IDLE,0");
                         }
+                    } else
+                    {
+                        //for any other message just log to RTB
+                        SetRTBText(rtb, strReceived);
                     }
 
                     //log everything to the rich textbox
