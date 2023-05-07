@@ -1617,7 +1617,6 @@ namespace HarmoniaRemote
             this.txtDataDir.Name = "txtDataDir";
             this.txtDataDir.Size = new System.Drawing.Size(186, 50);
             this.txtDataDir.TabIndex = 38;
-            this.txtDataDir.Text = "C:\\Business\\Submarine\\subjects\\research_project\\data";
             // 
             // label44
             // 
@@ -1637,7 +1636,6 @@ namespace HarmoniaRemote
             this.txtDBConn.Name = "txtDBConn";
             this.txtDBConn.Size = new System.Drawing.Size(186, 42);
             this.txtDBConn.TabIndex = 36;
-            this.txtDBConn.Text = "Server=localhost;Port=5432;UserId=postgres;Password=euge2;Database=example";
             // 
             // label46
             // 
