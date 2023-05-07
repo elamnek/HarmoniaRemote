@@ -22,7 +22,9 @@ namespace HarmoniaRemote
 
         //create the serial connection
         private SerialPort sp = new SerialPort("COM4", 9600);
-        private SerialPort sp_1 = new SerialPort("COM12", 9600);
+        //private SerialPort sp_1 = new SerialPort("COM12", 9600);
+        private SerialPort sp_1 = new SerialPort("COM6", 9600);//,Parity.None,8,StopBits.One
+        
         private Boolean m_blnUploading = false;
         private int m_intRecordsToUpload = 0;
         private int m_intRecordsUploaded = 0;
@@ -56,7 +58,7 @@ namespace HarmoniaRemote
                 //MessageBox.Show("Could not open Harmonia port: " + ex.Message, "Port Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             
-            sp_1.DataReceived += new SerialDataReceivedEventHandler(sp_1_DataReceived);
+            //sp_1.DataReceived += new SerialDataReceivedEventHandler(sp_1_DataReceived);
             try
             {
                 sp_1.Open();
@@ -86,25 +88,26 @@ namespace HarmoniaRemote
             try
             {
                 string strReceived = sp_1.ReadLine().Trim();
-                if (strReceived.StartsWith("{") && strReceived.EndsWith("}"))
-                {
-                    //SetRTBText(rtb, strReceived + Environment.NewLine);
-                    String[] arrayValue = strReceived.Trim().TrimStart('{').TrimEnd('}').Split(',');
-                    string strRange = arrayValue[1];
-                    String[] arrayRange = strRange.Trim().Split('|');
-                    string strRangeValue = arrayRange[1];
-                    SetControlText(this.meta_id_20, strRangeValue);
+                SetRTBText(rtb, strReceived);
+                //if (strReceived.StartsWith("{") && strReceived.EndsWith("}"))
+                //{
+                //    //SetRTBText(rtb, strReceived + Environment.NewLine);
+                //    String[] arrayValue = strReceived.Trim().TrimStart('{').TrimEnd('}').Split(',');
+                //    string strRange = arrayValue[1];
+                //    String[] arrayRange = strRange.Trim().Split('|');
+                //    string strRangeValue = arrayRange[1];
+                //    SetControlText(this.meta_id_20, strRangeValue);
 
-                    if (m_swRangeDataFile != null)
-                    {
-                        m_swRangeDataFile.WriteLine(strReceived);
-                        m_swRangeDataFile.Flush();
-                    }
+                //    if (m_swRangeDataFile != null)
+                //    {
+                //        m_swRangeDataFile.WriteLine(strReceived);
+                //        m_swRangeDataFile.Flush();
+                //    }
 
-                    //do the insert into the postgres realtime table here
-                    RealtimeInsertIntoDT(strReceived, 3, m_listRealtimeDataTableColDefs);
-                }
-            
+                //    //do the insert into the postgres realtime table here
+                //    RealtimeInsertIntoDT(strReceived, 3, m_listRealtimeDataTableColDefs);
+                //}
+
             }
             catch (Exception ex)
             {
@@ -1179,6 +1182,76 @@ namespace HarmoniaRemote
                 //TimeZoneInfo myZone = TimeZoneInfo.Local;
                 //myZone.IsDaylightSavingTime();
 
+                //byte buffer[] = { 0xFA, 0x06, 0x01, 0xFF);
+
+                //sp_1.Write("FA 06 01 FF");
+                //sp_1.Write("0x06");
+                //sp_1.Write("0x01");
+                //sp_1.Write("0xFF");
+
+                byte[] buffer = { 0x80, 0x06, 0x02, 0x78 };
+                sp_1.Write(buffer,0,4);
+                sp_1.WriteLine("/n");
+
+
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                byte[] buffer = { 0x80, 0x06, 0x02, 0x78 };
+                sp_1.Write(buffer, 0, 4);
+                sp_1.WriteLine("/n");
+
+                System.Threading.Thread.Sleep(200);
+
+
+                int btr = sp_1.BytesToRead;
+
+                if (btr > 0)
+                {
+                    int[] data = new int[btr];
+
+                    for (int i = 0; i < btr - 1; i++)
+                    {
+                        data[i] = sp_1.ReadByte();
+                    }
+
+                    if (data[3] == 'E' && data[4] == 'R' && data[5] == 'R')
+                    {
+                        //serialRemote.println("Out of range");
+                        SetControlText(this.meta_id_20, "ZZ");
+                    }
+                    else
+                    {
+                        //float distance = 0;
+                        double dblDistance = (data[3] - 0x30) * 100 + (data[4] - 0x30) * 10 + (data[5] - 0x30) * 1 + (data[7] - 0x30) * 0.1 + (data[8] - 0x30) * 0.01 + (data[9] - 0x30) * 0.001;
+
+                        SetControlText(this.meta_id_20, dblDistance.ToString());
+
+                        //DateTime now = rtc.now();
+                        //m_strSend = "{13|" + String(now.hour()) + ':' + String(now.minute()) + ':' + String(now.second()) + " " + String(now.day()) + '/' + String(now.month()) + '/' + String(now.year()) + ",20|" + String(distance) + "}";
+                        //serialRemote.println(m_strSend);
+
+                        //add this so data send rate to remote is around 4Hz
+                        // delay(200);
+                    }
+
+                    sp_1.DiscardInBuffer();
+
+
+                }
+
+
+
             }
             catch (Exception ex)
             {
@@ -1251,5 +1324,7 @@ namespace HarmoniaRemote
                 MessageBox.Show(ex.ToString());
             }
         }
+
+       
     }
 }
