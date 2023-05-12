@@ -1325,6 +1325,36 @@ namespace HarmoniaRemote
             }
         }
 
-       
+        private void ControlForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void ControlForm_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //handle your keys here
+
+
+            if (keyData == Keys.Left)
+            {
+
+                sp.WriteLine("RUDDER_LEFT,1000");
+
+                return true;
+            }
+            //capture right arrow key
+            if (keyData == Keys.Right)
+            {
+
+                sp.WriteLine("RUDDER_RIGHT,1000");
+
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
     }
 }
