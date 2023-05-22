@@ -166,6 +166,7 @@ namespace HarmoniaRemote
             this.btnExportExcel = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -1396,7 +1397,7 @@ namespace HarmoniaRemote
             // 
             // btnLoadIntoDT
             // 
-            this.btnLoadIntoDT.Location = new System.Drawing.Point(1522, 292);
+            this.btnLoadIntoDT.Location = new System.Drawing.Point(1522, 323);
             this.btnLoadIntoDT.Name = "btnLoadIntoDT";
             this.btnLoadIntoDT.Size = new System.Drawing.Size(192, 38);
             this.btnLoadIntoDT.TabIndex = 43;
@@ -1514,7 +1515,7 @@ namespace HarmoniaRemote
             // 
             // btnExportExcel
             // 
-            this.btnExportExcel.Location = new System.Drawing.Point(1522, 335);
+            this.btnExportExcel.Location = new System.Drawing.Point(1522, 366);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.Size = new System.Drawing.Size(190, 38);
             this.btnExportExcel.TabIndex = 50;
@@ -1524,23 +1525,35 @@ namespace HarmoniaRemote
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(1522, 380);
+            this.button5.Location = new System.Drawing.Point(1655, 413);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 35);
+            this.button5.Size = new System.Drawing.Size(26, 19);
             this.button5.TabIndex = 51;
             this.button5.Text = "Test";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Visible = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(1618, 385);
+            this.button8.Location = new System.Drawing.Point(1687, 410);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 35);
+            this.button8.Size = new System.Drawing.Size(25, 24);
             this.button8.TabIndex = 52;
             this.button8.Text = "Test";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Visible = false;
             this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(1611, 280);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(103, 36);
+            this.button9.TabIndex = 53;
+            this.button9.Text = "Format 4Hz";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // ControlForm
             // 
@@ -1548,6 +1561,7 @@ namespace HarmoniaRemote
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1730, 972);
+            this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.btnExportExcel);
@@ -1563,7 +1577,7 @@ namespace HarmoniaRemote
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.rtb);
             this.Controls.Add(this.btnSend);
-            this.MinimumSize = new System.Drawing.Size(1742, 638);
+            this.MinimumSize = new System.Drawing.Size(1740, 628);
             this.Name = "ControlForm";
             this.Padding = new System.Windows.Forms.Padding(0, 511, 0, 0);
             this.Text = "Harmonia Controller";
@@ -1733,6 +1747,7 @@ namespace HarmoniaRemote
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
     }
 }
 

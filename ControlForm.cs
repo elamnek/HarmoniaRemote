@@ -10,6 +10,7 @@ using System.IO.Ports;
 using System.Windows.Forms;
 using System.IO;
 using Npgsql;
+using System.Diagnostics;
 
 namespace HarmoniaRemote
 {
@@ -490,7 +491,7 @@ namespace HarmoniaRemote
                             {
                                 //'2017-07-28 11:42:42.846621+00'
                                
-                                DateTime dteThis = DateTime.ParseExact(strValue, "H:m:s d/M/yyyy", null); //16:56:13 5/2/2023
+                                DateTime dteThis = DateTime.ParseExact(strValue, "H:m:s.f d/M/yyyy", null); //16:56:13 5/2/2023
 
                                 //TimeZoneInfo myZone = TimeZoneInfo.Local;
                                 //myZone.IsDaylightSavingTime(dteThis);
@@ -503,9 +504,9 @@ namespace HarmoniaRemote
                                 //datetimes need to be inserted in the local timezone
                                 //the postgres timestamptz field type is time zone aware and assumes any insert datetime is local
                                 //it will store the actual datetime as utc, but whenever it is queried using sql the local time will be returned
-                                //the postgres database timezone is stored against the postghres serbver properties and this is used to define
+                                //the postgres database timezone is stored against the postgres server properties and this is used to define
                                 //what timezone the data is displayed in
-                                strTime = "'" + dteThis.ToString("yyyy-MM-dd HH:mm:ss") + "'";
+                                strTime = "'" + dteThis.ToString("yyyy-MM-dd HH:mm:ss.f") + "'";
                             } 
                             else
                             {
@@ -1342,7 +1343,7 @@ namespace HarmoniaRemote
             if (keyData == Keys.Left)
             {
 
-                sp.WriteLine("RUDDER_LEFT,1000");
+                sp.WriteLine("RUDDER,5"); //param is the servo step value
 
                 return true;
             }
@@ -1350,11 +1351,286 @@ namespace HarmoniaRemote
             if (keyData == Keys.Right)
             {
 
-                sp.WriteLine("RUDDER_RIGHT,1000");
+                sp.WriteLine("RUDDER,-5");
 
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog fileBrowser = new OpenFileDialog();
+                fileBrowser.Filter = "txt files (*.log)|*.log|All files (*.*)|*.*";
+                fileBrowser.Title = "Specify a 4Hz logfile to format time";
+                if (txtDataDir.Text.Length > 0)
+                {
+                    fileBrowser.InitialDirectory = txtDataDir.Text;
+                }
+
+                if (fileBrowser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+
+                    string strFileName = fileBrowser.FileName;
+                    timeFormatter(strFileName);
+                    //MessageBox.Show(fileBrowser.FileName);
+                }
+
+                fileBrowser.Dispose();
+                fileBrowser = null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        private void timeFormatter(string strInputFile)
+        {
+            try
+            {
+
+                string strOutFile = Path.Combine(Path.GetDirectoryName(strInputFile), Path.GetFileNameWithoutExtension(strInputFile) + "_subsecond.LOG");
+                if (File.Exists(strOutFile))
+                {
+                    MessageBox.Show("An output file already exists with the name: " + strOutFile + " (delete this first before exporting)", "Convert Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+  
+                //open the output file
+                StreamWriter swOut = new System.IO.StreamWriter(strOutFile, false);
+
+                //open the logfile
+                StreamReader reader = File.OpenText(strInputFile);
+
+                DateTime dtePrevious = DateTime.Now;
+                int intMillisPrevious = 0;
+
+                int intMillisRunning = 0;
+
+                int intRecord = 1;
+                while (reader.Peek() != -1)
+                {
+
+                    //Console.WriteLine(intRecord.ToString());
+
+                    //read a line and split it up
+                    String strLine = reader.ReadLine().Trim().TrimStart('{').TrimEnd('}');
+                    String[] arrayLine = strLine.Split(new char[] { ',' }, StringSplitOptions.None);
+
+                    //read the record
+                    string strTime = "";
+                    int intMillis = 0;
+                    DateTime dteThis = DateTime.Now;
+                    int intMillisStart = 0;
+                    string strAllExceptTime = "";
+                    foreach (string strDataValue in arrayLine)
+                    {
+                        String[] arrayParts = strDataValue.Split(new char[] { '|' }, StringSplitOptions.None);
+                        if (arrayParts.Length == 2)
+                        {
+                            string strMetaID = arrayParts[0].Trim();
+                            string strValue = arrayParts[1].Trim();
+                            int intMetaID = int.Parse(strMetaID);
+
+                            if (intMetaID == 13)
+                            {
+                                //'2017-07-28 11:42:42.846621+00'
+                                dteThis = DateTime.ParseExact(strValue, "H:m:s d/M/yyyy", null); //16:56:13 5/2/2023                    
+                                strTime = "'" + dteThis.ToString("yyyy-MM-dd HH:mm:ss") + "'";
+                            }
+                            else if (intMetaID == 35)
+                            {
+                                intMillis = int.Parse(strValue);   
+                            }
+                            if(intMetaID != 13){
+                                strAllExceptTime =  strAllExceptTime + "," + strDataValue;      
+                            }
+
+                        }
+                    }
+
+                    
+
+                    if (strTime.Length > 0 && intMillis > 0)
+                    {
+                        if (intRecord == 1)
+                        {
+                            //first record
+                            intMillisStart = intMillis;
+                            intMillisRunning = 0;
+
+                        } else {
+                            TimeSpan ts = dteThis.Subtract(dtePrevious);
+                            if (ts.Seconds == 0)
+                            {
+                                //same time as last record - need to compare millis values
+                                int intMillisSpan = intMillis - intMillisPrevious;
+                                intMillisRunning = intMillisRunning + intMillisSpan;
+
+                            } else
+                            {
+                                //time has incremented to next second
+                                intMillisStart = intMillis;
+                                intMillisRunning = 0;
+                            }
+                        }
+
+                        //write the record
+                        double dblSeconds = intMillisRunning / 1000.00; //convert to seconds
+                        DateTime dteSubSecond = dteThis.AddSeconds(Math.Round(dblSeconds, 1));
+                        string strTimeSubSecond = dteSubSecond.ToString("H:m:s.f d/M/yyyy");
+                        string strNew = "{13|" + strTimeSubSecond + strAllExceptTime + "}";
+                        swOut.WriteLine(strNew);
+
+                        //Debug.Print(strNew);
+
+                        dtePrevious = dteThis;
+                        intMillisPrevious = intMillis;
+                    }
+
+                    
+
+                    intRecord +=1;
+                }
+
+                reader.Close();
+                swOut.Close();
+
+                MessageBox.Show("Convert complete!");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        private void timeFormatterOLD(string strInputFile)
+        {
+            try
+            {
+
+                string strOutFile = Path.Combine(Path.GetDirectoryName(strInputFile), Path.GetFileNameWithoutExtension(strInputFile) + "_subsecond.LOG");
+                if (File.Exists(strOutFile))
+                {
+                    MessageBox.Show("An output file already exists with the name: " + strOutFile + " (delete this first before exporting)", "Convert Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                //open the output file
+                StreamWriter swOut = new System.IO.StreamWriter(strOutFile, false);
+
+                //open the logfile
+                StreamReader reader = File.OpenText(strInputFile);
+
+                DateTime dtePrevious = DateTime.Now;
+                int intMillisPrevious = 0;
+
+                int intMillisRunning = 0;
+
+                int intRecord = 1;
+                while (reader.Peek() != -1)
+                {
+
+                    //Console.WriteLine(intRecord.ToString());
+
+                    //read a line and split it up
+                    String strLine = reader.ReadLine().Trim().TrimStart('{').TrimEnd('}');
+                    String[] arrayLine = strLine.Split(new char[] { ',' }, StringSplitOptions.None);
+
+                    //read the record
+                    string strTime = "";
+                    int intMillis = 0;
+                    DateTime dteThis = DateTime.Now;
+                    int intMillisStart = 0;
+                    string strAllExceptTime = "";
+                    foreach (string strDataValue in arrayLine)
+                    {
+                        String[] arrayParts = strDataValue.Split(new char[] { '|' }, StringSplitOptions.None);
+                        if (arrayParts.Length == 2)
+                        {
+                            string strMetaID = arrayParts[0].Trim();
+                            string strValue = arrayParts[1].Trim();
+                            int intMetaID = int.Parse(strMetaID);
+
+                            if (intMetaID == 13)
+                            {
+
+                                String[] arraySubParts = strValue.Split(new char[] { '#' }, StringSplitOptions.None);
+
+                                intMillis = int.Parse(arraySubParts[0]);
+
+                                //'2017-07-28 11:42:42.846621+00'
+                                dteThis = DateTime.ParseExact(arraySubParts[1], "H:m:s d/M/yyyy", null); //16:56:13 5/2/2023                    
+                                strTime = "'" + dteThis.ToString("yyyy-MM-dd HH:mm:ss") + "'";
+                            }
+                            
+                            if (intMetaID != 13)
+                            {
+                                strAllExceptTime = strAllExceptTime + "," + strDataValue;
+                            }
+
+                        }
+                    }
+
+
+
+                    if (strTime.Length > 0 && intMillis > 0)
+                    {
+                        if (intRecord == 1)
+                        {
+                            //first record
+                            intMillisStart = intMillis;
+                            intMillisRunning = 0;
+
+                        }
+                        else
+                        {
+                            TimeSpan ts = dteThis.Subtract(dtePrevious);
+                            if (ts.Seconds == 0)
+                            {
+                                //same time as last record - need to compare millis values
+                                int intMillisSpan = intMillis - intMillisPrevious;
+                                intMillisRunning = intMillisRunning + intMillisSpan;
+
+                            }
+                            else
+                            {
+                                //time has incremented to next second
+                                intMillisStart = intMillis;
+                                intMillisRunning = 0;
+                            }
+                        }
+
+                        //write the record
+                        double dblSeconds = intMillisRunning / 1000.00; //convert to seconds
+                        DateTime dteSubSecond = dteThis.AddSeconds(Math.Round(dblSeconds, 1));
+                        string strTimeSubSecond = dteSubSecond.ToString("H:m:s.f d/M/yyyy");
+                        string strNew = "{13|" + strTimeSubSecond + strAllExceptTime + ",35|" + intMillis.ToString() + "}";
+                        swOut.WriteLine(strNew);
+
+                        //Debug.Print(strNew);
+
+                        dtePrevious = dteThis;
+                        intMillisPrevious = intMillis;
+                    }
+
+
+
+                    intRecord += 1;
+                }
+
+                reader.Close();
+                swOut.Close();
+
+                MessageBox.Show("Convert complete!");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }
