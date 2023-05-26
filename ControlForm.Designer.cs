@@ -102,6 +102,7 @@ namespace HarmoniaRemote
             this.txtDepthSetpoint = new System.Windows.Forms.TextBox();
             this.label36 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnMotorTest = new System.Windows.Forms.Button();
             this.tbRudder = new System.Windows.Forms.TrackBar();
             this.label27 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -895,6 +896,7 @@ namespace HarmoniaRemote
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnMotorTest);
             this.groupBox1.Controls.Add(this.tbRudder);
             this.groupBox1.Controls.Add(this.tbFwdDive);
             this.groupBox1.Controls.Add(this.trackBar1);
@@ -917,9 +919,19 @@ namespace HarmoniaRemote
             this.groupBox1.TabIndex = 47;
             this.groupBox1.TabStop = false;
             // 
+            // btnMotorTest
+            // 
+            this.btnMotorTest.Location = new System.Drawing.Point(437, 155);
+            this.btnMotorTest.Name = "btnMotorTest";
+            this.btnMotorTest.Size = new System.Drawing.Size(101, 51);
+            this.btnMotorTest.TabIndex = 54;
+            this.btnMotorTest.Text = "Motor Test";
+            this.btnMotorTest.UseVisualStyleBackColor = true;
+            this.btnMotorTest.Click += new System.EventHandler(this.btnMotorTest_Click);
+            // 
             // tbRudder
             // 
-            this.tbRudder.Location = new System.Drawing.Point(430, 58);
+            this.tbRudder.Location = new System.Drawing.Point(426, 36);
             this.tbRudder.Maximum = 180;
             this.tbRudder.Name = "tbRudder";
             this.tbRudder.Size = new System.Drawing.Size(130, 69);
@@ -982,7 +994,7 @@ namespace HarmoniaRemote
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(471, 160);
+            this.label19.Location = new System.Drawing.Point(458, 108);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(62, 20);
             this.label19.TabIndex = 27;
@@ -1748,6 +1760,7 @@ namespace HarmoniaRemote
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button btnMotorTest;
     }
 }
 
