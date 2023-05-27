@@ -131,7 +131,7 @@ namespace HarmoniaRemote
             this.meta_id_23 = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
-            this.meta_id_22 = new System.Windows.Forms.TextBox();
+            this.meta_id_37 = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.meta_id_16 = new System.Windows.Forms.TextBox();
@@ -1051,7 +1051,7 @@ namespace HarmoniaRemote
             this.groupBox3.Controls.Add(this.meta_id_23);
             this.groupBox3.Controls.Add(this.label21);
             this.groupBox3.Controls.Add(this.label31);
-            this.groupBox3.Controls.Add(this.meta_id_22);
+            this.groupBox3.Controls.Add(this.meta_id_37);
             this.groupBox3.Controls.Add(this.label30);
             this.groupBox3.Controls.Add(this.label29);
             this.groupBox3.Controls.Add(this.meta_id_16);
@@ -1237,12 +1237,12 @@ namespace HarmoniaRemote
             this.label31.TabIndex = 58;
             this.label31.Text = "Roll";
             // 
-            // meta_id_22
+            // meta_id_37
             // 
-            this.meta_id_22.Location = new System.Drawing.Point(795, 32);
-            this.meta_id_22.Name = "meta_id_22";
-            this.meta_id_22.Size = new System.Drawing.Size(76, 26);
-            this.meta_id_22.TabIndex = 54;
+            this.meta_id_37.Location = new System.Drawing.Point(795, 32);
+            this.meta_id_37.Name = "meta_id_37";
+            this.meta_id_37.Size = new System.Drawing.Size(76, 26);
+            this.meta_id_37.TabIndex = 54;
             // 
             // label30
             // 
@@ -1689,7 +1689,7 @@ namespace HarmoniaRemote
         private System.Windows.Forms.TextBox meta_id_15;
         private System.Windows.Forms.TextBox meta_id_14;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.TextBox meta_id_22;
+        private System.Windows.Forms.TextBox meta_id_37;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.TextBox meta_id_26;
         private System.Windows.Forms.Label label32;

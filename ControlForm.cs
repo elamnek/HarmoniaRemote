@@ -1639,34 +1639,26 @@ namespace HarmoniaRemote
             {
 
                 ArrayList listThrottleValues = new ArrayList();
-                listThrottleValues.Add(-800);
+                
                 listThrottleValues.Add(-720);
-                listThrottleValues.Add(-640);
-                listThrottleValues.Add(-560);
-                listThrottleValues.Add(-480);
-                listThrottleValues.Add(-400);
                 listThrottleValues.Add(-320);
-                listThrottleValues.Add(-240);
-                listThrottleValues.Add(-160);
-                listThrottleValues.Add(-80);
-                listThrottleValues.Add(0);
-                listThrottleValues.Add(80);
-                listThrottleValues.Add(160);
-                listThrottleValues.Add(240);
-                listThrottleValues.Add(320);
-                listThrottleValues.Add(400);
+                listThrottleValues.Add(-240); 
                 listThrottleValues.Add(480);
-                listThrottleValues.Add(560);
-                listThrottleValues.Add(640);
-                listThrottleValues.Add(720);
-                listThrottleValues.Add(800);
+                
 
                 foreach (int intValue in listThrottleValues)
                 {
                     sp.WriteLine("PROPELL," + intValue.ToString());
-                    //wait 3 seconds
-                    System.Threading.Thread.Sleep(4000);
+                    System.Threading.Thread.Sleep(2000);
+                    sp.WriteLine("PROPELL," + intValue.ToString());
+                    System.Threading.Thread.Sleep(2000);
+
                     sp.WriteLine("PROPELL,0");
+                    System.Threading.Thread.Sleep(2000);
+                    sp.WriteLine("PROPELL,0");
+                    System.Threading.Thread.Sleep(2000);
+                    sp.WriteLine("PROPELL,0");
+                    System.Threading.Thread.Sleep(2000);
                     //wait 60 seconds
                     System.Threading.Thread.Sleep(60000);
                 }
