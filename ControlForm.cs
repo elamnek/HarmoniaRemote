@@ -463,6 +463,15 @@ namespace HarmoniaRemote
                 //open the logfile
                 StreamReader reader = File.OpenText(strInputFile);
 
+                string strInDateFormat = "H:m:s d/M/yyyy";
+                string strOutDateFormat = "yyyy-MM-dd HH:mm:ss";
+               
+                //handle sub second date format
+                if (strInputFile.EndsWith("_subsecond.LOG")){
+                    strInDateFormat = "H:m:s.f d/M/yyyy";
+                    strOutDateFormat = "yyyy-MM-dd HH:mm:ss.f";
+                }
+
                 int intRecord = 1;
                 while (reader.Peek() != -1)
                 {
@@ -491,7 +500,7 @@ namespace HarmoniaRemote
                             {
                                 //'2017-07-28 11:42:42.846621+00'
                                
-                                DateTime dteThis = DateTime.ParseExact(strValue, "H:m:s d/M/yyyy", null); //16:56:13 5/2/2023
+                                DateTime dteThis = DateTime.ParseExact(strValue, strInDateFormat, null); //16:56:13 5/2/2023
 
                                 //TimeZoneInfo myZone = TimeZoneInfo.Local;
                                 //myZone.IsDaylightSavingTime(dteThis);
@@ -506,7 +515,7 @@ namespace HarmoniaRemote
                                 //it will store the actual datetime as utc, but whenever it is queried using sql the local time will be returned
                                 //the postgres database timezone is stored against the postgres server properties and this is used to define
                                 //what timezone the data is displayed in
-                                strTime = "'" + dteThis.ToString("yyyy-MM-dd HH:mm:ss.f") + "'";
+                                strTime = "'" + dteThis.ToString(strOutDateFormat) + "'";
                             } 
                             else
                             {
