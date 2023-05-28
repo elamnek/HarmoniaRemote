@@ -491,7 +491,7 @@ namespace HarmoniaRemote
                             {
                                 //'2017-07-28 11:42:42.846621+00'
                                
-                                DateTime dteThis = DateTime.ParseExact(strValue, "H:m:s.f d/M/yyyy", null); //16:56:13 5/2/2023
+                                DateTime dteThis = DateTime.ParseExact(strValue, "H:m:s d/M/yyyy", null); //16:56:13 5/2/2023
 
                                 //TimeZoneInfo myZone = TimeZoneInfo.Local;
                                 //myZone.IsDaylightSavingTime(dteThis);

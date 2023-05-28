@@ -54,7 +54,7 @@ namespace HarmoniaRemote
             this.label10 = new System.Windows.Forms.Label();
             this.btnRun = new System.Windows.Forms.Button();
             this.meta_id_4 = new System.Windows.Forms.TextBox();
-            this.meta_id_7 = new System.Windows.Forms.TextBox();
+            this.meta_id_38 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.meta_id_1 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -422,12 +422,12 @@ namespace HarmoniaRemote
             this.meta_id_4.Size = new System.Drawing.Size(174, 26);
             this.meta_id_4.TabIndex = 30;
             // 
-            // meta_id_7
+            // meta_id_38
             // 
-            this.meta_id_7.Location = new System.Drawing.Point(944, 31);
-            this.meta_id_7.Name = "meta_id_7";
-            this.meta_id_7.Size = new System.Drawing.Size(79, 26);
-            this.meta_id_7.TabIndex = 34;
+            this.meta_id_38.Location = new System.Drawing.Point(944, 31);
+            this.meta_id_38.Name = "meta_id_38";
+            this.meta_id_38.Size = new System.Drawing.Size(79, 26);
+            this.meta_id_38.TabIndex = 34;
             // 
             // label11
             // 
@@ -1083,7 +1083,7 @@ namespace HarmoniaRemote
             this.groupBox3.Controls.Add(this.meta_id_1);
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Controls.Add(this.label11);
-            this.groupBox3.Controls.Add(this.meta_id_7);
+            this.groupBox3.Controls.Add(this.meta_id_38);
             this.groupBox3.Location = new System.Drawing.Point(3, 271);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(1388, 208);
@@ -1647,7 +1647,7 @@ namespace HarmoniaRemote
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnRun;
         private System.Windows.Forms.TextBox meta_id_4;
-        private System.Windows.Forms.TextBox meta_id_7;
+        private System.Windows.Forms.TextBox meta_id_38;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox meta_id_1;
         private System.Windows.Forms.Label label12;
