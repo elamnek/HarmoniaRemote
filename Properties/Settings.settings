@@ -11,5 +11,8 @@
     <Setting Name="AftRudder0Pos" Type="System.String" Scope="User">
       <Value Profile="(Default)">90</Value>
     </Setting>
+    <Setting Name="RunNum" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

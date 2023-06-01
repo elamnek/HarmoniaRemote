@@ -58,5 +58,17 @@ namespace HarmoniaRemote.Properties {
                 this["AftRudder0Pos"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public string RunNum {
+            get {
+                return ((string)(this["RunNum"]));
+            }
+            set {
+                this["RunNum"] = value;
+            }
+        }
     }
 }

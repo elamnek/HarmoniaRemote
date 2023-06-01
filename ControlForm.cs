@@ -42,6 +42,7 @@ namespace HarmoniaRemote
                 txtFwdDive0Pos.Text = Properties.Settings.Default.FwdDive0Pos;
                 txtAftRudder0Pos.Text = Properties.Settings.Default.AftRudder0Pos;
                 txtAftPitch0Pos.Text = Properties.Settings.Default.AftPitch0Pos;
+                txtRunNum.Text = Properties.Settings.Default.RunNum;
             }
             catch (Exception ex)
             {
@@ -77,6 +78,7 @@ namespace HarmoniaRemote
                 Properties.Settings.Default.FwdDive0Pos = txtFwdDive0Pos.Text;
                 Properties.Settings.Default.AftRudder0Pos = txtAftRudder0Pos.Text;
                 Properties.Settings.Default.AftPitch0Pos = txtAftPitch0Pos.Text;
+                Properties.Settings.Default.RunNum = txtRunNum.Text;
                 Properties.Settings.Default.Save();
             }
             catch (Exception ex)
@@ -119,6 +121,9 @@ namespace HarmoniaRemote
         {
             try
             {
+
+                int intRunNum = int.Parse(txtRunNum.Text);
+
                 string strReceived = sp.ReadLine();
                 if (!strReceived.StartsWith("VMDPE"))
                 {
@@ -209,10 +214,12 @@ namespace HarmoniaRemote
                         if (listMetadataIDs.Contains(29))
                         {
                             //29 is a control plane position value - load this record into channel 2 (4Hz data)
-                            RealtimeInsertIntoDT(strReceived, 2, m_listRealtimeDataTableColDefs);
+                            RealtimeInsertIntoDT(strReceived, 2, intRunNum, m_listRealtimeDataTableColDefs);
                         } else
                         {
-                            RealtimeInsertIntoDT(strReceived, 1, m_listRealtimeDataTableColDefs);
+
+
+                            RealtimeInsertIntoDT(strReceived, 1, intRunNum, m_listRealtimeDataTableColDefs);
                         }
       
                         if (m_blnUploading)
@@ -1053,7 +1060,7 @@ namespace HarmoniaRemote
             }
         }
 
-        private void RealtimeInsertIntoDT(string strReceived, int intDataChannel, ArrayList listColDefs)
+        private void RealtimeInsertIntoDT(string strReceived, int intDataChannel, int intRunNum, ArrayList listColDefs)
         {
             try
             {
@@ -1114,8 +1121,8 @@ namespace HarmoniaRemote
                     ArrayList listSQLInserts = new ArrayList();
 
                     //this is a destination table
-                    string strColumns = "time,data_channel";
-                    string strValues = strTime + "," + intDataChannel.ToString();
+                    string strColumns = "time,data_channel,run_number";
+                    string strValues = strTime + "," + intDataChannel.ToString() +  "," + intRunNum.ToString();
 
                     //go through columns and build sql 
                     foreach (Hashtable hashColDef in listColDefs)
@@ -1167,6 +1174,7 @@ namespace HarmoniaRemote
 
                     if (strColumns != "time")
                     {
+                        
                         //build sql insert for this table
                         listSQLInserts.Add("insert into dt_ts_realtime_data (" + strColumns + ")" + " values (" + strValues + ") ON CONFLICT DO NOTHING");
                     }
@@ -1682,5 +1690,19 @@ namespace HarmoniaRemote
             }
         }
 
+        private void btnRunIncrement_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                int intNextRunNum = int.Parse(txtRunNum.Text) + 1;
+                txtRunNum.Text = intNextRunNum.ToString();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }
