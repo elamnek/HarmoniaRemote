@@ -358,9 +358,9 @@ namespace HarmoniaRemote
             sp.WriteLine("STATIC_TRIM," + this.txtDepthSetpoint.Text);
         }
 
-        private void btnDynamicTrim_Click(object sender, EventArgs e)
+        private void btnCalibrateIMU_Click(object sender, EventArgs e)
         {
-            sp.WriteLine("DYNAMIC_TRIM,0");
+            sp.WriteLine("CALIBRATE_IMU,0");
         }
 
         private void btnAlarm_Click(object sender, EventArgs e)
