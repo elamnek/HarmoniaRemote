@@ -31,7 +31,7 @@ namespace HarmoniaRemote
         {
             this.rtb = new System.Windows.Forms.RichTextBox();
             this.btnSend = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtCommandParam = new System.Windows.Forms.TextBox();
             this.btnDeflate = new System.Windows.Forms.Button();
             this.btnInflate = new System.Windows.Forms.Button();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
@@ -116,6 +116,7 @@ namespace HarmoniaRemote
             this.label17 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label50 = new System.Windows.Forms.Label();
+            this.button8 = new System.Windows.Forms.Button();
             this.txtDirection = new System.Windows.Forms.TextBox();
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
@@ -167,9 +168,8 @@ namespace HarmoniaRemote
             this.txtDBConn = new System.Windows.Forms.TextBox();
             this.label46 = new System.Windows.Forms.Label();
             this.btnExportExcel = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
+            this.cboCommand = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -203,13 +203,12 @@ namespace HarmoniaRemote
             this.btnSend.UseVisualStyleBackColor = true;
             this.btnSend.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox1
+            // txtCommandParam
             // 
-            this.textBox1.Location = new System.Drawing.Point(1396, 449);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(240, 26);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "PROPELL,";
+            this.txtCommandParam.Location = new System.Drawing.Point(1581, 450);
+            this.txtCommandParam.Name = "txtCommandParam";
+            this.txtCommandParam.Size = new System.Drawing.Size(55, 26);
+            this.txtCommandParam.TabIndex = 2;
             // 
             // btnDeflate
             // 
@@ -1058,6 +1057,7 @@ namespace HarmoniaRemote
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.label50);
+            this.groupBox3.Controls.Add(this.button8);
             this.groupBox3.Controls.Add(this.txtDirection);
             this.groupBox3.Controls.Add(this.label41);
             this.groupBox3.Controls.Add(this.label42);
@@ -1123,6 +1123,13 @@ namespace HarmoniaRemote
             this.label50.Size = new System.Drawing.Size(72, 20);
             this.label50.TabIndex = 74;
             this.label50.Text = "Direction";
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(0, 0);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.TabIndex = 75;
             // 
             // txtDirection
             // 
@@ -1559,28 +1566,6 @@ namespace HarmoniaRemote
             this.btnExportExcel.UseVisualStyleBackColor = true;
             this.btnExportExcel.Click += new System.EventHandler(this.btnExportExcel_Click);
             // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(1654, 412);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(26, 18);
-            this.button5.TabIndex = 51;
-            this.button5.Text = "Test";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Visible = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(1688, 409);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(26, 25);
-            this.button8.TabIndex = 52;
-            this.button8.Text = "Test";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Visible = false;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
             // button9
             // 
             this.button9.Location = new System.Drawing.Point(1611, 280);
@@ -1591,15 +1576,32 @@ namespace HarmoniaRemote
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
+            // cboCommand
+            // 
+            this.cboCommand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCommand.FormattingEnabled = true;
+            this.cboCommand.Items.AddRange(new object[] {
+            "INFLATE",
+            "DEFLATE",
+            "PUSHROD",
+            "PROPELL",
+            "SERVOFWDDIVE",
+            "SERVOAFTDIVE",
+            "SERVOAFTRUDDER",
+            "RUDDER"});
+            this.cboCommand.Location = new System.Drawing.Point(1407, 448);
+            this.cboCommand.Name = "cboCommand";
+            this.cboCommand.Size = new System.Drawing.Size(168, 28);
+            this.cboCommand.TabIndex = 54;
+            // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1730, 972);
+            this.Controls.Add(this.cboCommand);
             this.Controls.Add(this.button9);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.btnExportExcel);
             this.Controls.Add(this.label46);
             this.Controls.Add(this.groupBox6);
@@ -1610,7 +1612,7 @@ namespace HarmoniaRemote
             this.Controls.Add(this.btnLoadIntoDT);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtCommandParam);
             this.Controls.Add(this.rtb);
             this.Controls.Add(this.btnSend);
             this.MinimumSize = new System.Drawing.Size(1736, 619);
@@ -1619,8 +1621,6 @@ namespace HarmoniaRemote
             this.Text = "Harmonia Controller";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ControlForm_FormClosing);
             this.Load += new System.EventHandler(this.ControlForm_Load);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlForm_KeyPress);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ControlForm_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbFwdDive)).EndInit();
             this.groupBox2.ResumeLayout(false);
@@ -1648,7 +1648,7 @@ namespace HarmoniaRemote
 
         private System.Windows.Forms.RichTextBox rtb;
         private System.Windows.Forms.Button btnSend;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtCommandParam;
         private System.Windows.Forms.Button btnDeflate;
         private System.Windows.Forms.Button btnInflate;
         private System.Windows.Forms.TrackBar trackBar1;
@@ -1764,7 +1764,6 @@ namespace HarmoniaRemote
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button btnExportExcel;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Label label52;
@@ -1787,6 +1786,7 @@ namespace HarmoniaRemote
         private System.Windows.Forms.Button btnMotorTest;
         private System.Windows.Forms.Button btnRunIncrement;
         private System.Windows.Forms.TextBox txtRunNum;
+        private System.Windows.Forms.ComboBox cboCommand;
     }
 }
 

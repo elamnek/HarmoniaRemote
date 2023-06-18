@@ -24,7 +24,7 @@ namespace HarmoniaRemote
         //create the serial connection
         private SerialPort sp = new SerialPort("COM4", 9600);
         //private SerialPort sp_1 = new SerialPort("COM12", 9600);
-        private SerialPort sp_1 = new SerialPort("COM6", 9600);//,Parity.None,8,StopBits.One
+        //private SerialPort sp_1 = new SerialPort("COM6", 9600);//,Parity.None,8,StopBits.One
         
         private Boolean m_blnUploading = false;
         private int m_intRecordsToUpload = 0;
@@ -43,6 +43,8 @@ namespace HarmoniaRemote
                 txtAftRudder0Pos.Text = Properties.Settings.Default.AftRudder0Pos;
                 txtAftPitch0Pos.Text = Properties.Settings.Default.AftPitch0Pos;
                 txtRunNum.Text = Properties.Settings.Default.RunNum;
+
+                cboCommand.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
@@ -61,15 +63,15 @@ namespace HarmoniaRemote
             }
             
             //sp_1.DataReceived += new SerialDataReceivedEventHandler(sp_1_DataReceived);
-            try
-            {
-                sp_1.Open();
-            }
-            catch (Exception ex)
-            {
-                SetRTBText(rtb, "WARNING: could not open Range Finder port: " + ex.Message + Environment.NewLine);
-                //MessageBox.Show("Could not open Range Finder port: " + ex.Message,"Port Error",MessageBoxButtons.OK,MessageBoxIcon.Information);
-            }
+            //try
+            //{
+            //    sp_1.Open();
+            //}
+            //catch (Exception ex)
+            //{
+            //    SetRTBText(rtb, "WARNING: could not open Range Finder port: " + ex.Message + Environment.NewLine);
+            //    //MessageBox.Show("Could not open Range Finder port: " + ex.Message,"Port Error",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            //}
         }
         private void ControlForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -86,37 +88,37 @@ namespace HarmoniaRemote
                 MessageBox.Show(ex.ToString());
             }
         }
-        private void sp_1_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            try
-            {
-                string strReceived = sp_1.ReadLine().Trim();
-                SetRTBText(rtb, strReceived);
-                //if (strReceived.StartsWith("{") && strReceived.EndsWith("}"))
-                //{
-                //    //SetRTBText(rtb, strReceived + Environment.NewLine);
-                //    String[] arrayValue = strReceived.Trim().TrimStart('{').TrimEnd('}').Split(',');
-                //    string strRange = arrayValue[1];
-                //    String[] arrayRange = strRange.Trim().Split('|');
-                //    string strRangeValue = arrayRange[1];
-                //    SetControlText(this.meta_id_20, strRangeValue);
+        //private void sp_1_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        string strReceived = sp_1.ReadLine().Trim();
+        //        SetRTBText(rtb, strReceived);
+        //        //if (strReceived.StartsWith("{") && strReceived.EndsWith("}"))
+        //        //{
+        //        //    //SetRTBText(rtb, strReceived + Environment.NewLine);
+        //        //    String[] arrayValue = strReceived.Trim().TrimStart('{').TrimEnd('}').Split(',');
+        //        //    string strRange = arrayValue[1];
+        //        //    String[] arrayRange = strRange.Trim().Split('|');
+        //        //    string strRangeValue = arrayRange[1];
+        //        //    SetControlText(this.meta_id_20, strRangeValue);
 
-                //    if (m_swRangeDataFile != null)
-                //    {
-                //        m_swRangeDataFile.WriteLine(strReceived);
-                //        m_swRangeDataFile.Flush();
-                //    }
+        //        //    if (m_swRangeDataFile != null)
+        //        //    {
+        //        //        m_swRangeDataFile.WriteLine(strReceived);
+        //        //        m_swRangeDataFile.Flush();
+        //        //    }
 
-                //    //do the insert into the postgres realtime table here
-                //    RealtimeInsertIntoDT(strReceived, 3, m_listRealtimeDataTableColDefs);
-                //}
+        //        //    //do the insert into the postgres realtime table here
+        //        //    RealtimeInsertIntoDT(strReceived, 3, m_listRealtimeDataTableColDefs);
+        //        //}
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.ToString());
+        //    }
+        //}
         private void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             try
@@ -306,7 +308,8 @@ namespace HarmoniaRemote
 
         private void button1_Click(object sender, EventArgs e)
         {
-            sp.WriteLine(this.textBox1.Text);
+            string strSend = cboCommand.SelectedItem.ToString() + "," + this.txtCommandParam.Text;
+            sp.WriteLine(strSend);
         }
 
         private void btnDeflate_Click(object sender, EventArgs e)
@@ -766,14 +769,14 @@ namespace HarmoniaRemote
             }
 
             //try to set range finder time
-            try
-            {
-                sp_1.WriteLine("TIMESET," + strParam);
-            }
-            catch (Exception ex)
-            {
-                SetRTBText(rtb, "Could not set time on range finder: " + ex.Message + Environment.NewLine);
-            }
+            //try
+            //{
+            //    sp_1.WriteLine("TIMESET," + strParam);
+            //}
+            //catch (Exception ex)
+            //{
+            //    SetRTBText(rtb, "Could not set time on range finder: " + ex.Message + Environment.NewLine);
+            //}
 
         }
 
@@ -813,11 +816,11 @@ namespace HarmoniaRemote
                     MessageBox.Show("Data file directory has not been set - need to set this before using the Run state", "Settings Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-                if (!Directory.Exists(txtDataDir.Text))
-                {
-                    MessageBox.Show("Data file directory does not exist - need to fix this before using the Run state", "Settings Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
+                //if (!Directory.Exists(txtDataDir.Text))
+                //{
+                //    MessageBox.Show("Data file directory does not exist - need to fix this before using the Run state", "Settings Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    return;
+                //}
 
                 //need a pause between clock sync and run command, otherwise it doesn't get through
                 System.Threading.Thread.Sleep(2000);
@@ -825,8 +828,8 @@ namespace HarmoniaRemote
                 string strParam = this.txtDepthSP.Text + "|" + this.txtPitchSP.Text + "|" + this.txtFwdThrottle.Text + "|" + this.txtFwdTime.Text + "|" + this.txtRevThrottle.Text + "|" + this.txtRevTime.Text + "|" + this.txtFwdDive0Pos.Text + "|" + this.txtAftPitch0Pos.Text + "|" + this.txtAftRudder0Pos.Text + "|" + this.txtTrimTime.Text + "|" + this.txtDirectionSP.Text;
                 sp.WriteLine("RUN," + strParam);
 
-                string strOutLogFile = Path.Combine(txtDataDir.Text, "range_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".log");
-                m_swRangeDataFile = new System.IO.StreamWriter(strOutLogFile, true);
+                //string strOutLogFile = Path.Combine(txtDataDir.Text, "range_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".log");
+                //m_swRangeDataFile = new System.IO.StreamWriter(strOutLogFile, true);
    
             }
             catch (Exception ex)
@@ -1193,90 +1196,7 @@ namespace HarmoniaRemote
         }
 
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //TimeZoneInfo myZone = TimeZoneInfo.Local;
-                //myZone.IsDaylightSavingTime();
-
-                //byte buffer[] = { 0xFA, 0x06, 0x01, 0xFF);
-
-                //sp_1.Write("FA 06 01 FF");
-                //sp_1.Write("0x06");
-                //sp_1.Write("0x01");
-                //sp_1.Write("0xFF");
-
-                byte[] buffer = { 0x80, 0x06, 0x02, 0x78 };
-                sp_1.Write(buffer,0,4);
-                sp_1.WriteLine("/n");
-
-
-                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            try
-            {
-
-                byte[] buffer = { 0x80, 0x06, 0x02, 0x78 };
-                sp_1.Write(buffer, 0, 4);
-                sp_1.WriteLine("/n");
-
-                System.Threading.Thread.Sleep(200);
-
-
-                int btr = sp_1.BytesToRead;
-
-                if (btr > 0)
-                {
-                    int[] data = new int[btr];
-
-                    for (int i = 0; i < btr - 1; i++)
-                    {
-                        data[i] = sp_1.ReadByte();
-                    }
-
-                    if (data[3] == 'E' && data[4] == 'R' && data[5] == 'R')
-                    {
-                        //serialRemote.println("Out of range");
-                        SetControlText(this.meta_id_20, "ZZ");
-                    }
-                    else
-                    {
-                        //float distance = 0;
-                        double dblDistance = (data[3] - 0x30) * 100 + (data[4] - 0x30) * 10 + (data[5] - 0x30) * 1 + (data[7] - 0x30) * 0.1 + (data[8] - 0x30) * 0.01 + (data[9] - 0x30) * 0.001;
-
-                        SetControlText(this.meta_id_20, dblDistance.ToString());
-
-                        //DateTime now = rtc.now();
-                        //m_strSend = "{13|" + String(now.hour()) + ':' + String(now.minute()) + ':' + String(now.second()) + " " + String(now.day()) + '/' + String(now.month()) + '/' + String(now.year()) + ",20|" + String(distance) + "}";
-                        //serialRemote.println(m_strSend);
-
-                        //add this so data send rate to remote is around 4Hz
-                        // delay(200);
-                    }
-
-                    sp_1.DiscardInBuffer();
-
-
-                }
-
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
+     
         private void button6_Click(object sender, EventArgs e)
         {
             try
@@ -1342,16 +1262,7 @@ namespace HarmoniaRemote
                 MessageBox.Show(ex.ToString());
             }
         }
-
-        private void ControlForm_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
-
-        private void ControlForm_KeyUp(object sender, KeyEventArgs e)
-        {
-
-        }
+  
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             //handle your keys here
@@ -1704,5 +1615,7 @@ namespace HarmoniaRemote
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        
     }
 }
