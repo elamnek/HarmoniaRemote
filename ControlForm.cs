@@ -825,7 +825,7 @@ namespace HarmoniaRemote
                 //need a pause between clock sync and run command, otherwise it doesn't get through
                 System.Threading.Thread.Sleep(2000);
 
-                string strParam = this.txtDepthSP.Text + "|" + this.txtPitchSP.Text + "|" + this.txtFwdThrottle.Text + "|" + this.txtFwdTime.Text + "|" + this.txtRevThrottle.Text + "|" + this.txtRevTime.Text + "|" + this.txtFwdDive0Pos.Text + "|" + this.txtAftPitch0Pos.Text + "|" + this.txtAftRudder0Pos.Text + "|" + this.txtTrimTime.Text + "|" + this.txtDirectionSP.Text;
+                string strParam = this.txtDepthSP.Text + "|" + this.txtPitchSP.Text + "|" + this.txtFwdThrottle.Text + "|" + this.txtFwdTime.Text + "|" + this.txtRevThrottle.Text + "|" + this.txtRevTime.Text + "|" + this.txtFwdDive0Pos.Text + "|" + this.txtAftPitch0Pos.Text + "|" + this.txtAftRudder0Pos.Text + "|" + this.txtTrimTime.Text + "|" + this.txtDirectionSP.Text + "|" + this.txtZigZagPeriod.Text;
                 sp.WriteLine("RUN," + strParam);
 
                 //string strOutLogFile = Path.Combine(txtDataDir.Text, "range_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".log");
